@@ -16,3 +16,4 @@ steps:
     - take the first result and save it as the investor_relations_url in the instrument master. 
     - valiate that the url contains keywords like "investor" or "ir" to make sure we are on the right page.
     - save it to the instrument master
+    - do it for one intstrument at a time
