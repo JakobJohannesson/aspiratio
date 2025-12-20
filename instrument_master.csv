@@ -1,4 +1,4 @@
-CompanyName	ISIN	CID	date refreshed	Nasdaq_url	Active_coverage?	Investor_relations_url	CCY	MostRecentStockPrice	TradedStockVolume	StockTurnover
+CompanyName	ISIN	CID	date refreshed	Nasdaq_url	Active_coverage?	investor_relations_url	CCY	MostRecentStockPrice	TradedStockVolume	StockTurnover
 ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	TRUE	https://global.abb/group/en/investors	SEK	683	453736	308982606
 Addtech B		S2			TRUE		SEK	325.6	350644	114134399
 Alfa Laval		S3			TRUE		SEK	460.6	834570	384199339
