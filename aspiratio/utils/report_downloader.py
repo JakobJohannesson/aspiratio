@@ -155,6 +155,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             
             # Find all links on the page
             links = soup.find_all('a', href=True)
+            print(f"{'  ' * depth}  → Found {len(links)} links to analyze")
             
             # Patterns to identify annual reports (more flexible - allow words in between)
             annual_patterns = [
@@ -200,6 +201,8 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             nav_pattern = '|'.join(navigation_patterns)
             
             pages_to_visit = []
+            pdf_count = 0
+            excluded_count = 0
             
             for link in links:
                 href = link.get('href', '')
@@ -218,11 +221,20 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                     'download' in href.lower()
                 )
                 
+                if is_pdf_link:
+                    pdf_count += 1
+                
                 # Check if this matches annual report pattern AND doesn't match exclusion pattern
                 matches_annual = re.search(pattern, combined, re.IGNORECASE)
                 matches_exclude = re.search(exclude_pattern, combined, re.IGNORECASE)
                 
-                if is_pdf_link and matches_annual and not matches_exclude:
+                if is_pdf_link and matches_annual:
+                    if matches_exclude:
+                        excluded_count += 1
+                        # Uncomment for even more detail:
+                        # print(f"{'  ' * depth}    ✗ Excluded: {text[:50]} (quarterly/SEC filing)")
+                        continue
+                    
                     # Make absolute URL
                     abs_url = urljoin(url, href)
                     
@@ -240,6 +252,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                             year = 2000 + year_num if year_num > 10 else 2000 + year_num
                             
                             if year in years:
+                                print(f"{'  ' * depth}    ✓ Found report: {year} - {text[:60]}")
                                 results.append({
                                     'year': year,
                                     'url': abs_url,
@@ -248,7 +261,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                                 })
                 
                 # If depth allows, check for navigation links to follow
-                elif depth < max_depth and re.search(nav_pattern, combined, re.IGNORECASE):
+                if depth < max_depth and re.search(nav_pattern, combined, re.IGNORECASE):
                     # Make absolute URL
                     abs_url = urljoin(url, href)
                     
@@ -256,6 +269,9 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                     link_netloc = urlparse(abs_url).netloc
                     if base_domain in link_netloc:
                         pages_to_visit.append(abs_url)
+            
+            if pdf_count > 0:
+                print(f"{'  ' * depth}  → Analyzed {pdf_count} PDF links, excluded {excluded_count} quarterly/SEC filings")
             
             # Visit relevant pages
             for next_url in pages_to_visit[:5]:  # Limit to 5 sub-pages
@@ -336,16 +352,18 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
                 print(f"  Retry {attempt}/{max_retries}...")
                 time.sleep(2)  # Wait before retry
             
-            print(f"Downloading {url}...")
+            print(f"  → Downloading from: {url}")
             headers = {"User-Agent": get_random_user_agent()}
             resp = requests.get(url, timeout=30, headers=headers, stream=True)
             
             if resp.status_code != 200:
                 result['error'] = f"HTTP {resp.status_code}"
+                print(f"  ✗ HTTP error {resp.status_code}")
                 if attempt < max_retries - 1:
                     continue  # Try again with different user agent
                 return result
         
+            print(f"  → Saving to: {output_path}")
             # Create directory if it doesn't exist
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
             
@@ -358,14 +376,18 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
             # Get file size
             size_bytes = os.path.getsize(temp_path)
             result['size_mb'] = size_bytes / (1024 * 1024)
+            print(f"  → Downloaded: {result['size_mb']:.1f} MB")
             
             # Validate it's a valid PDF with minimum pages
+            print(f"  → Validating PDF...")
             try:
                 with open(temp_path, 'rb') as f:
                     pdf = PdfReader(f)
                     result['pages'] = len(pdf.pages)
+                print(f"  → PDF has {result['pages']} pages")
             except Exception as e:
                 result['error'] = f"PDF validation failed: {e}"
+                print(f"  ✗ {result['error']}")
                 os.remove(temp_path)
                 if attempt < max_retries - 1:
                     continue  # Try again
@@ -374,6 +396,7 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
             # Check minimum pages
             if result['pages'] < min_pages:
                 result['error'] = f"Only {result['pages']} pages (min {min_pages} required)"
+                print(f"  ✗ {result['error']}")
                 os.remove(temp_path)
                 return result
             
@@ -383,7 +406,7 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
             os.rename(temp_path, output_path)
             
             result['success'] = True
-            print(f"✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
+            print(f"  ✓ Success: {result['pages']} pages, {result['size_mb']:.1f} MB")
             return result
         
         except Exception as e:
@@ -441,9 +464,16 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
     company_dir = os.path.join(output_dir, cid)
     downloads = []
     
+    # Group reports by year to handle multiple candidates
+    reports_by_year = {}
     for report in reports:
         year = report['year']
-        url = report['url']
+        if year not in reports_by_year:
+            reports_by_year[year] = []
+        reports_by_year[year].append(report)
+    
+    for year in sorted(reports_by_year.keys(), reverse=True):
+        candidates = reports_by_year[year]
         output_path = os.path.join(company_dir, f"annual_report_{year}.pdf")
         
         # Skip if already exists
@@ -456,25 +486,55 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
             })
             continue
         
-        # Download with built-in retry and user agent rotation
-        result = download_pdf(url, output_path)
+        # Try each candidate until we get a valid one
+        downloaded = False
+        for idx, report in enumerate(candidates):
+            url = report['url']
+            candidate_label = f"candidate {idx+1}/{len(candidates)}" if len(candidates) > 1 else ""
+            
+            if candidate_label:
+                print(f"  Trying {year} {candidate_label}: {report.get('title', '')[:50]}")
+            
+            # Download with built-in retry and user agent rotation
+            result = download_pdf(url, output_path)
+            
+            if result['success']:
+                # Quick validation: check if it's reasonable
+                is_valid = True
+                validation_issues = []
+                
+                # Already checked pages in download_pdf, but double-check other criteria
+                if result['pages'] > 500:
+                    is_valid = False
+                    validation_issues.append(f"Too many pages ({result['pages']})")
+                
+                if is_valid:
+                    print(f"  ✓ Valid report for {year}")
+                    downloads.append({
+                        'year': year,
+                        'status': 'success',
+                        'url': url,
+                        'pages': result['pages'],
+                        'size_mb': result['size_mb'],
+                        'path': output_path,
+                        'timestamp': datetime.now().isoformat()
+                    })
+                    downloaded = True
+                    break
+                else:
+                    print(f"  ✗ Downloaded but invalid: {', '.join(validation_issues)}")
+                    # Remove invalid file and try next candidate
+                    if os.path.exists(output_path):
+                        os.remove(output_path)
+            else:
+                print(f"  ✗ Download failed: {result['error']}")
         
-        if result['success']:
-            downloads.append({
-                'year': year,
-                'status': 'success',
-                'url': url,
-                'pages': result['pages'],
-                'size_mb': result['size_mb'],
-                'path': output_path,
-                'timestamp': datetime.now().isoformat()
-            })
-        else:
-            print(f"✗ {year}: Failed - {result['error']}")
+        if not downloaded:
+            print(f"✗ {year}: All candidates failed")
             downloads.append({
                 'year': year,
                 'status': 'failed',
-                'url': url,
+                'url': candidates[0]['url'] if candidates else None,
                 'error': result['error']
             })
         

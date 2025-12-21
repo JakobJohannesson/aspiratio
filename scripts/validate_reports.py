@@ -218,13 +218,43 @@ def main():
     companies = load_instrument_master()
     print(f"✓ Loaded {len(companies)} companies\n")
     
+    # Load already validated reports from coverage table
+    already_validated = set()
+    coverage_file = 'coverage_table_updated.csv'
+    if os.path.exists(coverage_file):
+        try:
+            coverage_df = pd.read_csv(coverage_file, sep='\t')
+            # Get reports that are already validated and complete
+            validated = coverage_df[
+                (coverage_df['Validation_Status'] == 'Valid') & 
+                (coverage_df['Priority'] == 'Complete ✓')
+            ]
+            for _, row in validated.iterrows():
+                cid = row['Company_Identifier']
+                year = row['FiscalYear']
+                already_validated.add((cid, year))
+            
+            if already_validated:
+                print(f"Found {len(already_validated)} already validated reports (will skip)")
+        except Exception as e:
+            print(f"Note: Could not load previous validation status: {e}")
+    
     # Scan for downloaded reports
     print("Scanning for downloaded PDFs...")
-    reports = scan_downloaded_reports()
-    print(f"✓ Found {len(reports)} PDF files\n")
+    all_reports = scan_downloaded_reports()
+    
+    # Filter out already validated reports
+    reports = [r for r in all_reports if (r['cid'], r['year']) not in already_validated]
+    
+    print(f"✓ Found {len(all_reports)} PDF files")
+    if already_validated:
+        print(f"  - {len(all_reports) - len(reports)} already validated (skipped)")
+        print(f"  - {len(reports)} to validate\n")
+    else:
+        print()
     
     if not reports:
-        print("No PDFs found. Run download_reports.py first.")
+        print("No new PDFs to validate. All reports are already validated!")
         return
     
     # Create output directories
