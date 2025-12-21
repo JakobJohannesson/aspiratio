@@ -289,8 +289,18 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                 if is_pdf_link and matches_annual:
                     if matches_exclude:
                         excluded_count += 1
-                        # Uncomment for even more detail:
-                        # print(f"{'  ' * depth}    ✗ Excluded: {text[:50]} (quarterly/SEC filing)")
+                        # Show why this was excluded for transparency
+                        exclude_reason = None
+                        for pattern_name, pattern in [
+                            ('SEC filing', r'form\s*20[-\s]*f|form\s*sd|proxy|10-k|8-k'),
+                            ('Quarterly report', r'q[1-4]|quarter|interim|delårs|kvartals'),
+                            ('Half-year report', r'half[-\s]?year|h[1-2]\s*20\d{2}')
+                        ]:
+                            if re.search(pattern, combined, re.IGNORECASE):
+                                exclude_reason = pattern_name
+                                break
+                        if depth <= 1:  # Only show for top-level pages
+                            print(f"{'  ' * depth}    ✗ Excluded: {text[:50]} ({exclude_reason or 'filtered'})")
                         continue
                     
                     # Make absolute URL
@@ -310,13 +320,23 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                             year = 2000 + year_num if year_num > 10 else 2000 + year_num
                             
                             if year in years:
+                                # Show what we found with URL snippet for debugging
+                                url_snippet = abs_url.split('/')[-1][:40] if '/' in abs_url else abs_url[:40]
                                 print(f"{'  ' * depth}    ✓ Found report: {year} - {text[:60]}")
+                                if depth <= 1:  # Show URL for transparency
+                                    print(f"{'  ' * depth}      URL: .../{url_snippet}")
                                 results.append({
                                     'year': year,
                                     'url': abs_url,
                                     'title': link.get_text(strip=True),
                                     'source_page': url
                                 })
+                            elif depth <= 1:
+                                # Year detected but not in our target years - show why we're skipping
+                                print(f"{'  ' * depth}    ⊘ Skipped: {year} (year {year} not in target years {years})")
+                    elif depth <= 1 and is_pdf_link:
+                        # Found a PDF link but couldn't extract year
+                        print(f"{'  ' * depth}    ? No year found: {text[:50]}")
                 
                 # If depth allows, check for navigation links to follow
                 if depth < max_depth and re.search(nav_pattern, combined, re.IGNORECASE):
@@ -565,15 +585,23 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
         downloaded = False
         for idx, report in enumerate(candidates):
             url = report['url']
-            candidate_label = f"candidate {idx+1}/{len(candidates)}" if len(candidates) > 1 else ""
+            title = report.get('title', 'Unknown title')
             
-            if candidate_label:
-                print(f"  Trying {year} {candidate_label}: {report.get('title', '')[:50]}")
+            if len(candidates) > 1:
+                print(f"\n  [{year}] Trying candidate {idx+1}/{len(candidates)}")
+                print(f"      Title: {title[:70]}")
+                print(f"      URL: {url}")
+            else:
+                print(f"\n  [{year}] Downloading single candidate")
+                print(f"      Title: {title[:70]}")
+                print(f"      URL: {url}")
             
             # Download with built-in retry and user agent rotation, pass year hint
             result = download_pdf(url, output_path, year_hint=year)
             
             if result['success']:
+                print(f"      ✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
+                
                 # Quick validation: check if it's reasonable
                 is_valid = True
                 validation_issues = []
@@ -584,7 +612,7 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
                     validation_issues.append(f"Too many pages ({result['pages']})")
                 
                 if is_valid:
-                    print(f"  ✓ Valid report for {year}")
+                    print(f"      ✓ Validation passed - this is a valid annual report")
                     downloads.append({
                         'year': year,
                         'status': 'success',
@@ -597,15 +625,21 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
                     downloaded = True
                     break
                 else:
-                    print(f"  ✗ Downloaded but invalid: {', '.join(validation_issues)}")
+                    print(f"      ✗ Validation failed: {', '.join(validation_issues)}")
+                    print(f"      → Removing invalid file and trying next candidate...")
                     # Remove invalid file and try next candidate
                     if os.path.exists(output_path):
                         os.remove(output_path)
+                    if idx < len(candidates) - 1:
+                        continue
             else:
-                print(f"  ✗ Download failed: {result['error']}")
+                print(f"      ✗ Download failed: {result['error']}")
+                if idx < len(candidates) - 1:
+                    print(f"      → Trying next candidate...")
+                    continue
         
         if not downloaded:
-            print(f"✗ {year}: All candidates failed")
+            print(f"\n  ✗ [{year}] All {len(candidates)} candidate(s) failed - no valid report downloaded")
             downloads.append({
                 'year': year,
                 'status': 'failed',
@@ -617,8 +651,24 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
         time.sleep(1)
     
     # Summary
+    print("\n" + "="*70)
+    print("DOWNLOAD SUMMARY")
+    print("="*70)
+    
     successful = sum(1 for d in downloads if d['status'] == 'success')
     failed = sum(1 for d in downloads if d['status'] == 'failed')
+    skipped = sum(1 for d in downloads if d['status'] == 'skipped')
+    
+    print(f"Total: {len(downloads)} reports")
+    print(f"  ✓ Success: {successful}")
+    print(f"  ⊙ Skipped (already exists): {skipped}")
+    print(f"  ✗ Failed: {failed}")
+    
+    if failed > 0:
+        print("\nFailed reports:")
+        for d in downloads:
+            if d['status'] == 'failed':
+                print(f"  - Year {d['year']}: {d.get('error', 'Unknown error')}")
     skipped = sum(1 for d in downloads if d['status'] == 'skipped')
     
     print(f"\nSummary: {successful} downloaded, {skipped} skipped, {failed} failed")

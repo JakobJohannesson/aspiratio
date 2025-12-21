@@ -1,23 +1,23 @@
 CompanyName	ISIN	CID	date refreshed	Nasdaq_url	Active_coverage?	investor_relations_url	CCY	MostRecentStockPrice	TradedStockVolume	StockTurnover	validated
 ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	True	https://global.abb/group/en/investors	SEK	683.0	453736	308982606	True
 Addtech B		S2			True	https://www.addtech.com/investors-and-media	SEK	325.6	350644	114134399	True
-Alfa Laval		S3			True	https://corporate.alfalaval.com/alfa-laval-investor-call-q2-2025	SEK	460.6	834570	384199339	False
+Alfa Laval		S3			True	https://www.alfalaval.com/investors/	SEK	460.6	834570	384199339	False
 ASSA ABLOY B		S4			True	https://www.assaabloy.com/group/en/investors	SEK	355.8	1924559	685032972	True
 AstraZeneca		S5			True	https://www.astrazeneca.com/investor-relations/contacts-information.html	SEK	1701.0	283942	480673375	True
 Atlas Copco A		S6			True	https://www.atlascopcogroup.com/en/investors	SEK	164.05	5327339	873528240	True
 Boliden		S7			True	https://investors.boliden.com/	SEK	498.2	1621368	806020703	True
 Epiroc A		S8			True	https://www.epirocgroup.com/en/investors/investor-contacts	SEK	206.7	2926875	605520732	True
-EQT		S9			True	https://ir.eqt.com/	SEK	351.8	6554439	2300568085	False
+EQT		S9			True	https://eqtgroup.com/shareholders/reports-and-presentations	SEK	351.8	6554439	2300568085	False
 Ericsson B		S10			True	https://www.ericsson.com/en/investors	SEK	90.42	8433509	762114500	True
 Essity B		S11			True	https://www.essity.com/investors/	SEK	265.1	1857487	492519760	True
 Evolution		S12			True	https://www.evolution.com/investors/ir-contacts/	SEK	624.8	1266337	790983032	True
-Hennes & Mauritz B		S13			True		SEK	183.9	4538822	836489758	False
+Hennes & Mauritz B		S13			True	https://hmgroup.com/investors/	SEK	183.9	4538822	836489758	False
 Hexagon B		S14			True	https://hexagongroup.com/investors/	SEK	107.0	4964511	531028156	True
 Industrivärden C		S15			True	https://www.industrivarden.se/en-gb/investors/industrivarden-in-figures/key-ratios/	SEK	408.2	424135	173042714	False
 Investor B		S16			True	https://www.alliancebernstein.com/corporate/en/investor-relations.html	SEK	323.1	4327625	1395810389	False
 Lifco B		S17			True	https://www.lifco.se/investors/financial-reports	SEK	351.8	429040	150895807	True
 NIBE Industrier B		S18			True	https://www.nibe.com/investors	SEK	34.99	6297781	220747092	True
-Nordea Bank Abp		S19			True		SEK	171.85	5078865	873474999	False
+Nordea Bank Abp		S19			True	https://www.nordea.com/en/investors	SEK	171.85	5078865	873474999	False
 SAAB B		S20			True	https://www.saab.com/investors	SEK	508.7	2028470	1027868849	True
 Sandvik		S21			True	https://www.home.sandvik/en/investors/	SEK	295.7	3213548	949483303	True
 SCA B		S22			True	https://www.sca.com/en/investors/	SEK	120.85	1852731	224037825	True
@@ -28,4 +28,4 @@ Sv. Handelsbanken A		S26			True	https://www.handelsbanken.com/sv/investor-relati
 Swedbank A		S27			True	https://www.swedbank.com/investor-relations/the-share/shareholders.html	SEK	315.7	2936891	926118768	False
 Tele2 B		S28			True	https://www.tele2.com/investors	SEK	153.1	2288603	350402942	True
 Telia Company		S29			True	https://www.teliacompany.com/en/investors	SEK	38.6	8164111	315247592	True
-Volvo B		S30			True	https://www.volvogroup.com/en/investors/reports-and-presentations.1.html	SEK	294.2	4335808	1276278853	True
+Volvo B		S30			True	https://www.volvogroup.com/en/investors/reports-and-presentations.html	SEK	294.2	4335808	1276278853	True
