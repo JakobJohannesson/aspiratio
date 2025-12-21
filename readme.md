@@ -1,19 +1,99 @@
 ## The Stock Archive
 
-The stock archive is a project to collect and organize financial data from companies. the aspiration is to capture the annual reports for the omxs30 companies for the years 2019-2024. 
+### Project Overview
 
-First is to create a solid master of all the instruments that is in the scope of this project. I've captued a static version of the table with all the companies that is in scope at first glance, see the OMXS30_members.csv. from the omxs30_members, we will map it to the instrument master, but as of right now, it is missing inforamtion like the investor relations url, which is crucial for us to be able to find the annual reports.
+An automated system to collect annual reports for Swedish OMXS30 companies (2019-2024). The pipeline discovers investor relations URLs, validates them, and downloads historical annual reports for analysis.
+
+**Status**: ✅ Core implementation complete
+
+### Quick Start
+
+```bash
+# 1. Find IR URLs for all companies
+python scripts/ir_scraper.py
+
+# 2. Validate URLs (opens Streamlit UI)
+streamlit run scripts/app.py
+
+# 3. Download annual reports
+python scripts/download_reports.py
+```
+
+### Features
+
+- **Intelligent IR URL Discovery**: Multi-query search with sophisticated scoring (domain matching, path analysis, content inspection)
+- **URL Simplification**: Automatically strips deep links to find root IR pages
+- **Flexible Report Detection**: Handles direct PDF links and dynamic download URLs
+- **Recursive Search**: Follows navigation links (up to 2 levels deep) to find report pages
+- **Validation**: Ensures PDFs have minimum 10 pages, readable format
+- **Progress Tracking**: Detailed logging and JSON summaries of all downloads
+- **Smart Skipping**: Won't re-download existing reports
+
+### Known Limitations
+
+- **JavaScript-Rendered Content**: Some companies (ABB) use JavaScript to dynamically load annual reports. The current implementation only parses static HTML.
+- **Workaround**: For these cases, manually download PDFs and place them in `companies/{CID}/annual_report_{year}.pdf`
+
+### Supported IR Page Structures
+
+✅ **Works well with:**
+- Direct PDF links in HTML (e.g., Addtech: `/fileadmin/user_upload/Arsredovisningar/Addtech-Annual-Report-24-25.pdf`)
+- Dynamic download URLs (e.g., Swedbank: `?download=...&id=...`)
+- Static HTML-based document libraries
+- Fiscal year formats: 2024, 24-25, 2024-25
+- Multi-level navigation (up to 2 levels deep)
+- Cross-subdomain links (e.g., global.abb.com → library.e.abb.com)
+
+❌ **Currently limited support:**
+- JavaScript/AJAX-loaded content (ABB's annual-reporting-suite)
+- Interactive document selectors
+- Login-required sections
+
+### Project Structure
+
+```
+aspiratio/
+├── instrument_master.csv          # Core database
+├── omxs30_members.csv            # OMXS30 reference list
+├── aspiratio/utils/              
+│   ├── io.py                     # File I/O
+│   ├── ir_search.py              # IR URL discovery
+│   └── report_downloader.py      # Annual report scraper
+├── scripts/                      
+│   ├── ir_scraper.py            # Batch IR URL finder
+│   ├── app.py                   # Validation UI
+│   └── download_reports.py      # Batch downloader
+└── companies/{CID}/              # Downloaded reports
+    └── annual_report_{year}.pdf
+```
 
 
-steps:
 
-1. create instrument master for the companies that is in scope
-    - go to the [list here](https://www.nasdaq.com/european-market-activity/indexes/omxs30?id=IX447) and capture the table that matches what we have in omxs30_members.csv
-    - Using the omxs30_members.csv, map it to the instrument master table using the name. If there is a mismatch, raise an error.
-2. From the up to date instrument master we will find the investor_relations_url
-    - Here we have to build a scraper that should go and search for the investor relations page based on the company name.
-    - go and search the web like this "https://duckduckgo.com/?q=abb+ltd+investor+relations&t=h_&ia=web", adjust it for the company we are looking for
-    - take the first result and save it as the investor_relations_url in the instrument master. 
-    - valiate that the url contains keywords like "investor" or "ir" to make sure we are on the right page.
-    - save it to the instrument master
-    - do it for one intstrument at a time
+### Usage
+
+#### Step 1: Find Investor Relations URLs
+```bash
+# Run IR scraper to find URLs for all companies
+python scripts/ir_scraper.py
+```
+
+#### Step 2: Validate URLs
+```bash
+# Launch Streamlit app for manual validation
+streamlit run scripts/app.py
+```
+
+#### Step 3: Download Annual Reports
+```bash
+# Download reports for all validated companies
+python scripts/download_reports.py
+```
+
+The script will:
+- Process all companies with validated IR URLs
+- Search for annual reports from 2019-2024
+- Download PDFs to `companies/{CID}/annual_report_{year}.pdf`
+- Validate each PDF has at least 10 pages
+- Skip reports that already exist
+- Generate a summary JSON file with download results
+

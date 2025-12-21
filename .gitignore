@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Virtual Environment
+.venv/
+venv/
+
+# Testing
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# macOS
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# Logs & Downloads
+*.log
+*.tmp
+download_summary_*.json
+
+# Debug files
+debug_*.py
+test_downloader.py
+debug_reports.py
