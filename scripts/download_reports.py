@@ -12,7 +12,7 @@ if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
 from aspiratio.utils.io import read_tsv, write_tsv
-from aspiratio.utils.report_downloader import download_company_reports
+from aspiratio.utils.report_downloader import download_company_reports, DownloadError
 
 def main():
     master_path = os.path.join(repo_root, 'instrument_master.csv')
@@ -38,6 +38,7 @@ def main():
     # Download reports for each company
     years = [2019, 2020, 2021, 2022, 2023, 2024]
     all_results = []
+    error_count = 0
     
     for idx, row in valid_df.iterrows():
         cid = row['CID']
@@ -53,12 +54,32 @@ def main():
                 output_dir=os.path.join(repo_root, 'companies')
             )
             all_results.append(result)
-        except Exception as e:
-            print(f"Error processing {company}: {e}")
+        except DownloadError as e:
+            # Site is problematic (repeated failures), skip to next
+            print(f"⚠ Download error for {company}: {e}")
+            print("  Skipping to next company...")
+            error_count += 1
             all_results.append({
                 'cid': cid,
                 'company': company,
-                'error': str(e)
+                'found': 0,
+                'downloaded': 0,
+                'failed': 0,
+                'error': str(e),
+                'error_type': 'download_error'
+            })
+        except Exception as e:
+            # Other unexpected errors
+            print(f"Unexpected error processing {company}: {e}")
+            error_count += 1
+            all_results.append({
+                'cid': cid,
+                'company': company,
+                'found': 0,
+                'downloaded': 0,
+                'failed': 0,
+                'error': str(e),
+                'error_type': 'unknown'
             })
         
         print()  # Blank line between companies
@@ -78,6 +99,7 @@ def main():
     total_failed = sum(r.get('failed', 0) for r in all_results)
     
     print(f"Companies processed: {len(all_results)}")
+    print(f"Companies with errors: {error_count}")
     print(f"Reports found: {total_found}")
     print(f"Reports downloaded: {total_downloaded}")
     print(f"Reports skipped: {total_skipped}")

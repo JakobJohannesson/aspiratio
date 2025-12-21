@@ -4,13 +4,31 @@ Annual report discovery and download utilities.
 import re
 import os
 import requests
+import random
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from PyPDF2 import PdfReader
 import time
 from datetime import datetime
 
-def find_annual_reports(ir_url, years=None, max_depth=2):
+# User agents to rotate through
+USER_AGENTS = [
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+]
+
+class DownloadError(Exception):
+    """Raised when download fails after multiple retries."""
+    pass
+
+def get_random_user_agent():
+    """Return a random user agent from the pool."""
+    return random.choice(USER_AGENTS)
+
+def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
     """
     Search IR page for annual report PDFs.
     
@@ -18,15 +36,20 @@ def find_annual_reports(ir_url, years=None, max_depth=2):
         ir_url: Investor relations page URL
         years: List of years to find (default: 2019-2024)
         max_depth: How many levels deep to search (default: 2)
+        max_failures: Max consecutive failures before raising error (default: 3)
     
     Returns:
         List of dicts: [{'year': 2024, 'url': 'https://...', 'title': '...'}]
+    
+    Raises:
+        DownloadError: If max_failures consecutive errors occur
     """
     if years is None:
         years = list(range(2019, 2025))
     
     results = []
     visited = set()
+    consecutive_failures = 0
     
     # Get the base domain (e.g., "abb" from "global.abb.com")
     base_netloc = urlparse(ir_url).netloc
@@ -38,6 +61,8 @@ def find_annual_reports(ir_url, years=None, max_depth=2):
         base_domain = base_netloc
     
     def search_page(url, depth=0):
+        nonlocal consecutive_failures
+        
         # Remove fragment from URL for visiting (fragments are client-side)
         url_no_fragment = url.split('#')[0]
         
@@ -48,11 +73,18 @@ def find_annual_reports(ir_url, years=None, max_depth=2):
         
         try:
             print(f"{'  ' * depth}Searching: {url}")
-            headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
+            headers = {"User-Agent": get_random_user_agent()}
             resp = requests.get(url_no_fragment, timeout=10, headers=headers)
             
             if resp.status_code != 200:
+                consecutive_failures += 1
+                print(f"{'  ' * depth}HTTP {resp.status_code} (failure {consecutive_failures}/{max_failures})")
+                if consecutive_failures >= max_failures:
+                    raise DownloadError(f"Failed to fetch {max_failures} pages in a row (last: HTTP {resp.status_code})")
                 return
+            
+            # Reset failure counter on success
+            consecutive_failures = 0
             
             soup = BeautifulSoup(resp.text, 'html.parser')
             
@@ -143,8 +175,14 @@ def find_annual_reports(ir_url, years=None, max_depth=2):
                 search_page(next_url, depth + 1)
                 time.sleep(0.5)  # Be nice to servers
         
+        except DownloadError:
+            # Re-raise DownloadError to propagate up
+            raise
         except Exception as e:
-            print(f"{'  ' * depth}Error searching {url}: {e}")
+            consecutive_failures += 1
+            print(f"{'  ' * depth}Error searching {url}: {e} (failure {consecutive_failures}/{max_failures})")
+            if consecutive_failures >= max_failures:
+                raise DownloadError(f"Failed to fetch {max_failures} pages in a row (last error: {e})")
     
     # Start search
     search_page(ir_url, 0)
@@ -185,7 +223,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2):
     print(f"Found {len(unique_results)} annual reports")
     return sorted(unique_results, key=lambda x: x['year'], reverse=True)
 
-def download_pdf(url, output_path, min_pages=10):
+def download_pdf(url, output_path, min_pages=10, max_retries=3):
     """
     Download PDF and validate it meets minimum page requirement.
     
@@ -193,6 +231,7 @@ def download_pdf(url, output_path, min_pages=10):
         url: PDF URL
         output_path: Where to save the file
         min_pages: Minimum number of pages required (default 10)
+        max_retries: Maximum download attempts with user agent rotation (default 3)
     
     Returns:
         dict: {'success': bool, 'pages': int, 'size_mb': float, 'error': str}
@@ -204,58 +243,73 @@ def download_pdf(url, output_path, min_pages=10):
         'error': None
     }
     
-    try:
-        print(f"Downloading {url}...")
-        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
-        resp = requests.get(url, timeout=30, headers=headers, stream=True)
-        
-        if resp.status_code != 200:
-            result['error'] = f"HTTP {resp.status_code}"
-            return result
-        
-        # Create directory if it doesn't exist
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        
-        # Download to temporary file first
-        temp_path = output_path + '.tmp'
-        with open(temp_path, 'wb') as f:
-            for chunk in resp.iter_content(chunk_size=8192):
-                f.write(chunk)
-        
-        # Get file size
-        size_bytes = os.path.getsize(temp_path)
-        result['size_mb'] = size_bytes / (1024 * 1024)
-        
-        # Validate it's a valid PDF with minimum pages
+    for attempt in range(max_retries):
         try:
-            with open(temp_path, 'rb') as f:
-                pdf = PdfReader(f)
-                result['pages'] = len(pdf.pages)
+            if attempt > 0:
+                print(f"  Retry {attempt}/{max_retries}...")
+                time.sleep(2)  # Wait before retry
+            
+            print(f"Downloading {url}...")
+            headers = {"User-Agent": get_random_user_agent()}
+            resp = requests.get(url, timeout=30, headers=headers, stream=True)
+            
+            if resp.status_code != 200:
+                result['error'] = f"HTTP {resp.status_code}"
+                if attempt < max_retries - 1:
+                    continue  # Try again with different user agent
+                return result
+        
+            # Create directory if it doesn't exist
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            
+            # Download to temporary file first
+            temp_path = output_path + '.tmp'
+            with open(temp_path, 'wb') as f:
+                for chunk in resp.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            
+            # Get file size
+            size_bytes = os.path.getsize(temp_path)
+            result['size_mb'] = size_bytes / (1024 * 1024)
+            
+            # Validate it's a valid PDF with minimum pages
+            try:
+                with open(temp_path, 'rb') as f:
+                    pdf = PdfReader(f)
+                    result['pages'] = len(pdf.pages)
+            except Exception as e:
+                result['error'] = f"PDF validation failed: {e}"
+                os.remove(temp_path)
+                if attempt < max_retries - 1:
+                    continue  # Try again
+                return result
+            
+            # Check minimum pages
+            if result['pages'] < min_pages:
+                result['error'] = f"Only {result['pages']} pages (min {min_pages} required)"
+                os.remove(temp_path)
+                return result
+            
+            # Move temp file to final location
+            if os.path.exists(output_path):
+                os.remove(output_path)
+            os.rename(temp_path, output_path)
+            
+            result['success'] = True
+            print(f"✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
+            return result
+        
         except Exception as e:
-            result['error'] = f"PDF validation failed: {e}"
-            os.remove(temp_path)
-            return result
-        
-        # Check minimum pages
-        if result['pages'] < min_pages:
-            result['error'] = f"Only {result['pages']} pages (min {min_pages} required)"
-            os.remove(temp_path)
-            return result
-        
-        # Move temp file to final location
-        if os.path.exists(output_path):
-            os.remove(output_path)
-        os.rename(temp_path, output_path)
-        
-        result['success'] = True
-        print(f"✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
-        return result
+            result['error'] = str(e)
+            if os.path.exists(temp_path):
+                try:
+                    os.remove(temp_path)
+                except:
+                    pass
+            if attempt >= max_retries - 1:
+                return result
     
-    except Exception as e:
-        result['error'] = str(e)
-        if os.path.exists(temp_path):
-            os.remove(temp_path)
-        return result
+    return result
 
 def download_company_reports(cid, company_name, ir_url, years=None, output_dir='companies'):
     """
@@ -270,6 +324,9 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
     
     Returns:
         dict: Summary of downloads
+        
+    Raises:
+        DownloadError: If repeated fetch failures occur
     """
     if years is None:
         years = list(range(2019, 2025))
@@ -279,7 +336,7 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
     print(f"IR URL: {ir_url}")
     print(f"{'='*60}")
     
-    # Find reports
+    # Find reports (may raise DownloadError)
     reports = find_annual_reports(ir_url, years)
     
     if not reports:
@@ -312,34 +369,27 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
             })
             continue
         
-        # Download with retry
-        max_retries = 2
-        for attempt in range(max_retries):
-            result = download_pdf(url, output_path)
-            
-            if result['success']:
-                downloads.append({
-                    'year': year,
-                    'status': 'success',
-                    'url': url,
-                    'pages': result['pages'],
-                    'size_mb': result['size_mb'],
-                    'path': output_path,
-                    'timestamp': datetime.now().isoformat()
-                })
-                break
-            else:
-                if attempt < max_retries - 1:
-                    print(f"  Retry {attempt + 1}/{max_retries}...")
-                    time.sleep(2)
-                else:
-                    print(f"✗ {year}: Failed - {result['error']}")
-                    downloads.append({
-                        'year': year,
-                        'status': 'failed',
-                        'url': url,
-                        'error': result['error']
-                    })
+        # Download with built-in retry and user agent rotation
+        result = download_pdf(url, output_path)
+        
+        if result['success']:
+            downloads.append({
+                'year': year,
+                'status': 'success',
+                'url': url,
+                'pages': result['pages'],
+                'size_mb': result['size_mb'],
+                'path': output_path,
+                'timestamp': datetime.now().isoformat()
+            })
+        else:
+            print(f"✗ {year}: Failed - {result['error']}")
+            downloads.append({
+                'year': year,
+                'status': 'failed',
+                'url': url,
+                'error': result['error']
+            })
         
         # Be nice to servers
         time.sleep(1)
