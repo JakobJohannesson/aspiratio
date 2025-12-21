@@ -140,15 +140,173 @@ def try_direct_url_patterns(ir_url, years):
     
     return results
 
-def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
+def extract_links_from_page(url, soup):
     """
-    Search IR page for annual report PDFs.
+    Extract all links from a page including those in JSON data structures,
+    navigation bars, and footer sections.
+    
+    Args:
+        url: Base URL for making relative links absolute
+        soup: BeautifulSoup object of the page
+    
+    Returns:
+        List of dicts: [{'href': '...', 'text': '...', 'title': '...', 'source': '...'}]
+    """
+    all_links = []
+    
+    # 1. Regular HTML links
+    for link in soup.find_all('a', href=True):
+        all_links.append({
+            'href': link.get('href', ''),
+            'text': link.get_text(strip=True).lower(),
+            'title': link.get('title', '').lower(),
+            'source': 'html'
+        })
+    
+    # 2. Check for JSON-LD structured data (common for IR pages)
+    import json
+    for script in soup.find_all('script', type='application/ld+json'):
+        try:
+            data = json.loads(script.string)
+            # Recursively find URLs in JSON
+            def extract_urls(obj, path=''):
+                if isinstance(obj, dict):
+                    for key, val in obj.items():
+                        if key.lower() in ['url', 'contenturl', 'link', 'href']:
+                            if isinstance(val, str) and val.startswith('http'):
+                                all_links.append({
+                                    'href': val,
+                                    'text': obj.get('name', obj.get('headline', '')).lower() if isinstance(obj.get('name'), str) else '',
+                                    'title': obj.get('description', '').lower() if isinstance(obj.get('description'), str) else '',
+                                    'source': f'json-ld:{path}'
+                                })
+                        else:
+                            extract_urls(val, f'{path}.{key}')
+                elif isinstance(obj, list):
+                    for i, item in enumerate(obj):
+                        extract_urls(item, f'{path}[{i}]')
+            extract_urls(data)
+        except (json.JSONDecodeError, AttributeError):
+            pass
+    
+    # 3. Check for navigation menus (often contain annual reports link)
+    nav_elements = soup.find_all(['nav', 'header']) + soup.find_all(class_=re.compile(r'nav|menu|header', re.I))
+    for nav in nav_elements:
+        for link in nav.find_all('a', href=True):
+            href = link.get('href', '')
+            text = link.get_text(strip=True).lower()
+            # Mark these as high-priority navigation links
+            all_links.append({
+                'href': href,
+                'text': text,
+                'title': link.get('title', '').lower(),
+                'source': 'navigation'
+            })
+    
+    # 4. Check footer for investor relations link (failsafe)
+    footer_elements = soup.find_all(['footer']) + soup.find_all(class_=re.compile(r'footer', re.I))
+    for footer in footer_elements:
+        for link in footer.find_all('a', href=True):
+            href = link.get('href', '')
+            text = link.get_text(strip=True).lower()
+            if any(kw in text or kw in href.lower() for kw in ['investor', 'ir', 'investerare', 'financial']):
+                all_links.append({
+                    'href': href,
+                    'text': text,
+                    'title': link.get('title', '').lower(),
+                    'source': 'footer'
+                })
+    
+    # 5. JavaScript data attributes (data-href, data-url, etc.)
+    for elem in soup.find_all(attrs={'data-href': True}):
+        all_links.append({
+            'href': elem.get('data-href', ''),
+            'text': elem.get_text(strip=True).lower(),
+            'title': elem.get('data-title', '').lower(),
+            'source': 'data-attr'
+        })
+    
+    return all_links
+
+def find_ir_page_from_main_site(main_url):
+    """
+    Failsafe: Navigate from main company page to find investor relations page.
+    Looks in navigation, footer, and common patterns.
+    
+    Args:
+        main_url: Main company website URL
+    
+    Returns:
+        IR URL if found, otherwise None
+    """
+    try:
+        print(f"  🔄 Failsafe: Searching main site for IR link: {main_url}")
+        headers = {"User-Agent": get_random_user_agent()}
+        resp = requests.get(main_url, timeout=15, headers=headers)
+        
+        if resp.status_code != 200:
+            print(f"    ✗ HTTP {resp.status_code}")
+            return None
+        
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        links = extract_links_from_page(main_url, soup)
+        
+        # IR keywords to look for
+        ir_keywords = ['investor', 'ir', 'investerare', 'shareholder', 'financial', 'annual report']
+        
+        # Prioritize footer and navigation links
+        for priority_source in ['footer', 'navigation', 'html']:
+            for link in links:
+                if link['source'] != priority_source:
+                    continue
+                
+                combined = f"{link['href']} {link['text']} {link['title']}".lower()
+                
+                # Check if this looks like an IR link
+                if any(kw in combined for kw in ir_keywords):
+                    # Exclude press/news pages
+                    if not any(bad in combined for bad in ['press', 'news', 'media', 'blog', 'article']):
+                        abs_url = urljoin(main_url, link['href'])
+                        print(f"    ✓ Found IR link in {link['source']}: {link['text'][:50]}")
+                        print(f"      URL: {abs_url}")
+                        return abs_url
+        
+        # Try common patterns if nothing found
+        parsed = urlparse(main_url)
+        common_paths = ['/investors', '/investor-relations', '/investerare', '/en/investors', '/group/en/investors']
+        for path in common_paths:
+            test_url = f"{parsed.scheme}://{parsed.netloc}{path}"
+            try:
+                resp = requests.head(test_url, headers=headers, timeout=10, allow_redirects=True)
+                if resp.status_code == 200:
+                    print(f"    ✓ Found IR page via common pattern: {path}")
+                    return test_url
+            except:
+                continue
+        
+        print(f"    ✗ No IR link found on main site")
+        return None
+        
+    except Exception as e:
+        print(f"    ✗ Error searching main site: {e}")
+        return None
+
+def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_failsafe=True):
+    """
+    Search IR page for annual report PDFs with enhanced navigation strategy.
+    
+    Strategy:
+    1. Extract all links from IR page (HTML, JSON-LD, navigation, footer)
+    2. Look for annual reports in direct links and navigation
+    3. Follow relevant pages to find reports
+    4. FAILSAFE: If nothing found, go to main site → find IR link → retry
     
     Args:
         ir_url: Investor relations page URL
         years: List of years to find (default: 2019-2024)
         max_depth: How many levels deep to search (default: 2)
         max_failures: Max consecutive failures before raising error (default: 3)
+        enable_failsafe: Whether to try main site failsafe (default: True)
     
     Returns:
         List of dicts: [{'year': 2024, 'url': 'https://...', 'title': '...'}]
@@ -211,9 +369,21 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             
             soup = BeautifulSoup(resp.text, 'html.parser')
             
-            # Find all links on the page
-            links = soup.find_all('a', href=True)
-            print(f"{'  ' * depth}  → Found {len(links)} links to analyze")
+            # Find all links on the page using enhanced extraction
+            links_data = extract_links_from_page(url, soup)
+            print(f"{'  ' * depth}  → Found {len(links_data)} links to analyze (from HTML, JSON, nav, footer)")
+            
+            # Convert to soup-like objects for compatibility
+            class LinkWrapper:
+                def __init__(self, data):
+                    self._data = data
+                def get(self, key, default=''):
+                    return self._data.get(key, default)
+                def get_text(self, strip=False):
+                    return self._data.get('text', '')
+            
+            links = [LinkWrapper(ld) for ld in links_data]
+            links_raw = links_data  # Keep raw data for source checking
             
             # Patterns to identify annual reports (more flexible - allow words in between)
             annual_patterns = [
@@ -262,13 +432,17 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             pdf_count = 0
             excluded_count = 0
             
-            for link in links:
+            for i, link in enumerate(links):
                 href = link.get('href', '')
                 text = link.get_text(strip=True).lower()
                 title = link.get('title', '').lower()
+                source = links_raw[i].get('source', 'html') if i < len(links_raw) else 'html'
                 
                 # Combine text sources
                 combined = f"{href} {text} {title}".lower()
+                
+                # Prioritize navigation and footer links (they often have the main annual reports link)
+                is_priority_link = source in ['navigation', 'footer']
                 
                 # Check if it's a PDF link for annual reports
                 # Either URL ends with .pdf OR text mentions (PDF) OR href contains 'download' or 'pdf'
@@ -339,14 +513,19 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                         print(f"{'  ' * depth}    ? No year found: {text[:50]}")
                 
                 # If depth allows, check for navigation links to follow
-                if depth < max_depth and re.search(nav_pattern, combined, re.IGNORECASE):
+                # Prioritize navigation/footer links (they're more likely to be correct)
+                if depth < max_depth and (is_priority_link or re.search(nav_pattern, combined, re.IGNORECASE)):
                     # Make absolute URL
                     abs_url = urljoin(url, href)
                     
                     # Allow following links on same domain or subdomains (e.g., global.abb.com -> library.e.abb.com)
                     link_netloc = urlparse(abs_url).netloc
                     if base_domain in link_netloc:
-                        pages_to_visit.append(abs_url)
+                        # Put priority links at front of queue
+                        if is_priority_link:
+                            pages_to_visit.insert(0, abs_url)
+                        else:
+                            pages_to_visit.append(abs_url)
             
             if pdf_count > 0:
                 print(f"{'  ' * depth}  → Analyzed {pdf_count} PDF links, excluded {excluded_count} quarterly/SEC filings")
@@ -386,12 +565,41 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             '/financial-reports/annual-reports',
         ]
         
+        # Reset failure counter when trying alternative patterns
+        consecutive_failures = 0
+        
         for path in common_paths:
             test_url = f"{parsed.scheme}://{parsed.netloc}{path}"
             if test_url not in visited:
-                search_page(test_url, 0)
-                if results:  # If we found something, stop trying
-                    break
+                try:
+                    search_page(test_url, 0)
+                    if results:  # If we found something, stop trying
+                        break
+                except DownloadError:
+                    # Don't let common path 404s stop us from trying failsafe
+                    consecutive_failures = 0
+                    continue
+    
+    # FAILSAFE: If still no results and failsafe is enabled, try going to main site
+    if not results and enable_failsafe:
+        print("  ⚠ No reports found, activating failsafe...")
+        
+        # Try to construct main site URL
+        parsed = urlparse(ir_url)
+        main_url = f"{parsed.scheme}://{parsed.netloc}"
+        
+        # Only try failsafe if we're not already on the root domain
+        if parsed.path and parsed.path != '/':
+            # Try to find IR page from main site
+            new_ir_url = find_ir_page_from_main_site(main_url)
+            
+            if new_ir_url and new_ir_url != ir_url:
+                print(f"  → Retrying search from discovered IR page: {new_ir_url}")
+                # Recursive call but with failsafe disabled to prevent infinite loop
+                try:
+                    return find_annual_reports(new_ir_url, years, max_depth, max_failures, enable_failsafe=False)
+                except Exception as e:
+                    print(f"  ✗ Failsafe search also failed: {e}")
     
     # Deduplicate by year (keep first occurrence)
     seen_years = set()

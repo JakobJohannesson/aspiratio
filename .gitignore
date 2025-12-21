@@ -29,6 +29,10 @@ venv/
 *.tmp
 download_summary_*.json
 
+# Downloaded reports (keep out of git)
+companies/
+companies_validated/
+
 # Debug files
 debug_*.py
 test_downloader.py

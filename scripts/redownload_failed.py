@@ -226,14 +226,14 @@ def main():
                 df.at[idx, 'Source_Page'] = report.get('source_page', '')
                 df.at[idx, 'Size_MB'] = result['size_mb']
                 df.at[idx, 'Pages'] = result['pages']
-                df.at[idx, 'Validation_Status'] = validation['status']
+                df.at[idx, 'Validation_Status'] = 'Valid' if validation['valid'] else 'Invalid'
                 df.at[idx, 'Validation_Confidence'] = validation.get('confidence', 0.0)
-                df.at[idx, 'Validation_Issues'] = str(validation.get('issues', []))
+                df.at[idx, 'Validation_Issues'] = ', '.join(validation.get('issues', []))
                 df.at[idx, 'CaptureStatus'] = 'Downloaded'
                 
-                if validation['status'] == 'Valid':
+                if validation['valid']:
                     df.at[idx, 'Priority'] = 'Complete ✓'
-                    print(f"✓ Validation passed: {validation['confidence']:.1%} confidence")
+                    print(f"✓ Validation passed: {validation['confidence']:.1f}% confidence")
                     print(f"✓ Report complete for {company_name} {year}")
                     downloaded = True
                     

@@ -1,0 +1,731 @@
+[
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:43:04.282316"
+  },
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:43:04.290846"
+  },
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:43:04.294646"
+  },
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:43:04.298460"
+  },
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2023,
+    "status": "download_failed",
+    "url": "https://global.abb/content/dam/abb/global/group/investors/results-and-reports/annual_reporting_suite/2023/ABB%20Form%20SD%202023.pdf",
+    "error": "Only 23 pages (min 50 required)",
+    "timestamp": "2025-12-21T16:43:04.500289"
+  },
+  {
+    "company": "ABB Ltd",
+    "cid": "S1",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:43:04.500738"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:09.382075"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2020,
+    "status": "success",
+    "url": "https://www.atlascopcogroup.com/content/dam/atlas-copco/group/documents/investors/financial-publications/english/20250320-annual-report-2024-incl-sustainability-report-and-corporate-governance-report-copy-of-the-official-ESEF-format.pdf",
+    "pages": 169,
+    "size_mb": 10.113022804260254,
+    "confidence": 91.7,
+    "timestamp": "2025-12-21T16:44:10.313465"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:10.314941"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:10.316088"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:10.317227"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:10.318774"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2019,
+    "status": "validation_failed",
+    "url": "https://investors.boliden.com/sites/boliden-ir/files/pr/201903076646-1.pdf",
+    "pages": 124,
+    "size_mb": 7.679756164550781,
+    "validation_issues": [
+      "Year 2019 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:18.161011"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2022,
+    "status": "validation_failed",
+    "url": "https://investors.boliden.com/sites/boliden-ir/files/pr/202203086784-1.pdf",
+    "pages": 128,
+    "size_mb": 7.953472137451172,
+    "validation_issues": [
+      "Year 2022 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:18.932223"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2023,
+    "status": "validation_failed",
+    "url": "https://investors.boliden.com/sites/boliden-ir/files/pr/202303076693-1.pdf",
+    "pages": 136,
+    "size_mb": 7.377209663391113,
+    "validation_issues": [
+      "Year 2023 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:19.606089"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 2 reports for other years)",
+    "timestamp": "2025-12-21T16:44:24.855860"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 2 reports for other years)",
+    "timestamp": "2025-12-21T16:44:24.860852"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2022,
+    "status": "validation_failed",
+    "url": "https://www.epirocgroup.com/content/dam/epiroc/corporate/documents/investors/annual-report/2022/Annual%20and%20Sustainability%20Report%202021.pdf",
+    "pages": 152,
+    "size_mb": 12.510419845581055,
+    "validation_issues": [
+      "Year 2022 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:25.617218"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2023,
+    "status": "validation_failed",
+    "url": "https://www.epirocgroup.com/content/dam/epiroc/corporate/documents/investors/annual-report/annual-report-2023/Epiroc%20Annual%20and%20Sustainability%20Report%202022.pdf",
+    "pages": 164,
+    "size_mb": 15.999327659606934,
+    "validation_issues": [
+      "Year 2023 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:26.516975"
+  },
+  {
+    "company": "Ericsson B",
+    "cid": "S10",
+    "year": 2019,
+    "status": "validation_failed",
+    "url": "https://www.ericsson.com/494193/assets/local/investors/documents/2020/annual-report-2020-en.pdf",
+    "pages": 213,
+    "size_mb": 4.051419258117676,
+    "validation_issues": [
+      "Year 2019 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:44:36.532353"
+  },
+  {
+    "company": "Ericsson B",
+    "cid": "S10",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:44:36.533890"
+  },
+  {
+    "company": "Essity B",
+    "cid": "S11",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:44:53.563557"
+  },
+  {
+    "company": "Essity B",
+    "cid": "S11",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:44:53.563673"
+  },
+  {
+    "company": "Evolution",
+    "cid": "S12",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:44:59.634755"
+  },
+  {
+    "company": "Evolution",
+    "cid": "S12",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:44:59.634848"
+  },
+  {
+    "company": "Hexagon B",
+    "cid": "S14",
+    "year": 2020,
+    "status": "validation_failed",
+    "url": "https://s3.eu-central-1.amazonaws.com/hexagonassets/HEX-Annual-Report-2018.pdf",
+    "pages": 156,
+    "size_mb": 4.140134811401367,
+    "validation_issues": [
+      "Year 2020 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:45:13.969017"
+  },
+  {
+    "company": "Lifco B",
+    "cid": "S17",
+    "year": 2020,
+    "status": "validation_failed",
+    "url": "https://network.s-z.se/app/uploads/sites/16/Lifco-annual-report-2017.pdf",
+    "pages": 92,
+    "size_mb": 3.398387908935547,
+    "validation_issues": [
+      "Year 2020 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:45:16.797334"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.652982"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.653079"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.653143"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.653202"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.653257"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2024,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:26.653313"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353209"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353299"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353353"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353400"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353441"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2024,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 403)",
+    "timestamp": "2025-12-21T16:45:32.353482"
+  },
+  {
+    "company": "Sandvik",
+    "cid": "S21",
+    "year": 2023,
+    "status": "success",
+    "url": "https://www.annualreport.sandvik/en/2023/services/downloads.html",
+    "pages": 168,
+    "size_mb": 11.577954292297363,
+    "confidence": 91.5,
+    "timestamp": "2025-12-21T16:45:39.558608"
+  },
+  {
+    "company": "Sandvik",
+    "cid": "S21",
+    "year": 2024,
+    "status": "success",
+    "url": "https://www.annualreport.sandvik/en/2024/services/downloads.html",
+    "pages": 160,
+    "size_mb": 8.172282218933105,
+    "confidence": 89.3,
+    "timestamp": "2025-12-21T16:45:40.839907"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:47.904602"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:47.904683"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:47.904730"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:47.904773"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:47.904822"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167171"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167253"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167307"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167349"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167387"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2024,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:45:55.167429"
+  },
+  {
+    "company": "Skanska B",
+    "cid": "S24",
+    "year": 2019,
+    "status": "validation_failed",
+    "url": "https://group.skanska.com/4a1971/siteassets/investors/reports-publications/annual-reports/2020/annual-and-sustainability-report-2020.pdf",
+    "pages": 212,
+    "size_mb": 7.623106956481934,
+    "validation_issues": [
+      "Year 2019 not found in PDF"
+    ],
+    "timestamp": "2025-12-21T16:46:04.717188"
+  },
+  {
+    "company": "Skanska B",
+    "cid": "S24",
+    "year": 2020,
+    "status": "success",
+    "url": "https://group.skanska.com/4a18fd/siteassets/investors/reports-publications/annual-reports/2016/annual-report--2016.pdf",
+    "pages": 182,
+    "size_mb": 7.835984230041504,
+    "confidence": 95.2,
+    "timestamp": "2025-12-21T16:46:05.464568"
+  },
+  {
+    "company": "Skanska B",
+    "cid": "S24",
+    "year": 2021,
+    "status": "success",
+    "url": "https://group.skanska.com/49b28a/siteassets/investors/reports-publications/annual-reports/2021/annual-and-sustainability-report-2021.pdf",
+    "pages": 208,
+    "size_mb": 14.626075744628906,
+    "confidence": 100,
+    "timestamp": "2025-12-21T16:46:06.739928"
+  },
+  {
+    "company": "Skanska B",
+    "cid": "S24",
+    "year": 2024,
+    "status": "success",
+    "url": "https://group.skanska.com/49490b/siteassets/investors/reports-publications/annual-reports/2024/annual-and-sustainability-report-2024.pdf",
+    "pages": 232,
+    "size_mb": 14.541145324707031,
+    "confidence": 100,
+    "timestamp": "2025-12-21T16:46:07.916469"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.523464"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.528256"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.532308"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.536114"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.538926"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:09.541555"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105503"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105580"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105631"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105672"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105710"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2024,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:10.105746"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:46:19.713718"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2020,
+    "status": "download_failed",
+    "url": "https://www.tele2.com/files/globalassets/documents/reports/archive/reports/2018/comhem-com-hem-publishes-re-audited-financial-statements-for-the-merger-with-tele2-180711.pdf",
+    "error": "Only 2 pages (min 50 required)",
+    "timestamp": "2025-12-21T16:46:20.142894"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 1 reports for other years)",
+    "timestamp": "2025-12-21T16:46:20.144111"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.337664"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.342513"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.346079"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.349142"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.352547"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2025-12-21T16:46:22.354907"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2019,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173298"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2020,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173396"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2021,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173457"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2022,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173513"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2023,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173566"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2024,
+    "status": "search_failed",
+    "error": "Failed to fetch 3 pages in a row (last: HTTP 404)",
+    "timestamp": "2025-12-21T16:46:47.173619"
+  }
+]
