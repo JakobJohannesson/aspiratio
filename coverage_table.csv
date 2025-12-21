@@ -1,7 +1,0 @@
-CompanyName	Company_Identifer	What to capture	FiscalYear	Where	Capture_attempt_date	AgentId	CaptureStatus	CaptureStatusDetails	Next_capture_attempt	milestone1_Establish_Connection	milestone2_Find_object_to_capture	milestone3_download_object	Milestone4_object_passed_validation
-ABB Ltd	S1	Annual report	2019	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Failed
-ABB Ltd	S1	Annual report	2020	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Pass
-ABB Ltd	S1	Annual report	2021	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Pass
-ABB Ltd	S1	Annual report	2022	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Pass
-ABB Ltd	S1	Annual report	2023	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Pass
-ABB Ltd	S1	Annual report	2024	https://global.abb/group/en/investors	2025-12-20	A1	Failed	Reason for failure here, if any	2025-12-21	Pass	Pass	Pass	Pass
