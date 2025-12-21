@@ -1,0 +1,20 @@
+# Aspiratio - Annual Report Downloader
+# Required Python packages
+
+# Core dependencies
+beautifulsoup4==4.14.3
+pandas==2.3.3
+PyPDF2==3.0.1
+requests==2.32.5
+
+# Configuration
+PyYAML==6.0.1
+
+# Browser automation (Tier 2: JavaScript-heavy sites)
+playwright==1.57.0
+
+# Interactive UI
+streamlit==1.52.2
+
+# Optional: For better performance
+# watchdog  # For Streamlit hot reload

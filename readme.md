@@ -10,6 +10,10 @@ An automated system to download and validate annual reports for Swedish OMXS30 c
 
 **IMPORTANT: Always check what's missing before downloading!**
 
+#### Using CLI Commands (Recommended)
+
+After installation with `pip install -e .`, use the clean CLI commands:
+
 ```bash
 # Step 1: Check what's missing from coverage table
 python3 -c "
@@ -22,14 +26,30 @@ for company, count in by_company.items():
     print(f'  {company}: {count}')
 "
 
-# Step 2: Download reports (only fetches missing ones from coverage table)
-python scripts/download_reports.py
+# Step 2: Download reports (only fetches missing ones)
+aspiratio-download
 
 # Step 3: Validate downloaded PDFs
-python scripts/validate_reports.py
+aspiratio-validate
 
-# Step 4: Review results - check coverage_table_updated.csv Priority column
-# Repeat steps 2-3 for reports that still need work
+# Step 4: Update coverage table
+aspiratio-update
+
+# Step 5: Retry failures with smart logic (Playwright fallback)
+aspiratio-retry
+
+# Interactive UI
+streamlit run scripts/app.py
+```
+
+#### Using Python Scripts (Alternative)
+
+```bash
+# Traditional method still works
+python scripts/download_reports.py
+python scripts/validate_reports.py
+python scripts/update_coverage_table.py
+python scripts/redownload_failed.py
 ```
 
 **Key principles:**
@@ -57,22 +77,58 @@ python scripts/validate_reports.py
 
 ### Development
 
-**Dependencies:**
+**Setup:**
 ```bash
-pip install pandas beautifulsoup4 requests PyPDF2 streamlit playwright pycryptodome
-playwright install chromium
+# Clone and navigate to project
+cd aspiratio
+
+# Install in editable mode (includes all dependencies)
+pip install -e .
+
+# Install Playwright browser
+playwright install webkit
+
+# Configuration is in config.yaml
+# See CONFIG_GUIDE.md for details on using the config system
 ```
+
+**Available CLI Commands:**
+```bash
+# Main workflow
+aspiratio-download      # Batch download missing reports
+aspiratio-validate      # Validate downloaded PDFs
+aspiratio-retry         # Smart retry with Playwright fallback
+aspiratio-update        # Update coverage table
+
+# Setup tools (one-time)
+aspiratio-build-master  # Build/validate instrument master
+aspiratio-find-ir       # Find IR URLs for companies
+
+# Interactive
+streamlit run scripts/app.py  # Web UI for manual review
+```
+
+**Configuration:**
+The project uses centralized configuration in `config.yaml`:
+- Validation thresholds (min/max pages, confidence)
+- Download parameters (retries, timeouts, rate limiting)
+- HTTP settings (user agents)
+- File paths
+- Playwright settings
+
+See [CONFIG_GUIDE.md](CONFIG_GUIDE.md) for usage examples.
 
 **Testing individual companies:**
 ```python
 from aspiratio.utils.report_downloader import download_annual_reports
+from aspiratio.config import get_target_years
 
 # Download reports for a specific company
 download_annual_reports(
     ir_url="https://www.company.com/investors",
     company_name="Company Name",
     company_id="S1",
-    years=[2019, 2020, 2021, 2022, 2023, 2024]
+    years=get_target_years()  # From config
 )
 ```
 
@@ -80,13 +136,50 @@ download_annual_reports(
 
 ```
 aspiratio/
-├── coverage_table_updated.csv    # Download tracking with priorities
-├── validation_results.csv        # PDF validation feedback
-├── instrument_master.csv         # Company database
-├── omxs30_members.csv           # OMXS30 companies
-├── aspiratio/utils/              
-│   ├── report_downloader.py     # Core downloader (50+ pages, quarterly filter)
-│   ├── playwright_downloader.py # JavaScript-heavy sites (ABB)
+├── config.yaml                  # 🆕 Centralized configuration
+├── requirements.txt             # 🆕 Python dependencies
+├── CONFIG_GUIDE.md              # 🆕 Configuration usage guide
+├── coverage_table_updated.csv   # Download tracking with priorities
+├── validation_results.csv       # PDF validation feedback
+├── instrument_master.csv        # Company database
+├── omxs30_members.csv          # OMXS30 companies
+├── aspiratio/
+│   ├── config.py               # 🆕 Configuration loader
+│   └── utils/              
+│       ├── report_downloader.py     # Tier 1: Traditional scraping
+│       ├── playwright_downloader.py # Tier 2: JavaScript sites
+│       ├── ir_search.py             # IR URL discovery
+│       ├── name_match.py            # Company name matching
+│       └── io.py                    # File operations
+├── scripts/                      
+│   ├── download_reports.py      # Main batch downloader
+│   ├── validate_reports.py      # PDF validation pipeline
+│   ├── redownload_failed.py     # Smart retry with Playwright fallback
+│   ├── app.py                   # Streamlit UI
+│   ├── record_download.py       # Tier 3: Record manual downloads
+│   ├── ir_scraper.py            # Find IR URLs
+│   ├── build_master.py          # Build instrument master
+│   └── update_coverage_table.py # Update coverage tracking
+```
+
+### Three-Tier Download Strategy
+
+**Tier 1: Traditional Scraping** (Primary - 80%+ success)
+- Searches IR pages for PDF links (HTML, JSON-LD, navigation)
+- Failsafe: Main site → IR discovery if initial search fails
+- Handles direct patterns for predictable sites
+
+**Tier 2: Playwright/JavaScript** (Fallback - 10-15%)
+- For sites with dynamic content (cookie popups, dropdowns)
+- Registry-based: Record once, reuse for all years
+- Currently implemented: Atlas Copco (S6)
+
+**Tier 3: Manual Recording** (Last Resort - <5%)
+- Streamlit app generates Playwright codegen commands
+- User demonstrates download path once
+- Agent analyzes and integrates pattern
+
+The system automatically escalates: Tier 1 → Tier 2 → Tier 3
 │   ├── ir_search.py             # IR URL discovery
 │   ├── name_match.py            # Company name matching
 │   └── io.py                    # File operations

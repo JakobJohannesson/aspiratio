@@ -1,0 +1,168 @@
+# Aspiratio - Annual Report Downloader Configuration
+# ===================================================
+
+# Project Information
+project:
+  name: "Aspiratio"
+  description: "Automated annual report downloader for OMXS30 companies"
+  target_index: "OMXS30"
+  target_years: [2019, 2020, 2021, 2022, 2023, 2024]
+
+# File Paths
+paths:
+  # Input files (configuration)
+  instrument_master: "instrument_master.csv"
+  omxs30_members: "omxs30_members.csv"
+  
+  # Output files (generated)
+  coverage_table: "coverage_table_updated.csv"
+  validation_results: "validation_results.csv"
+  
+  # Directories
+  companies_dir: "companies"           # Downloaded PDFs
+  companies_validated_dir: "companies_validated"  # Validated PDFs only
+  agent_logs_dir: "agent_logs"
+  runs_dir: "agent_logs/runs"
+  playwright_scripts_dir: "aspiratio/utils/playwright_scripts"
+
+# Download Configuration
+download:
+  # Retry and error handling
+  max_retries: 3                    # Max attempts per PDF download with user agent rotation
+  max_consecutive_failures: 3       # Max consecutive failures before raising DownloadError
+  
+  # Search parameters
+  max_depth: 2                      # How many levels deep to search for reports
+  enable_failsafe: true             # Try main site → IR page discovery if initial search fails
+  
+  # Timeouts (seconds)
+  request_timeout: 30
+  
+  # Rate limiting
+  delay_between_downloads: 1        # Seconds to wait between downloads (be nice to servers)
+  delay_between_companies: 2        # Seconds to wait between companies
+
+# HTTP Configuration
+http:
+  # User agents to rotate through (helps avoid blocking)
+  user_agents:
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# PDF Validation Configuration
+validation:
+  # Page count requirements
+  min_pages: 50                     # Minimum pages for valid annual report
+  max_pages: 500                    # Maximum pages (filter out combined documents)
+  
+  # Validation criteria weights (sum to 100%)
+  page_count_weight: 40             # 40 points for page count in range
+  company_name_weight: 30           # 30 points for company name found
+  year_mention_weight: 30           # 30 points for year mentioned
+  
+  # Confidence threshold
+  confidence_threshold: 60          # Minimum confidence (%) to mark as valid
+  
+  # Text extraction
+  max_pages_to_check: 5             # Check first N pages for company/year
+  
+  # Skip patterns (exclude these from annual reports)
+  exclude_patterns:
+    # Quarterly reports
+    - "q1|q2|q3|q4"
+    - "quarter|quarterly"
+    - "interim|interims"
+    - "delårs|delår"                # Swedish: interim
+    - "kvartals"                    # Swedish: quarterly
+    # SEC filings (for non-US companies, these are just summaries)
+    - "form\\s*20-?f"
+    - "form\\s*sd"
+    - "6-?k"
+
+# Playwright Configuration (Tier 2: JavaScript-heavy sites)
+playwright:
+  # Browser settings
+  browser: "chromium"               # chromium, firefox, or webkit
+  headless: true                    # Run browser in headless mode
+  
+  # Timeouts (milliseconds)
+  page_load_timeout: 20000
+  element_timeout: 5000
+  popup_timeout: 5000
+  
+  # Download handling
+  accept_downloads: true
+  download_path: null               # null = use default temp dir
+
+# Streamlit App Configuration
+streamlit:
+  title: "Aspiratio - Annual Report Downloader"
+  page_icon: "📊"
+  layout: "wide"
+  
+  # Display settings
+  items_per_page: 20
+  show_debug_info: false
+
+# IR Search Configuration
+ir_search:
+  # Search query templates
+  search_query: "{company_name} investor relations"
+  
+  # Keywords for IR URL detection (weighted scoring)
+  keywords:
+    high_priority:                  # Weight: 10 points each
+      - "investor"
+      - "investors"
+      - "ir"
+    medium_priority:                # Weight: 5 points each
+      - "financial"
+      - "reports"
+      - "annual"
+    low_priority:                   # Weight: 2 points each
+      - "press"
+      - "media"
+      - "news"
+  
+  # URL patterns to exclude
+  exclude_patterns:
+    - "facebook.com"
+    - "twitter.com"
+    - "linkedin.com"
+    - "youtube.com"
+    - "instagram.com"
+  
+  max_search_results: 10
+
+# Coverage Table Status Values
+status:
+  complete: "Complete ✓"
+  needs_work: "Needs Work ⚠"
+  not_downloaded: "Not Downloaded"
+  manual_review: "Manual Review Required"
+
+# Logging
+logging:
+  level: "INFO"                     # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Log file naming
+  summary_prefix: "download_summary_"
+  redownload_prefix: "redownload_log_"
+  timestamp_format: "%Y%m%d_%H%M%S"
+
+# Development/Debug Settings
+debug:
+  skip_existing: true               # Skip downloading files that already exist
+  verbose: false                    # Extra detailed output
+  save_html_snapshots: false        # Save HTML of pages searched (for debugging)
+  
+# Company-Specific Overrides (for edge cases)
+company_overrides:
+  # Example: Companies with non-standard report patterns
+  # "S1":  # ABB
+  #   min_pages: 80
+  #   exclude_patterns: ["form 20-f"]

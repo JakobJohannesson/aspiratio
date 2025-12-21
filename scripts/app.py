@@ -168,13 +168,13 @@ with tab1:
         with col1:
             st.write("**Document Classification**")
             doc_type_counts = filtered_df['Document_Type'].value_counts()
-            st.dataframe(doc_type_counts, use_container_width=True)
+            st.dataframe(doc_type_counts, width='stretch')
         
         with col2:
             st.write("**Feedback Summary**")
             if filtered_df['Feedback_Status'].notna().any():
                 feedback_counts = filtered_df[filtered_df['Feedback_Status'] != '']['Feedback_Status'].value_counts()
-                st.dataframe(feedback_counts, use_container_width=True)
+                st.dataframe(feedback_counts, width='stretch')
             else:
                 st.info("No feedback provided yet")
 
@@ -182,11 +182,116 @@ with tab1:
 with tab2:
     st.header("Download Results & JSON Summary")
     
+    st.divider()
+    
+    # Section 1: Download Missing Reports
+    st.subheader("🚀 Download Missing Reports")
+    
+    if not os.path.exists(coverage_path):
+        st.warning("Coverage table not found. Run `aspiratio-update` first.")
+    else:
+        coverage_df = pd.read_csv(coverage_path, sep='\t')
+        missing_reports = coverage_df[coverage_df['Priority'] != 'Complete ✓'].copy()
+        
+        if len(missing_reports) == 0:
+            st.success("✅ All reports complete! No missing reports to download.")
+        else:
+            st.info(f"Found **{len(missing_reports)}** missing reports across **{missing_reports['CompanyName'].nunique()}** companies")
+            
+            col1, col2 = st.columns([1, 3])
+            
+            with col1:
+                if st.button("📥 Download All Missing", type="primary", use_container_width=True):
+                    with st.spinner("Starting batch download..."):
+                        result = os.system("aspiratio-download > /tmp/aspiratio_download.log 2>&1 &")
+                        if result == 0:
+                            st.success("✅ Batch download started in background! Check coverage table for progress.")
+                            st.info("Monitor progress: `tail -f /tmp/aspiratio_download.log`")
+                        else:
+                            st.error("Failed to start download. Check terminal for errors.")
+            
+            with col2:
+                st.markdown("""
+                **Or download individual reports below** ⬇️  
+                Select a company and year, then click download.
+                """)
+            
+            st.divider()
+            
+            # Individual report downloads
+            st.subheader("📄 Download Individual Reports")
+            
+            # Group by company
+            missing_by_company = missing_reports.groupby('CompanyName').agg({
+                'FiscalYear': list,
+                'Company_Identifier': 'first',
+                'IR_URL': 'first'
+            }).reset_index()
+            
+            # Company filter
+            company_filter = st.selectbox(
+                "Filter by company (optional)",
+                options=['All'] + sorted(missing_by_company['CompanyName'].tolist()),
+                key="missing_company_filter"
+            )
+            
+            if company_filter != 'All':
+                missing_by_company = missing_by_company[missing_by_company['CompanyName'] == company_filter]
+            
+            # Display each company with download buttons
+            for idx, row in missing_by_company.iterrows():
+                company_name = row['CompanyName']
+                company_id = row['Company_Identifier']
+                years = sorted(row['FiscalYear'])
+                ir_url = row['IR_URL']
+                
+                with st.expander(f"**{company_name}** ({company_id}) - {len(years)} missing report(s)"):
+                    st.write(f"**IR URL:** {ir_url}")
+                    st.write(f"**Missing years:** {', '.join(map(str, years))}")
+                    
+                    # Create columns for each year
+                    cols = st.columns(min(len(years), 6))
+                    
+                    for i, year in enumerate(years):
+                        col_idx = i % 6
+                        with cols[col_idx]:
+                            if st.button(f"📥 {year}", key=f"dl_{company_id}_{year}", use_container_width=True):
+                                # Try to download this specific report
+                                with st.spinner(f"Downloading {company_name} {year}..."):
+                                    import subprocess
+                                    try:
+                                        # Run redownload for this specific company/year
+                                        cmd = f"aspiratio-retry"
+                                        result = subprocess.run(
+                                            cmd,
+                                            shell=True,
+                                            capture_output=True,
+                                            text=True,
+                                            timeout=120
+                                        )
+                                        
+                                        if "✓" in result.stdout or "success" in result.stdout.lower():
+                                            st.success(f"✅ {year} downloaded!")
+                                            st.rerun()
+                                        else:
+                                            st.warning(f"⚠️ Download completed with warnings. Check coverage table.")
+                                            with st.expander("View output"):
+                                                st.text(result.stdout[-1000:])  # Last 1000 chars
+                                    except subprocess.TimeoutExpired:
+                                        st.error("Download timed out (>120s)")
+                                    except Exception as e:
+                                        st.error(f"Error: {e}")
+    
+    st.divider()
+    
+    # Section 2: View Previous Download Summaries
+    st.subheader("📊 Previous Download Summaries")
+    
     # Find all download summary JSON files
     summary_files = sorted(Path(repo_root).glob('download_summary_*.json'), reverse=True)
     
     if not summary_files:
-        st.info("No download summaries found. Run `python scripts/download_reports.py` first.")
+        st.info("No download summaries found. Run `aspiratio-download` first.")
     else:
         selected_file = st.selectbox(
             "Select download summary",
@@ -252,7 +357,7 @@ with tab2:
                             "error": "Error",
                         },
                         hide_index=True,
-                        use_container_width=True
+                        width='stretch'
                     )
 
 # TAB 3: URL Validator (original functionality)
