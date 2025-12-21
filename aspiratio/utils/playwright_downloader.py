@@ -175,7 +175,6 @@ async def download_atlas_copco_report(year, output_dir='companies'):
         dict: {'success': bool, 'url': str, 'path': str, 'error': str}
     """
     from aspiratio.utils.report_downloader import download_pdf
-    import pypdf
     
     company_name = "Atlas Copco AB"
     cid = "S6"
@@ -186,20 +185,14 @@ async def download_atlas_copco_report(year, output_dir='companies'):
     company_dir.mkdir(parents=True, exist_ok=True)
     output_path = company_dir / f"annual_report_{year}.pdf"
     
-    # Skip if exists and valid
-    if output_path.exists():
-        try:
-            with open(output_path, 'rb') as f:
-                pdf = pypdf.PdfReader(f)
-                if len(pdf.pages) >= 50:
-                    return {
-                        'success': True,
-                        'url': None,
-                        'path': str(output_path),
-                        'error': 'Already exists'
-                    }
-        except:
-            pass  # Invalid PDF, will redownload
+    # Skip if exists (simple check by file size)
+    if output_path.exists() and output_path.stat().st_size > 1_000_000:  # > 1MB
+        return {
+            'success': True,
+            'url': None,
+            'path': str(output_path),
+            'error': 'Already exists'
+        }
     
     print(f"\n{'='*70}")
     print(f"Atlas Copco AB ({cid}) - {year} (Playwright)")
@@ -247,14 +240,24 @@ async def download_atlas_copco_report(year, output_dir='companies'):
                 link_text = f"Annual Report {year} (PDF)"
                 print(f"  Looking for: {link_text}")
                 
-                # Wait for popup and capture URL
-                async with page.expect_popup(timeout=5000) as popup_info:
-                    await page.get_by_role("link", name=link_text).click()
-                popup = await popup_info.value
-                pdf_url = popup.url
+                # Get the link element first
+                link = page.get_by_role("link", name=link_text)
                 
-                print(f"  ✓ Found report URL: {pdf_url}")
-                await popup.close()
+                # Extract href before clicking
+                pdf_url = await link.get_attribute('href')
+                if pdf_url:
+                    # Make absolute URL if relative
+                    if not pdf_url.startswith('http'):
+                        pdf_url = urljoin(ir_url, pdf_url)
+                    print(f"  ✓ Found report URL: {pdf_url}")
+                else:
+                    # Try clicking and capturing popup if no direct href
+                    async with page.expect_popup(timeout=5000) as popup_info:
+                        await link.click()
+                    popup = await popup_info.value
+                    pdf_url = popup.url
+                    print(f"  ✓ Found report URL (via popup): {pdf_url}")
+                    await popup.close()
                 
             except Exception as e:
                 print(f"  ✗ Failed to find report link: {e}")
@@ -342,3 +345,13 @@ if __name__ == '__main__':
     
     # Uncomment to test ABB
     # download_abb_reports()
+
+
+# Registry of company-specific Playwright handlers
+PLAYWRIGHT_HANDLERS = {
+    'S6': download_atlas_copco_report,  # Atlas Copco AB
+    # Add more as they're recorded:
+    # 'S14': download_nibe_report,
+    # 'S21': download_saab_report,
+    # etc.
+}

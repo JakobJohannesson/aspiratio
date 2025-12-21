@@ -20,6 +20,8 @@ import json
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from aspiratio.utils.report_downloader import find_annual_reports, download_pdf
+from aspiratio.utils.playwright_downloader import PLAYWRIGHT_HANDLERS
+import asyncio
 
 # Import validation function from validate_reports script
 import importlib.util
@@ -159,6 +161,65 @@ def main():
             if not year_reports:
                 print(f"✗ No report URL found for year {year}")
                 print(f"  Reason: Search found {len(reports)} reports total, but none matched year {year}")
+                
+                # Try Playwright fallback if available for this company
+                if cid in PLAYWRIGHT_HANDLERS:
+                    print(f"→ Attempting Playwright-based download for {company_name}...")
+                    try:
+                        playwright_result = asyncio.run(PLAYWRIGHT_HANDLERS[cid](year, str(repo_root / 'companies')))
+                        
+                        if playwright_result['success']:
+                            print(f"✓ Playwright download successful!")
+                            
+                            # Validate
+                            output_path = playwright_result['path']
+                            validation = validate_pdf(
+                                output_path,
+                                company_name=company_name,
+                                expected_year=year
+                            )
+                            
+                            # Update coverage table
+                            df.at[idx, 'Report_URL'] = playwright_result.get('url', 'Playwright download')
+                            df.at[idx, 'Source_Page'] = ir_url
+                            df.at[idx, 'Size_MB'] = os.path.getsize(output_path) / (1024 * 1024)
+                            
+                            # Get page count
+                            try:
+                                import PyPDF2
+                                with open(output_path, 'rb') as f:
+                                    pdf = PyPDF2.PdfReader(f)
+                                    pages = len(pdf.pages)
+                                df.at[idx, 'Pages'] = pages
+                            except:
+                                df.at[idx, 'Pages'] = 0
+                            
+                            df.at[idx, 'Validation_Status'] = 'Valid' if validation['valid'] else 'Invalid'
+                            df.at[idx, 'Validation_Confidence'] = validation.get('confidence', 0.0)
+                            df.at[idx, 'Validation_Issues'] = ', '.join(validation.get('issues', []))
+                            df.at[idx, 'CaptureStatus'] = 'Playwright'
+                            
+                            if validation['valid']:
+                                df.at[idx, 'Priority'] = 'Complete ✓'
+                                print(f"✓ Validation passed: {validation['confidence']:.1f}% confidence")
+                            
+                            log_entries.append({
+                                'company': company_name,
+                                'cid': cid,
+                                'year': year,
+                                'status': 'success_playwright',
+                                'url': playwright_result.get('url', ''),
+                                'confidence': validation.get('confidence', 0),
+                                'timestamp': datetime.now().isoformat()
+                            })
+                            
+                            # Save progress
+                            df.to_csv(coverage_file, sep='\t', index=False)
+                            continue  # Skip to next year
+                            
+                    except Exception as e:
+                        print(f"✗ Playwright fallback failed: {e}")
+                
                 log_entries.append({
                     'company': company_name,
                     'cid': cid,
