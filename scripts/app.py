@@ -18,7 +18,7 @@ st.set_page_config(page_title="IR Download Manager", layout="wide")
 st.title("📊 IR Download Manager")
 
 # Tabs for different views
-tab1, tab2, tab3 = st.tabs(["📊 Coverage Review", "📥 Download Results", "✅ URL Validator"])
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Coverage Review", "📥 Download Results", "✅ URL Validator", "🎬 Record Download"])
 
 master_path = os.path.join(repo_root, 'instrument_master.csv')
 coverage_path = os.path.join(repo_root, 'coverage_table_updated.csv')
@@ -310,3 +310,137 @@ with tab3:
         st.divider()
         st.subheader("Current Master Data Preview")
         st.dataframe(df.head(10))
+
+# TAB 4: Playwright Recording Helper
+with tab4:
+    st.header("🎬 Record Download Path with Playwright")
+    
+    st.markdown("""
+    Use this tool to get the command for recording how to download an annual report.
+    
+    ### How It Works:
+    1. **Select** a company and year below
+    2. **Copy** the generated command
+    3. **Run** it in your terminal
+    4. **Navigate** to download the report in the browser that opens
+    5. **Share** the generated script with the system for analysis
+    """)
+    
+    if not os.path.exists(coverage_path):
+        st.warning(f"Coverage table not found. Run `python scripts/update_coverage_table.py` first.")
+    else:
+        coverage_df = pd.read_csv(coverage_path, sep='\t')
+        
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.subheader("Select Report to Record")
+            
+            # Filter for incomplete reports
+            show_incomplete = st.checkbox("Show only incomplete reports", value=True, key="rec_incomplete")
+            
+            if show_incomplete:
+                display_df = coverage_df[coverage_df['Priority'] != 'Complete ✓'].copy()
+            else:
+                display_df = coverage_df.copy()
+            
+            # Company selection
+            companies = sorted(display_df['CompanyName'].unique())
+            if companies:
+                selected_company = st.selectbox("Company", companies, key="rec_company")
+                
+                # Year selection
+                company_data = display_df[display_df['CompanyName'] == selected_company]
+                years = sorted(company_data['FiscalYear'].unique(), reverse=True)
+                selected_year = st.selectbox("Year", years, key="rec_year")
+                
+                # Get report data
+                report_data = coverage_df[
+                    (coverage_df['CompanyName'] == selected_company) & 
+                    (coverage_df['FiscalYear'] == selected_year)
+                ].iloc[0]
+                
+                company_id = report_data['Company_Identifier']
+                ir_url = report_data['IR_URL']
+                
+                st.divider()
+                
+                # Display company info
+                st.info(f"""
+                **Company:** {selected_company}  
+                **ID:** {company_id}  
+                **Year:** {selected_year}  
+                **IR URL:** {ir_url}
+                """)
+                
+        with col2:
+            st.subheader("Quick Info")
+            st.markdown("""
+            **Script saves to:**  
+            `aspiratio/utils/playwright_scripts/`
+            
+            **After recording:**  
+            Share the generated `.py` file content
+            """)
+        
+        st.divider()
+        st.subheader("📋 Commands to Run")
+        
+        # Method 1: Helper script
+        st.markdown("**Option 1: Using helper script (Recommended)**")
+        helper_cmd = f"python scripts/record_download.py {company_id} {selected_year}"
+        st.code(helper_cmd, language="bash")
+        
+        # Method 2: Direct playwright command
+        st.markdown("**Option 2: Direct Playwright command**")
+        output_file = os.path.abspath(f"aspiratio/utils/playwright_scripts/{company_id}_{selected_year}.py")
+        playwright_cmd = f"playwright codegen --browser webkit --target python-async --output {output_file} {ir_url}"
+        st.code(playwright_cmd, language="bash")
+        
+        st.divider()
+        st.subheader("📖 Instructions")
+        
+        st.markdown("""
+        ### Step-by-Step:
+        
+        1. **Copy** one of the commands above
+        
+        2. **Open** a terminal and navigate to the project directory:
+           ```bash
+           cd ~/Documents/github_repos/aspiratio
+           source .venv/bin/activate
+           ```
+        
+        3. **Run** the copied command
+        
+        4. **Browser opens** with Playwright Inspector:
+           - Navigate to find the annual report
+           - Click download links, buttons, etc.
+           - All actions are recorded automatically
+        
+        5. **Close** the browser when done
+        
+        6. **Check** the generated script:
+           ```bash
+           cat {output_file}
+           ```
+        
+        7. **Share** the script content so I can:
+           - Analyze the navigation pattern
+           - Extract the download logic
+           - Integrate it into automated downloads
+           - Apply to similar companies
+        
+        ### What Gets Recorded:
+        - ✅ All clicks and navigation
+        - ✅ Form inputs and selections  
+        - ✅ Best-practice locators (role, text, test IDs)
+        - ✅ Resilient selectors
+        
+        ### Tips:
+        - Be deliberate with your clicks
+        - Take the shortest path to the report
+        - Wait for pages to load before clicking
+        - Close the browser to save the recording
+        """)
+

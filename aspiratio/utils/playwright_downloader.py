@@ -3,11 +3,13 @@ Playwright-based downloader for JavaScript-heavy sites.
 Handles companies where reports are loaded dynamically.
 """
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 import re
 import time
 from urllib.parse import urljoin
 from pathlib import Path
+import asyncio
+from playwright.async_api import async_playwright
 
 def find_reports_with_playwright(ir_url, years, company_name=""):
     """
@@ -160,5 +162,183 @@ def download_abb_reports(output_dir='companies'):
     
     print(f"\n✓ ABB: Downloaded {downloaded} new reports")
 
+async def download_atlas_copco_report(year, output_dir='companies'):
+    """
+    Download Atlas Copco annual report for specific year using recorded navigation.
+    Based on playwright script generated from codegen.
+    
+    Args:
+        year: Year to download (e.g., 2024)
+        output_dir: Output directory (default: 'companies')
+    
+    Returns:
+        dict: {'success': bool, 'url': str, 'path': str, 'error': str}
+    """
+    from aspiratio.utils.report_downloader import download_pdf
+    import pypdf
+    
+    company_name = "Atlas Copco AB"
+    cid = "S6"
+    ir_url = "https://www.atlascopcogroup.com/en/investors"
+    
+    # Create output directory
+    company_dir = Path(output_dir) / cid
+    company_dir.mkdir(parents=True, exist_ok=True)
+    output_path = company_dir / f"annual_report_{year}.pdf"
+    
+    # Skip if exists and valid
+    if output_path.exists():
+        try:
+            with open(output_path, 'rb') as f:
+                pdf = pypdf.PdfReader(f)
+                if len(pdf.pages) >= 50:
+                    return {
+                        'success': True,
+                        'url': None,
+                        'path': str(output_path),
+                        'error': 'Already exists'
+                    }
+        except:
+            pass  # Invalid PDF, will redownload
+    
+    print(f"\n{'='*70}")
+    print(f"Atlas Copco AB ({cid}) - {year} (Playwright)")
+    print(f"{'='*70}\n")
+    
+    pdf_url = None
+    
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch(headless=True)
+            context = await browser.new_context()
+            page = await context.new_page()
+            
+            print(f"  Loading {ir_url}...")
+            await page.goto(ir_url, timeout=20000)
+            
+            # Handle cookie consent if present
+            try:
+                await page.locator(".onetrust-pc-dark-filter").click(timeout=3000)
+                await page.get_by_role("button", name="Allow only necessary").click(timeout=3000)
+                print("  ✓ Cookie consent handled")
+            except PlaywrightTimeout:
+                print("  ⊙ No cookie consent popup")
+            except Exception as e:
+                print(f"  ⊙ Cookie consent handling: {e}")
+            
+            # Navigate to Reports and presentations
+            try:
+                await page.get_by_role("link", name="Reports and presentations Download our financial documents").click(timeout=5000)
+                print("  ✓ Navigated to Reports section")
+                await page.wait_for_timeout(1000)
+            except Exception as e:
+                print(f"  ✗ Failed to navigate to Reports section: {e}")
+                await browser.close()
+                return {
+                    'success': False,
+                    'url': None,
+                    'path': None,
+                    'error': f'Navigation failed: {e}'
+                }
+            
+            # Find the annual report link for the specific year
+            try:
+                # Try exact year match first
+                link_text = f"Annual Report {year} (PDF)"
+                print(f"  Looking for: {link_text}")
+                
+                # Wait for popup and capture URL
+                async with page.expect_popup(timeout=5000) as popup_info:
+                    await page.get_by_role("link", name=link_text).click()
+                popup = await popup_info.value
+                pdf_url = popup.url
+                
+                print(f"  ✓ Found report URL: {pdf_url}")
+                await popup.close()
+                
+            except Exception as e:
+                print(f"  ✗ Failed to find report link: {e}")
+                await browser.close()
+                return {
+                    'success': False,
+                    'url': None,
+                    'path': None,
+                    'error': f'Report link not found: {e}'
+                }
+            
+            await browser.close()
+            
+        except Exception as e:
+            print(f"  ✗ Playwright error: {e}")
+            return {
+                'success': False,
+                'url': None,
+                'path': None,
+                'error': str(e)
+            }
+    
+    # Download the PDF
+    if pdf_url:
+        print(f"\n  Downloading from {pdf_url[:80]}...")
+        result = download_pdf(pdf_url, str(output_path), min_pages=50)
+        
+        if result['success']:
+            print(f"  ✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
+            return {
+                'success': True,
+                'url': pdf_url,
+                'path': str(output_path),
+                'error': None
+            }
+        else:
+            print(f"  ✗ Download failed: {result.get('error', 'Unknown error')}")
+            return {
+                'success': False,
+                'url': pdf_url,
+                'path': None,
+                'error': result.get('error', 'Download failed')
+            }
+    
+    return {
+        'success': False,
+        'url': None,
+        'path': None,
+        'error': 'No PDF URL found'
+    }
+
+def download_atlas_copco_reports(years=[2019, 2020, 2021, 2022, 2023, 2024], output_dir='companies'):
+    """
+    Download Atlas Copco annual reports for multiple years.
+    
+    Args:
+        years: List of years to download
+        output_dir: Output directory
+    
+    Returns:
+        List of results for each year
+    """
+    results = []
+    
+    for year in years:
+        result = asyncio.run(download_atlas_copco_report(year, output_dir))
+        results.append({
+            'year': year,
+            **result
+        })
+        time.sleep(1)  # Be nice to the server
+    
+    # Summary
+    successful = sum(1 for r in results if r['success'])
+    print(f"\n{'='*70}")
+    print(f"✓ Atlas Copco: {successful}/{len(years)} reports downloaded successfully")
+    print(f"{'='*70}\n")
+    
+    return results
+
 if __name__ == '__main__':
-    download_abb_reports()
+    # Test Atlas Copco downloader
+    print("Testing Atlas Copco downloader...")
+    download_atlas_copco_reports(years=[2024])
+    
+    # Uncomment to test ABB
+    # download_abb_reports()
