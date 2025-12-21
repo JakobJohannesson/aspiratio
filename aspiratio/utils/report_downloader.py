@@ -28,6 +28,60 @@ def get_random_user_agent():
     """Return a random user agent from the pool."""
     return random.choice(USER_AGENTS)
 
+def try_direct_url_patterns(ir_url, years):
+    """
+    Try known direct URL patterns for specific companies.
+    Some sites have predictable patterns but JavaScript-rendered links.
+    
+    Args:
+        ir_url: Investor relations URL
+        years: List of years to check
+    
+    Returns:
+        List of dicts: [{'year': 2024, 'url': 'https://...', 'title': '...'}]
+    """
+    results = []
+    netloc = urlparse(ir_url).netloc
+    headers = {"User-Agent": get_random_user_agent()}
+    
+    # ASSA ABLOY pattern
+    if 'assaabloy.com' in netloc:
+        print("  Detected ASSA ABLOY - trying direct PDF pattern...")
+        # Try both capitalizations (changed between years)
+        patterns = [
+            "https://www.assaabloy.com/group/en/documents/investors/annual-reports/{year}/Annual%20Report%20{year}.pdf",
+            "https://www.assaabloy.com/group/en/documents/investors/annual-reports/{year}/Annual%20report%20{year}.pdf",
+        ]
+        
+        for year in years:
+            found = False
+            for pattern in patterns:
+                pdf_url = pattern.format(year=year)
+                try:
+                    resp = requests.head(pdf_url, headers=headers, timeout=10, allow_redirects=True)
+                    if resp.status_code == 200:
+                        results.append({
+                            'year': year,
+                            'url': pdf_url,
+                            'title': f'Annual Report {year}',
+                            'source_page': ir_url
+                        })
+                        print(f"    ✓ Found {year} via direct URL")
+                        found = True
+                        break
+                except Exception as e:
+                    continue
+            
+            if not found:
+                print(f"    ✗ {year}: Not found")
+    
+    # ABB pattern - use search but exclude SEC filings
+    if 'abb.com' in netloc or 'abb' in netloc:
+        print("  Detected ABB - will search for Group Annual Reports (excluding SEC filings)...")
+        # Let the main search handle it, but we'll filter in the search logic
+    
+    return results
+
 def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
     """
     Search IR page for annual report PDFs.
@@ -48,6 +102,17 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
         years = list(range(2019, 2025))
     
     results = []
+    
+    # Try direct URL patterns first (for JavaScript-heavy sites)
+    direct_results = try_direct_url_patterns(ir_url, years)
+    if direct_results:
+        print(f"  Found {len(direct_results)} reports via direct URL patterns")
+        results.extend(direct_results)
+        # Remove years we already found
+        years = [y for y in years if y not in [r['year'] for r in direct_results]]
+        if not years:  # Found everything
+            return sorted(results, key=lambda x: x['year'], reverse=True)
+    
     visited = set()
     consecutive_failures = 0
     
@@ -99,6 +164,23 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                 r'rapport.*annuel',
                 r'financial.*report',
                 r'integrated.*report',
+                r'abb.*group.*annual.*report',  # ABB Group Annual Report
+            ]
+            
+            # Patterns to exclude (SEC filings, quarterly reports, etc.)
+            exclude_patterns = [
+                r'form\s*20[-\s]*f',  # SEC annual report filing
+                r'form\s*sd',  # SEC conflict minerals filing
+                r'proxy',
+                r'10-k',
+                r'8-k',
+                r'q[1-4]',  # Quarterly reports (Q1, Q2, Q3, Q4)
+                r'quarter',
+                r'interim',
+                r'delårs',  # Swedish: interim/quarterly
+                r'kvartals',  # Swedish: quarterly
+                r'half[-\s]?year',  # Half-year reports
+                r'h[1-2]\s*20\d{2}',  # H1 2024, H2 2024
             ]
             
             # Patterns to identify pages that might contain reports
@@ -114,6 +196,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
             ]
             
             pattern = '|'.join(annual_patterns)
+            exclude_pattern = '|'.join(exclude_patterns)
             nav_pattern = '|'.join(navigation_patterns)
             
             pages_to_visit = []
@@ -135,7 +218,11 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
                     'download' in href.lower()
                 )
                 
-                if is_pdf_link and re.search(pattern, combined, re.IGNORECASE):
+                # Check if this matches annual report pattern AND doesn't match exclusion pattern
+                matches_annual = re.search(pattern, combined, re.IGNORECASE)
+                matches_exclude = re.search(exclude_pattern, combined, re.IGNORECASE)
+                
+                if is_pdf_link and matches_annual and not matches_exclude:
                     # Make absolute URL
                     abs_url = urljoin(url, href)
                     
@@ -223,14 +310,14 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
     print(f"Found {len(unique_results)} annual reports")
     return sorted(unique_results, key=lambda x: x['year'], reverse=True)
 
-def download_pdf(url, output_path, min_pages=10, max_retries=3):
+def download_pdf(url, output_path, min_pages=50, max_retries=3):
     """
     Download PDF and validate it meets minimum page requirement.
     
     Args:
         url: PDF URL
         output_path: Where to save the file
-        min_pages: Minimum number of pages required (default 10)
+        min_pages: Minimum number of pages required (default 50)
         max_retries: Maximum download attempts with user agent rotation (default 3)
     
     Returns:
