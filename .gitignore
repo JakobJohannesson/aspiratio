@@ -32,6 +32,7 @@ download_summary_*.json
 # Downloaded reports (keep out of git)
 companies/
 companies_validated/
+companies_validated/S1
 
 # Debug files
 debug_*.py
