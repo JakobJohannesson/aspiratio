@@ -28,6 +28,64 @@ def get_random_user_agent():
     """Return a random user agent from the pool."""
     return random.choice(USER_AGENTS)
 
+def extract_pdf_from_html_page(url, year_hint=None):
+    """
+    Extract PDF download link from an HTML page.
+    Handles cases where URL points to an HTML page containing the actual PDF link.
+    
+    Args:
+        url: URL of HTML page
+        year_hint: Optional year to help identify correct PDF
+    
+    Returns:
+        PDF URL if found, otherwise None
+    """
+    try:
+        headers = {"User-Agent": get_random_user_agent()}
+        response = requests.get(url, headers=headers, timeout=15)
+        
+        if response.status_code != 200:
+            return None
+        
+        # Check if this is actually a PDF
+        content_type = response.headers.get('Content-Type', '').lower()
+        if 'application/pdf' in content_type:
+            return url  # It's already a PDF
+        
+        # Parse HTML to find PDF links
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Look for PDF download links
+        pdf_links = []
+        for link in soup.find_all('a', href=True):
+            href = link.get('href', '')
+            text = link.get_text(strip=True).lower()
+            
+            # Check if this looks like a PDF link
+            if '.pdf' in href.lower() or 'pdf' in text:
+                # Filter for annual report keywords
+                if any(kw in text or kw in href.lower() for kw in ['annual', 'report', 'entire', 'full']):
+                    # Make absolute URL
+                    abs_url = urljoin(url, href)
+                    pdf_links.append(abs_url)
+        
+        if pdf_links:
+            # If year hint provided, try to find matching PDF
+            if year_hint:
+                for pdf_url in pdf_links:
+                    if str(year_hint) in pdf_url:
+                        print(f"    → Found PDF link on HTML page: {pdf_url}")
+                        return pdf_url
+            
+            # Return first PDF found
+            print(f"    → Found PDF link on HTML page: {pdf_links[0]}")
+            return pdf_links[0]
+        
+    except Exception as e:
+        print(f"    ✗ Error extracting PDF from HTML: {e}")
+    
+    return None
+
 def try_direct_url_patterns(ir_url, years):
     """
     Try known direct URL patterns for specific companies.
@@ -326,15 +384,16 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3):
     print(f"Found {len(unique_results)} annual reports")
     return sorted(unique_results, key=lambda x: x['year'], reverse=True)
 
-def download_pdf(url, output_path, min_pages=50, max_retries=3):
+def download_pdf(url, output_path, min_pages=50, max_retries=3, year_hint=None):
     """
     Download PDF and validate it meets minimum page requirement.
     
     Args:
-        url: PDF URL
+        url: PDF URL (or HTML page containing PDF link)
         output_path: Where to save the file
         min_pages: Minimum number of pages required (default 50)
         max_retries: Maximum download attempts with user agent rotation (default 3)
+        year_hint: Optional year to help identify correct PDF on HTML pages
     
     Returns:
         dict: {'success': bool, 'pages': int, 'size_mb': float, 'error': str}
@@ -346,15 +405,29 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
         'error': None
     }
     
+    # Check if URL points to HTML page with PDF link
+    actual_pdf_url = url
+    if not url.lower().endswith('.pdf'):
+        print(f"  → URL doesn't end with .pdf, checking if it's an HTML page...")
+        pdf_from_html = extract_pdf_from_html_page(url, year_hint)
+        if pdf_from_html:
+            actual_pdf_url = pdf_from_html
+        else:
+            result['error'] = "URL is not a PDF and no PDF found on HTML page"
+            print(f"  ✗ {result['error']}")
+            return result
+    
+    temp_path = output_path + '.tmp'
+    
     for attempt in range(max_retries):
         try:
             if attempt > 0:
                 print(f"  Retry {attempt}/{max_retries}...")
                 time.sleep(2)  # Wait before retry
             
-            print(f"  → Downloading from: {url}")
+            print(f"  → Downloading from: {actual_pdf_url}")
             headers = {"User-Agent": get_random_user_agent()}
-            resp = requests.get(url, timeout=30, headers=headers, stream=True)
+            resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
             
             if resp.status_code != 200:
                 result['error'] = f"HTTP {resp.status_code}"
@@ -365,7 +438,9 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3):
         
             print(f"  → Saving to: {output_path}")
             # Create directory if it doesn't exist
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            output_dir = os.path.dirname(output_path)
+            if output_dir:  # Only create if there's a directory component
+                os.makedirs(output_dir, exist_ok=True)
             
             # Download to temporary file first
             temp_path = output_path + '.tmp'
@@ -495,8 +570,8 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
             if candidate_label:
                 print(f"  Trying {year} {candidate_label}: {report.get('title', '')[:50]}")
             
-            # Download with built-in retry and user agent rotation
-            result = download_pdf(url, output_path)
+            # Download with built-in retry and user agent rotation, pass year hint
+            result = download_pdf(url, output_path, year_hint=year)
             
             if result['success']:
                 # Quick validation: check if it's reasonable

@@ -8,25 +8,36 @@ An automated system to download and validate annual reports for Swedish OMXS30 c
 
 ### Workflow
 
+**IMPORTANT: Always check what's missing before downloading!**
+
 ```bash
-# 1. Download annual reports for all companies
+# Step 1: Check what's missing from coverage table
+python3 -c "
+import pandas as pd
+df = pd.read_csv('coverage_table_updated.csv', sep='\t')
+missing = df[df['Priority'] != 'Complete ✓']
+print(f'Missing: {len(missing)} reports')
+by_company = missing.groupby('CompanyName').size().sort_values(ascending=False)
+for company, count in by_company.items():
+    print(f'  {company}: {count}')
+"
+
+# Step 2: Download reports (only fetches missing ones from coverage table)
 python scripts/download_reports.py
 
-# 2. Validate downloaded PDFs
+# Step 3: Validate downloaded PDFs
 python scripts/validate_reports.py
 
-# 3. Review validation results
-# Check coverage_table_updated.csv for Milestone 4 status and Priority column
-
-# 4. Re-download failed reports with better patterns
-python scripts/redownload_failed.py
+# Step 4: Review results - check coverage_table_updated.csv Priority column
+# Repeat steps 2-3 for reports that still need work
 ```
 
-**What happens:**
-- Downloads reports to `companies/{CID}/` (min 50 pages, excludes quarterly/SEC filings)
-- Validates each PDF (company name, year verification)
-- Copies valid reports to `companies_validated/{CID}/`
-- Updates `coverage_table_updated.csv` with priorities: "Complete ✓", "Needs Work ⚠", "Not Downloaded"
+**Key principles:**
+- **Check first**: Always verify what's missing in coverage table before downloading
+- **Download only missing**: Script automatically filters to Priority != "Complete ✓"
+- **Validate immediately**: Each PDF is validated right after download
+- **Update coverage**: Coverage table is updated after validation with status
+- **Try alternatives**: If multiple PDFs found for a year, tries each until one validates
 
 ### Key Features
 
