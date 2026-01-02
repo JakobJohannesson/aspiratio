@@ -355,11 +355,46 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
         try:
             print(f"{'  ' * depth}Searching: {url}")
             headers = {"User-Agent": get_random_user_agent()}
-            resp = requests.get(url_no_fragment, timeout=10, headers=headers)
+            
+            try:
+                resp = requests.get(url_no_fragment, timeout=10, headers=headers)
+            except requests.exceptions.Timeout:
+                consecutive_failures += 1
+                print(f"{'  ' * depth}⏱ Timeout after 10s (failure {consecutive_failures}/{max_failures})")
+                if consecutive_failures >= max_failures:
+                    raise DownloadError(f"Connection timeout - failed to fetch {max_failures} pages in a row")
+                return
+            except requests.exceptions.SSLError as e:
+                consecutive_failures += 1
+                print(f"{'  ' * depth}🔒 SSL/TLS error (failure {consecutive_failures}/{max_failures})")
+                if consecutive_failures >= max_failures:
+                    raise DownloadError(f"SSL/TLS error - failed to fetch {max_failures} pages in a row")
+                return
+            except requests.exceptions.ConnectionError as e:
+                consecutive_failures += 1
+                error_str = str(e)
+                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
+                    print(f"{'  ' * depth}🌐 DNS resolution failed - domain may be blocked or unreachable (failure {consecutive_failures}/{max_failures})")
+                    if consecutive_failures >= max_failures:
+                        raise DownloadError(f"DNS resolution error - domain appears to be blocked or unreachable in this environment")
+                elif 'Connection refused' in error_str:
+                    print(f"{'  ' * depth}🚫 Connection refused by server (failure {consecutive_failures}/{max_failures})")
+                    if consecutive_failures >= max_failures:
+                        raise DownloadError(f"Connection refused - server is blocking requests")
+                else:
+                    print(f"{'  ' * depth}📡 Connection error (failure {consecutive_failures}/{max_failures})")
+                    if consecutive_failures >= max_failures:
+                        raise DownloadError(f"Connection error - {error_str[:100]}")
+                return
             
             if resp.status_code != 200:
                 consecutive_failures += 1
-                print(f"{'  ' * depth}HTTP {resp.status_code} (failure {consecutive_failures}/{max_failures})")
+                if resp.status_code == 403:
+                    print(f"{'  ' * depth}🚫 HTTP 403 Forbidden - server blocking requests (failure {consecutive_failures}/{max_failures})")
+                elif resp.status_code == 404:
+                    print(f"{'  ' * depth}❌ HTTP 404 Not Found (failure {consecutive_failures}/{max_failures})")
+                else:
+                    print(f"{'  ' * depth}HTTP {resp.status_code} (failure {consecutive_failures}/{max_failures})")
                 if consecutive_failures >= max_failures:
                     raise DownloadError(f"Failed to fetch {max_failures} pages in a row (last: HTTP {resp.status_code})")
                 return
@@ -655,12 +690,48 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3, year_hint=None):
             
             print(f"  → Downloading from: {actual_pdf_url}")
             headers = {"User-Agent": get_random_user_agent()}
-            resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
+            
+            try:
+                resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
+            except requests.exceptions.Timeout:
+                result['error'] = f"Connection timeout after 30s"
+                print(f"  ⏱ {result['error']}")
+                if attempt < max_retries - 1:
+                    print(f"  → Retrying with different user agent...")
+                    continue
+                return result
+            except requests.exceptions.SSLError as e:
+                result['error'] = f"SSL/TLS error: {str(e)[:50]}"
+                print(f"  🔒 {result['error']}")
+                if attempt < max_retries - 1:
+                    continue
+                return result
+            except requests.exceptions.ConnectionError as e:
+                error_str = str(e)
+                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
+                    result['error'] = "DNS resolution failed - domain may be blocked or unreachable"
+                    print(f"  🌐 {result['error']}")
+                elif 'Connection refused' in error_str:
+                    result['error'] = "Connection refused by server"
+                    print(f"  🚫 {result['error']}")
+                else:
+                    result['error'] = f"Connection error: {error_str[:50]}"
+                    print(f"  📡 {result['error']}")
+                if attempt < max_retries - 1:
+                    print(f"  → Retrying with different user agent...")
+                    continue
+                return result
             
             if resp.status_code != 200:
                 result['error'] = f"HTTP {resp.status_code}"
-                print(f"  ✗ HTTP error {resp.status_code}")
+                if resp.status_code == 403:
+                    print(f"  🚫 HTTP 403 Forbidden - server may be blocking requests")
+                elif resp.status_code == 404:
+                    print(f"  ❌ HTTP 404 Not Found")
+                else:
+                    print(f"  ✗ HTTP error {resp.status_code}")
                 if attempt < max_retries - 1:
+                    print(f"  → Retrying with different user agent...")
                     continue  # Try again with different user agent
                 return result
         
