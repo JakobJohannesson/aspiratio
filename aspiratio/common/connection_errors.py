@@ -34,7 +34,9 @@ def categorize_connection_error(exception):
     if isinstance(exception, requests.exceptions.ConnectionError):
         error_str = str(exception)
         
-        if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
+        # Check for DNS resolution errors
+        dns_error_indicators = ('NameResolutionError', 'Failed to resolve', 'getaddrinfo failed')
+        if any(indicator in error_str for indicator in dns_error_indicators):
             return ('dns_error', 'DNS resolution failed - domain may be blocked or unreachable', '🌐')
         elif 'Connection refused' in error_str:
             return ('connection_refused', 'Connection refused by server', '🚫')

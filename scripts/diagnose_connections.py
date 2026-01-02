@@ -10,25 +10,11 @@ import requests
 from urllib.parse import urlparse
 import pandas as pd
 
-# Import user agents from config
-try:
-    from aspiratio.config import get_user_agents
-    USER_AGENTS = get_user_agents()
-except (ImportError, ModuleNotFoundError):
-    # Fallback if config not available
-    USER_AGENTS = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    ]
+# Import shared utilities
+from aspiratio.config import get_user_agents
+from aspiratio.common.connection_errors import categorize_connection_error, format_error_message
 
-# Import connection error utilities
-try:
-    from aspiratio.common.connection_errors import categorize_connection_error, format_error_message
-except (ImportError, ModuleNotFoundError):
-    # Fallback if not available (shouldn't happen but just in case)
-    categorize_connection_error = None
-    format_error_message = None
+USER_AGENTS = get_user_agents()
 
 
 def test_connection(url, user_agent=None, timeout=15):
@@ -79,31 +65,9 @@ def test_connection(url, user_agent=None, timeout=15):
     except (requests.exceptions.Timeout, requests.exceptions.SSLError,
             requests.exceptions.ConnectionError) as e:
         result['response_time'] = time.time() - start_time
-        
-        # Use shared utility if available, otherwise fall back to inline logic
-        if categorize_connection_error:
-            error_type, error_msg, emoji = categorize_connection_error(e)
-            result['error_type'] = error_type
-            result['error_message'] = error_msg
-        else:
-            # Fallback implementation
-            if isinstance(e, requests.exceptions.Timeout):
-                result['error_type'] = 'timeout'
-                result['error_message'] = f'Connection timed out after {timeout}s'
-            elif isinstance(e, requests.exceptions.SSLError):
-                result['error_type'] = 'ssl_error'
-                result['error_message'] = f'SSL/TLS error: {str(e)[:100]}'
-            else:  # ConnectionError
-                error_str = str(e)
-                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str:
-                    result['error_type'] = 'dns_error'
-                    result['error_message'] = 'DNS resolution failed - domain may be blocked or unreachable'
-                elif 'Connection refused' in error_str:
-                    result['error_type'] = 'connection_refused'
-                    result['error_message'] = 'Connection refused by server'
-                else:
-                    result['error_type'] = 'connection_error'
-                    result['error_message'] = f'Connection error: {error_str[:100]}'
+        error_type, error_msg, emoji = categorize_connection_error(e)
+        result['error_type'] = error_type
+        result['error_message'] = error_msg
     
     except Exception as e:
         result['response_time'] = time.time() - start_time
