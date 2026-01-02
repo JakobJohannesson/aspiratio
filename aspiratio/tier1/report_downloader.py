@@ -15,7 +15,7 @@ from datetime import datetime
 from ..common.connection_errors import categorize_connection_error, format_error_message
 
 # Import MFN search for fallback
-from .mfn_search import find_reports_via_mfn
+from ..tier1.mfn_search import find_reports_via_mfn
 
 # User agents to rotate through
 USER_AGENTS = [
