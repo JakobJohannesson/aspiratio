@@ -35,7 +35,7 @@ BAD_DOMAINS = [
     'watchlistnews.com', 'telegraph.co.uk', 'thelincolnianonline.com', 'marketwirenews.com', 'trendspider.com',
     'investorshangout.com', 'startuprise.co.uk', 'aktiedysten.dk', 'esgnews.com', 'stockopedia.com', 'finanzen100.de',
     'nyemissioner.se', 'trivano.com', 'dagensps.se', 'affarsvarlden.se', 'webbinvestor.se', 'borsvarlden.com',
-    'nordnet.se', 'rapidus.se', 'cotf.se', 'daytrading.se', 'hello-safe.se', 'borskollen.se', 'mfn.se', 'vfb.be',
+    'nordnet.se', 'rapidus.se', 'cotf.se', 'daytrading.se', 'hello-safe.se', 'borskollen.se', 'vfb.be',
     'centralcharts.com', 'cybo.com', 'onemainfinancial.com', 'nissanfinance.com', 'atmeta.com', 'valuespectrum.com',
     'epicos.com', 'gurufocus.com', 'stockinvest.us', 'walletinvestor.com', 'maritime-executive.com', 'referenceforbusiness.com',
     'fiscal.ai', 'invvest.co', 'etoro.com', 'spectrumone.com', 'sweatyourassets.biz', 'breadfinancial.com', '3blmedia.com',
