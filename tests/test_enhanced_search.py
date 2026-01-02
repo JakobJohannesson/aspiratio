@@ -15,7 +15,7 @@ def test_company(company_name, ir_url):
     print(f"{'='*80}")
     
     try:
-        reports = find_annual_reports(ir_url, years=[2024, 2023], max_depth=2, enable_failsafe=True)
+        reports = find_annual_reports(ir_url, years=[2024, 2023], max_depth=2, enable_failsafe=True, company_name=company_name)
         
         if reports:
             print(f"\n✓ SUCCESS: Found {len(reports)} reports")
