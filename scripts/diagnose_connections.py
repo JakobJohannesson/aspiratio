@@ -14,7 +14,7 @@ import pandas as pd
 try:
     from aspiratio.config import get_user_agents
     USER_AGENTS = get_user_agents()
-except:
+except (ImportError, ModuleNotFoundError):
     # Fallback if config not available
     USER_AGENTS = [
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -257,7 +257,8 @@ def diagnose_companies(csv_path='instrument_master.csv'):
     return results_df
 
 
-if __name__ == '__main__':
+def main():
+    """Entry point for console script."""
     # Check if specific URL provided
     if len(sys.argv) > 1:
         url = sys.argv[1]
@@ -267,11 +268,5 @@ if __name__ == '__main__':
         diagnose_companies()
 
 
-def main():
-    """Entry point for console script."""
-    if len(sys.argv) > 1:
-        url = sys.argv[1]
-        test_url_with_multiple_agents(url)
-    else:
-        # Test all companies
-        diagnose_companies()
+if __name__ == '__main__':
+    main()
