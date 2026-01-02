@@ -11,6 +11,9 @@ from PyPDF2 import PdfReader
 import time
 from datetime import datetime
 
+# Import connection error utilities
+from ..common.connection_errors import categorize_connection_error, format_error_message
+
 # User agents to rotate through
 USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -358,33 +361,13 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
             
             try:
                 resp = requests.get(url_no_fragment, timeout=10, headers=headers)
-            except requests.exceptions.Timeout:
+            except (requests.exceptions.Timeout, requests.exceptions.SSLError, 
+                    requests.exceptions.ConnectionError) as e:
                 consecutive_failures += 1
-                print(f"{'  ' * depth}⏱ Timeout after 10s (failure {consecutive_failures}/{max_failures})")
+                error_type, error_msg, emoji = categorize_connection_error(e)
+                print(f"{'  ' * depth}{format_error_message(error_type, error_msg)} (failure {consecutive_failures}/{max_failures})")
                 if consecutive_failures >= max_failures:
-                    raise DownloadError(f"Connection timeout - failed to fetch {max_failures} pages in a row")
-                return
-            except requests.exceptions.SSLError as e:
-                consecutive_failures += 1
-                print(f"{'  ' * depth}🔒 SSL/TLS error (failure {consecutive_failures}/{max_failures})")
-                if consecutive_failures >= max_failures:
-                    raise DownloadError(f"SSL/TLS error - failed to fetch {max_failures} pages in a row")
-                return
-            except requests.exceptions.ConnectionError as e:
-                consecutive_failures += 1
-                error_str = str(e)
-                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
-                    print(f"{'  ' * depth}🌐 DNS resolution failed - domain may be blocked or unreachable (failure {consecutive_failures}/{max_failures})")
-                    if consecutive_failures >= max_failures:
-                        raise DownloadError(f"DNS resolution error - domain appears to be blocked or unreachable in this environment")
-                elif 'Connection refused' in error_str:
-                    print(f"{'  ' * depth}🚫 Connection refused by server (failure {consecutive_failures}/{max_failures})")
-                    if consecutive_failures >= max_failures:
-                        raise DownloadError(f"Connection refused - server is blocking requests")
-                else:
-                    print(f"{'  ' * depth}📡 Connection error (failure {consecutive_failures}/{max_failures})")
-                    if consecutive_failures >= max_failures:
-                        raise DownloadError(f"Connection error - {error_str[:100]}")
+                    raise DownloadError(f"{error_msg} - failed to fetch {max_failures} pages in a row")
                 return
             
             if resp.status_code != 200:
@@ -693,30 +676,11 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3, year_hint=None):
             
             try:
                 resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
-            except requests.exceptions.Timeout:
-                result['error'] = f"Connection timeout after 30s"
-                print(f"  ⏱ {result['error']}")
-                if attempt < max_retries - 1:
-                    print(f"  → Retrying with different user agent...")
-                    continue
-                return result
-            except requests.exceptions.SSLError as e:
-                result['error'] = f"SSL/TLS error: {str(e)[:50]}"
-                print(f"  🔒 {result['error']}")
-                if attempt < max_retries - 1:
-                    continue
-                return result
-            except requests.exceptions.ConnectionError as e:
-                error_str = str(e)
-                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
-                    result['error'] = "DNS resolution failed - domain may be blocked or unreachable"
-                    print(f"  🌐 {result['error']}")
-                elif 'Connection refused' in error_str:
-                    result['error'] = "Connection refused by server"
-                    print(f"  🚫 {result['error']}")
-                else:
-                    result['error'] = f"Connection error: {error_str[:50]}"
-                    print(f"  📡 {result['error']}")
+            except (requests.exceptions.Timeout, requests.exceptions.SSLError,
+                    requests.exceptions.ConnectionError) as e:
+                error_type, error_msg, emoji = categorize_connection_error(e)
+                result['error'] = error_msg
+                print(f"  {format_error_message(error_type, error_msg)}")
                 if attempt < max_retries - 1:
                     print(f"  → Retrying with different user agent...")
                     continue

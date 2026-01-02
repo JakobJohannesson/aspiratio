@@ -22,6 +22,14 @@ except (ImportError, ModuleNotFoundError):
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     ]
 
+# Import connection error utilities
+try:
+    from aspiratio.common.connection_errors import categorize_connection_error, format_error_message
+except (ImportError, ModuleNotFoundError):
+    # Fallback if not available (shouldn't happen but just in case)
+    categorize_connection_error = None
+    format_error_message = None
+
 
 def test_connection(url, user_agent=None, timeout=15):
     """
@@ -68,32 +76,34 @@ def test_connection(url, user_agent=None, timeout=15):
             result['error_type'] = 'http_error'
             result['error_message'] = f'HTTP {response.status_code}'
     
-    except requests.exceptions.Timeout:
+    except (requests.exceptions.Timeout, requests.exceptions.SSLError,
+            requests.exceptions.ConnectionError) as e:
         result['response_time'] = time.time() - start_time
-        result['error_type'] = 'timeout'
-        result['error_message'] = f'Connection timed out after {timeout}s'
-    
-    except requests.exceptions.SSLError as e:
-        result['response_time'] = time.time() - start_time
-        result['error_type'] = 'ssl_error'
-        result['error_message'] = f'SSL/TLS error: {str(e)[:100]}'
-    
-    except requests.exceptions.ConnectionError as e:
-        result['response_time'] = time.time() - start_time
-        error_str = str(e)
         
-        if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str or 'getaddrinfo failed' in error_str:
-            result['error_type'] = 'dns_error'
-            result['error_message'] = 'DNS resolution failed - domain may be blocked or unreachable'
-        elif 'Connection refused' in error_str:
-            result['error_type'] = 'connection_refused'
-            result['error_message'] = 'Connection refused by server'
-        elif 'Connection reset' in error_str:
-            result['error_type'] = 'connection_reset'
-            result['error_message'] = 'Connection reset by server'
+        # Use shared utility if available, otherwise fall back to inline logic
+        if categorize_connection_error:
+            error_type, error_msg, emoji = categorize_connection_error(e)
+            result['error_type'] = error_type
+            result['error_message'] = error_msg
         else:
-            result['error_type'] = 'connection_error'
-            result['error_message'] = f'Connection error: {error_str[:100]}'
+            # Fallback implementation
+            if isinstance(e, requests.exceptions.Timeout):
+                result['error_type'] = 'timeout'
+                result['error_message'] = f'Connection timed out after {timeout}s'
+            elif isinstance(e, requests.exceptions.SSLError):
+                result['error_type'] = 'ssl_error'
+                result['error_message'] = f'SSL/TLS error: {str(e)[:100]}'
+            else:  # ConnectionError
+                error_str = str(e)
+                if 'NameResolutionError' in error_str or 'Failed to resolve' in error_str:
+                    result['error_type'] = 'dns_error'
+                    result['error_message'] = 'DNS resolution failed - domain may be blocked or unreachable'
+                elif 'Connection refused' in error_str:
+                    result['error_type'] = 'connection_refused'
+                    result['error_message'] = 'Connection refused by server'
+                else:
+                    result['error_type'] = 'connection_error'
+                    result['error_message'] = f'Connection error: {error_str[:100]}'
     
     except Exception as e:
         result['response_time'] = time.time() - start_time
