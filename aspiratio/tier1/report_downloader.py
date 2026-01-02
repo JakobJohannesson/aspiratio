@@ -11,6 +11,9 @@ from PyPDF2 import PdfReader
 import time
 from datetime import datetime
 
+# Import connection error utilities
+from ..common.connection_errors import categorize_connection_error, format_error_message
+
 # User agents to rotate through
 USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -355,11 +358,26 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
         try:
             print(f"{'  ' * depth}Searching: {url}")
             headers = {"User-Agent": get_random_user_agent()}
-            resp = requests.get(url_no_fragment, timeout=10, headers=headers)
+            
+            try:
+                resp = requests.get(url_no_fragment, timeout=10, headers=headers)
+            except (requests.exceptions.Timeout, requests.exceptions.SSLError, 
+                    requests.exceptions.ConnectionError) as e:
+                consecutive_failures += 1
+                error_type, error_msg, emoji = categorize_connection_error(e)
+                print(f"{'  ' * depth}{format_error_message(error_type, error_msg)} (failure {consecutive_failures}/{max_failures})")
+                if consecutive_failures >= max_failures:
+                    raise DownloadError(f"{error_msg} - failed to fetch {max_failures} pages in a row")
+                return
             
             if resp.status_code != 200:
                 consecutive_failures += 1
-                print(f"{'  ' * depth}HTTP {resp.status_code} (failure {consecutive_failures}/{max_failures})")
+                if resp.status_code == 403:
+                    print(f"{'  ' * depth}🚫 HTTP 403 Forbidden - server blocking requests (failure {consecutive_failures}/{max_failures})")
+                elif resp.status_code == 404:
+                    print(f"{'  ' * depth}❌ HTTP 404 Not Found (failure {consecutive_failures}/{max_failures})")
+                else:
+                    print(f"{'  ' * depth}HTTP {resp.status_code} (failure {consecutive_failures}/{max_failures})")
                 if consecutive_failures >= max_failures:
                     raise DownloadError(f"Failed to fetch {max_failures} pages in a row (last: HTTP {resp.status_code})")
                 return
@@ -655,12 +673,29 @@ def download_pdf(url, output_path, min_pages=50, max_retries=3, year_hint=None):
             
             print(f"  → Downloading from: {actual_pdf_url}")
             headers = {"User-Agent": get_random_user_agent()}
-            resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
+            
+            try:
+                resp = requests.get(actual_pdf_url, timeout=30, headers=headers, stream=True)
+            except (requests.exceptions.Timeout, requests.exceptions.SSLError,
+                    requests.exceptions.ConnectionError) as e:
+                error_type, error_msg, emoji = categorize_connection_error(e)
+                result['error'] = error_msg
+                print(f"  {format_error_message(error_type, error_msg)}")
+                if attempt < max_retries - 1:
+                    print(f"  → Retrying with different user agent...")
+                    continue
+                return result
             
             if resp.status_code != 200:
                 result['error'] = f"HTTP {resp.status_code}"
-                print(f"  ✗ HTTP error {resp.status_code}")
+                if resp.status_code == 403:
+                    print(f"  🚫 HTTP 403 Forbidden - server may be blocking requests")
+                elif resp.status_code == 404:
+                    print(f"  ❌ HTTP 404 Not Found")
+                else:
+                    print(f"  ✗ HTTP error {resp.status_code}")
                 if attempt < max_retries - 1:
+                    print(f"  → Retrying with different user agent...")
                     continue  # Try again with different user agent
                 return result
         

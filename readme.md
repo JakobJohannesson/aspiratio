@@ -68,6 +68,45 @@ python scripts/redownload_failed.py
 - **Playwright Support**: Handles dynamic content for complex sites (ABB Group Annual Reports)
 - **Encrypted PDFs**: Supports password-protected documents
 - **Progress Tracking**: Coverage table with milestone tracking and priorities
+- **Enhanced Error Handling**: Detailed diagnostics for connection issues (DNS, timeout, HTTP errors)
+- **User Agent Rotation**: Automatic rotation through multiple browser user agents to avoid blocking
+
+### Troubleshooting
+
+**Connection Issues:**
+
+The system now provides detailed error messages for different types of connection failures:
+
+- 🌐 **DNS Resolution Error**: Domain cannot be resolved (may be blocked or unreachable in current environment)
+- ⏱ **Connection Timeout**: Request took too long (increase timeout in config.yaml)
+- 🚫 **HTTP 403 Forbidden**: Server is blocking requests (may need Playwright approach)
+- ❌ **HTTP 404 Not Found**: URL does not exist (may need to update IR URL)
+- 🔒 **SSL/TLS Error**: Certificate validation issue
+
+To diagnose connection issues:
+```bash
+# Test all company URLs
+aspiratio-diagnose
+
+# Test a specific URL
+aspiratio-diagnose https://www.example.com/investors
+```
+
+The diagnostic tool will:
+1. Test the URL with multiple user agents
+2. Identify the specific error type (DNS, timeout, HTTP error, etc.)
+3. Provide recommendations for resolution
+4. Save detailed results to `connection_diagnostics.csv`
+
+**Configuration Options:**
+
+Adjust timeouts and retry behavior in `config.yaml`:
+```yaml
+download:
+  max_retries: 3              # Attempts per download with user agent rotation
+  request_timeout: 30         # Seconds to wait for response
+  max_consecutive_failures: 3 # Max failures before giving up
+```
 
 ### Current Challenges
 
@@ -99,6 +138,11 @@ aspiratio-download      # Batch download missing reports
 aspiratio-validate      # Validate downloaded PDFs
 aspiratio-retry         # Smart retry with Playwright fallback
 aspiratio-update        # Update coverage table
+
+# Diagnostic tools
+aspiratio-diagnose      # Test website connections and identify issues
+                       # Usage: aspiratio-diagnose [URL]
+                       # Without URL: tests all companies in instrument_master.csv
 
 # Setup tools (one-time)
 aspiratio-build-master  # Build/validate instrument master

@@ -45,6 +45,9 @@ setup(
             'aspiratio-retry=scripts.redownload_failed:main',
             'aspiratio-update=scripts.update_coverage_table:main',
             
+            # Diagnostic tools
+            'aspiratio-diagnose=scripts.diagnose_connections:main',
+            
             # Setup tools
             'aspiratio-build-master=scripts.setup.build_master:main',
             'aspiratio-find-ir=scripts.setup.ir_scraper:main',
