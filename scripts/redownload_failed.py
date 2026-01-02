@@ -41,6 +41,7 @@ def clear_file_info_for_row(df, idx):
     df.at[idx, 'Validation_Issues'] = ''
     df.at[idx, 'Priority'] = 'Not Downloaded'
     df.at[idx, 'CaptureStatus'] = ''
+    df.at[idx, 'Failure_Reason'] = ''
     return df
 
 def remove_file_if_exists(filepath):
@@ -74,6 +75,12 @@ def main():
     # Load data
     print("Loading data...")
     df = pd.read_csv(coverage_file, sep='\t')
+    
+    # Add Failure_Reason column if it doesn't exist
+    if 'Failure_Reason' not in df.columns:
+        df['Failure_Reason'] = ''
+        print("Added Failure_Reason column to coverage table")
+    
     instruments = pd.read_csv(instrument_file, sep='\t')
     
     # Find rows where Priority != 'Complete ✓'
@@ -119,6 +126,8 @@ def main():
         except Exception as e:
             print(f"✗ Error searching for reports: {e}")
             for _, row in company_rows.iterrows():
+                idx = row.name
+                df.at[idx, 'Failure_Reason'] = f"Search failed: {str(e)}"
                 log_entries.append({
                     'company': company_name,
                     'cid': cid,
@@ -127,6 +136,8 @@ def main():
                     'error': str(e),
                     'timestamp': datetime.now().isoformat()
                 })
+            # Save progress
+            df.to_csv(coverage_file, sep='\t', index=False)
             continue
         
         # Process each year for this company
@@ -162,6 +173,9 @@ def main():
                 print(f"✗ No report URL found for year {year}")
                 print(f"  Reason: Search found {len(reports)} reports total, but none matched year {year}")
                 
+                # Record failure reason
+                df.at[idx, 'Failure_Reason'] = f"No report URL found for {year} (found {len(reports)} reports for other years)"
+                
                 # Try Playwright fallback if available for this company
                 if cid in PLAYWRIGHT_HANDLERS:
                     print(f"→ Attempting Playwright-based download for {company_name}...")
@@ -183,6 +197,7 @@ def main():
                             df.at[idx, 'Report_URL'] = playwright_result.get('url', 'Playwright download')
                             df.at[idx, 'Source_Page'] = ir_url
                             df.at[idx, 'Size_MB'] = os.path.getsize(output_path) / (1024 * 1024)
+                            df.at[idx, 'Failure_Reason'] = ''  # Clear any previous failure reason
                             
                             # Get page count
                             try:
@@ -219,6 +234,7 @@ def main():
                             
                     except Exception as e:
                         print(f"✗ Playwright fallback failed: {e}")
+                        df.at[idx, 'Failure_Reason'] = f"No report URL found; Playwright fallback failed: {str(e)}"
                 
                 log_entries.append({
                     'company': company_name,
@@ -260,6 +276,7 @@ def main():
                     else:
                         # Last candidate failed
                         print(f"✗ All candidates exhausted - no valid download for {year}")
+                        df.at[idx, 'Failure_Reason'] = f"Download failed: {result['error']}"
                         log_entries.append({
                             'company': company_name,
                             'cid': cid,
@@ -291,6 +308,7 @@ def main():
                 df.at[idx, 'Validation_Confidence'] = validation.get('confidence', 0.0)
                 df.at[idx, 'Validation_Issues'] = ', '.join(validation.get('issues', []))
                 df.at[idx, 'CaptureStatus'] = 'Downloaded'
+                df.at[idx, 'Failure_Reason'] = ''  # Clear any previous failure reason
                 
                 if validation['valid']:
                     df.at[idx, 'Priority'] = 'Complete ✓'
@@ -311,6 +329,7 @@ def main():
                     })
                 else:
                     df.at[idx, 'Priority'] = 'Needs Work ⚠'
+                    df.at[idx, 'Failure_Reason'] = f"Validation failed: {', '.join(validation.get('issues', []))}"
                     print(f"⚠ Validation found issues:")
                     issues = validation.get('issues', [])
                     for issue in issues:

@@ -406,6 +406,8 @@ def main():
                 coverage_df['Validation_Date'] = ''
             if 'Priority' not in coverage_df.columns:
                 coverage_df['Priority'] = ''
+            if 'Failure_Reason' not in coverage_df.columns:
+                coverage_df['Failure_Reason'] = ''
             
             # Update each row with validation results
             updated_count = 0
@@ -437,6 +439,7 @@ def main():
                             coverage_df.at[idx, 'CaptureStatusDetails'] = f"Successfully validated: {validation['Pages']} pages, {validation['Confidence']}% confidence"
                         # Mark as complete - no further action needed
                         coverage_df.at[idx, 'Priority'] = 'Complete ✓'
+                        coverage_df.at[idx, 'Failure_Reason'] = ''  # Clear any previous failure reason
                         passed_count += 1
                     else:
                         coverage_df.at[idx, 'Milestone4_object_passed_validation'] = 'Failed'
@@ -445,6 +448,7 @@ def main():
                         coverage_df.at[idx, 'CaptureStatusDetails'] = f"Validation failed: {validation['Issues']}"
                         # Mark as needing attention
                         coverage_df.at[idx, 'Priority'] = 'Needs Work ⚠'
+                        coverage_df.at[idx, 'Failure_Reason'] = f"Validation failed: {validation['Issues']}"
                         failed_count += 1
                     
                     updated_count += 1

@@ -6,7 +6,7 @@ from urllib.parse import urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup
 import unicodedata
-from ddgs import DDGS
+from duckduckgo_search import DDGS
 
 PATH_PATTERNS = [
     r"/investors",

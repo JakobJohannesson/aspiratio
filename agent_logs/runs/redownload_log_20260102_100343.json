@@ -1,0 +1,602 @@
+[
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:44.198219"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:44.599161"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.000773"
+  },
+  {
+    "company": "Atlas Copco A",
+    "cid": "S6",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.406170"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.415243"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.416800"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.418255"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.419748"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.421282"
+  },
+  {
+    "company": "Boliden",
+    "cid": "S7",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.423049"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.435161"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.436678"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.438338"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.439799"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.441242"
+  },
+  {
+    "company": "Epiroc A",
+    "cid": "S8",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.442701"
+  },
+  {
+    "company": "Ericsson B",
+    "cid": "S10",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.455139"
+  },
+  {
+    "company": "Ericsson B",
+    "cid": "S10",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.456631"
+  },
+  {
+    "company": "Essity B",
+    "cid": "S11",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.468852"
+  },
+  {
+    "company": "Essity B",
+    "cid": "S11",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.470369"
+  },
+  {
+    "company": "Evolution",
+    "cid": "S12",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.482912"
+  },
+  {
+    "company": "Evolution",
+    "cid": "S12",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.484431"
+  },
+  {
+    "company": "Hexagon B",
+    "cid": "S14",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.497724"
+  },
+  {
+    "company": "Lifco B",
+    "cid": "S17",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.510149"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.530355"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.531969"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.533791"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.535233"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.536670"
+  },
+  {
+    "company": "NIBE Industrier B",
+    "cid": "S18",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.538340"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.550261"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.551794"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.553314"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.554878"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.556358"
+  },
+  {
+    "company": "SAAB B",
+    "cid": "S20",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.557808"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.570096"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.571632"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.573136"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.574655"
+  },
+  {
+    "company": "SCA B",
+    "cid": "S22",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.576145"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.588045"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.589592"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.591073"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.592606"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.594051"
+  },
+  {
+    "company": "SEB A",
+    "cid": "S23",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.595618"
+  },
+  {
+    "company": "Skanska B",
+    "cid": "S24",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.608580"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.621046"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.622636"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.624103"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.626183"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.627705"
+  },
+  {
+    "company": "SKF B",
+    "cid": "S25",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.629183"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.642242"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.643800"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.645314"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.646781"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.648268"
+  },
+  {
+    "company": "Sv. Handelsbanken A",
+    "cid": "S26",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.649758"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.661970"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.663582"
+  },
+  {
+    "company": "Tele2 B",
+    "cid": "S28",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.665118"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.677760"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.679347"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.680797"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.682237"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.683702"
+  },
+  {
+    "company": "Telia Company",
+    "cid": "S29",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.685145"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2019,
+    "status": "not_found",
+    "error": "No report URL found for 2019 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.697473"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2020,
+    "status": "not_found",
+    "error": "No report URL found for 2020 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.698971"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2021,
+    "status": "not_found",
+    "error": "No report URL found for 2021 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.700519"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2022,
+    "status": "not_found",
+    "error": "No report URL found for 2022 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.702010"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2023,
+    "status": "not_found",
+    "error": "No report URL found for 2023 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.703599"
+  },
+  {
+    "company": "Volvo B",
+    "cid": "S30",
+    "year": 2024,
+    "status": "not_found",
+    "error": "No report URL found for 2024 (found 0 reports for other years)",
+    "timestamp": "2026-01-02T10:03:45.705112"
+  }
+]
