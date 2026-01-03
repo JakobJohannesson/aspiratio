@@ -16,6 +16,8 @@ from ..common.connection_errors import categorize_connection_error, format_error
 
 # Import wget-based search for fallback
 from .wget_search import find_reports_via_wget
+# Import MFN search for fallback
+from .mfn_search import find_reports_via_mfn
 
 # User agents to rotate through
 USER_AGENTS = [
@@ -297,7 +299,7 @@ def find_ir_page_from_main_site(main_url):
         print(f"    ✗ Error searching main site: {e}")
         return None
 
-def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_failsafe=True):
+def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_failsafe=True, company_name=None):
     """
     Search IR page for annual report PDFs with enhanced navigation strategy.
     
@@ -306,6 +308,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
     2. Look for annual reports in direct links and navigation
     3. Follow relevant pages to find reports
     4. FAILSAFE: If nothing found, go to main site → find IR link → retry
+    5. MFN FALLBACK: If still nothing found and company_name provided, try MFN.se
     
     Args:
         ir_url: Investor relations page URL
@@ -313,6 +316,7 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
         max_depth: How many levels deep to search (default: 2)
         max_failures: Max consecutive failures before raising error (default: 3)
         enable_failsafe: Whether to try main site failsafe (default: True)
+        company_name: Optional company name for MFN fallback search (default: None)
     
     Returns:
         List of dicts: [{'year': 2024, 'url': 'https://...', 'title': '...'}]
@@ -618,9 +622,20 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
                 print(f"  → Retrying search from discovered IR page: {new_ir_url}")
                 # Recursive call but with failsafe disabled to prevent infinite loop
                 try:
-                    return find_annual_reports(new_ir_url, years, max_depth, max_failures, enable_failsafe=False)
+                    return find_annual_reports(new_ir_url, years, max_depth, max_failures, enable_failsafe=False, company_name=company_name)
                 except Exception as e:
                     print(f"  ✗ Failsafe search also failed: {e}")
+    
+    # MFN FALLBACK: If still no results and company name is provided, try MFN.se
+    if not results and company_name and enable_failsafe:
+        print("  ⚠ Standard methods failed, trying MFN.se fallback...")
+        try:
+            mfn_results = find_reports_via_mfn(company_name, years)
+            if mfn_results:
+                results.extend(mfn_results)
+                print(f"  ✓ MFN fallback found {len(mfn_results)} reports")
+        except Exception as e:
+            print(f"  ✗ MFN fallback failed: {e}")
     
     # Deduplicate by year (keep first occurrence)
     seen_years = set()
@@ -788,7 +803,8 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
     print(f"{'='*60}")
     
     # Find reports (may raise DownloadError)
-    reports = find_annual_reports(ir_url, years)
+    # Pass company_name to enable MFN fallback
+    reports = find_annual_reports(ir_url, years, company_name=company_name)
     
     # WGET FALLBACK: If no reports found, try wget mirroring for MFN and Cision
     if not reports:

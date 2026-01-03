@@ -113,7 +113,7 @@ def main():
         # Find annual reports
         print(f"Searching for annual reports (years: {years})...")
         try:
-            reports = find_annual_reports(ir_url, years=years)
+            reports = find_annual_reports(ir_url, years=years, company_name=company_name)
             print(f"Found {len(reports)} reports")
             print()
         except Exception as e:
