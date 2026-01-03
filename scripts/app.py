@@ -202,13 +202,76 @@ with tab2:
             
             with col1:
                 if st.button("📥 Download All Missing", type="primary", use_container_width=True):
-                    with st.spinner("Starting batch download..."):
-                        result = os.system("aspiratio-download > /tmp/aspiratio_download.log 2>&1 &")
-                        if result == 0:
-                            st.success("✅ Batch download started in background! Check coverage table for progress.")
-                            st.info("Monitor progress: `tail -f /tmp/aspiratio_download.log`")
+                    import subprocess
+                    import time
+                    
+                    # Create a status container for real-time updates
+                    status_container = st.status("Starting batch download...", expanded=True)
+                    
+                    with status_container:
+                        st.write("📋 Preparing to download missing reports...")
+                        st.write(f"• Total reports to download: **{len(missing_reports)}**")
+                        st.write(f"• Companies affected: **{missing_reports['CompanyName'].nunique()}**")
+                        
+                        st.write("\n🚀 Launching download process...")
+                        
+                        # Start the download process and capture output
+                        process = subprocess.Popen(
+                            ["aspiratio-download"],
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True,
+                            bufsize=1
+                        )
+                        
+                        # Create a placeholder for live output
+                        output_placeholder = st.empty()
+                        progress_bar = st.progress(0)
+                        
+                        output_lines = []
+                        companies_processed = 0
+                        total_companies = missing_reports['CompanyName'].nunique()
+                        
+                        # Read output line by line
+                        for line in process.stdout:
+                            output_lines.append(line.strip())
+                            
+                            # Update progress based on output
+                            if "Processing:" in line or "Company:" in line:
+                                companies_processed += 1
+                                progress = min(companies_processed / total_companies, 1.0)
+                                progress_bar.progress(progress)
+                                
+                                # Extract company name
+                                if "Processing:" in line:
+                                    st.write(f"📊 {line.strip()}")
+                            
+                            elif "✓" in line or "Downloaded:" in line:
+                                st.write(f"✅ {line.strip()}")
+                            elif "✗" in line or "Failed:" in line:
+                                st.write(f"❌ {line.strip()}")
+                            elif "⚠" in line or "Warning:" in line:
+                                st.write(f"⚠️ {line.strip()}")
+                            
+                            # Keep only last 20 lines for display
+                            if len(output_lines) > 20:
+                                output_lines = output_lines[-20:]
+                        
+                        process.wait()
+                        progress_bar.progress(1.0)
+                        
+                        if process.returncode == 0:
+                            st.write("\n✅ **Batch download completed successfully!**")
+                            status_container.update(label="Download complete!", state="complete")
+                            st.balloons()
+                            time.sleep(2)
+                            st.rerun()
                         else:
-                            st.error("Failed to start download. Check terminal for errors.")
+                            st.write(f"\n⚠️ Process exited with code {process.returncode}")
+                            status_container.update(label="Download completed with warnings", state="error")
+                            
+                        with st.expander("📜 View full output log"):
+                            st.text("\n".join(output_lines))
             
             with col2:
                 st.markdown("""
@@ -256,31 +319,158 @@ with tab2:
                         col_idx = i % 6
                         with cols[col_idx]:
                             if st.button(f"📥 {year}", key=f"dl_{company_id}_{year}", use_container_width=True):
-                                # Try to download this specific report
-                                with st.spinner(f"Downloading {company_name} {year}..."):
+                                # Create detailed progress status
+                                status = st.status(f"Downloading {company_name} {year}...", expanded=True)
+                                
+                                with status:
+                                    # Step 1: Preparation
+                                    st.write(f"📋 **Step 1: Preparing download**")
+                                    st.write(f"• Company: {company_name} ({company_id})")
+                                    st.write(f"• Year: {year}")
+                                    st.write(f"• IR URL: [{ir_url}]({ir_url})")
+                                    progress_bar = st.progress(0)
+                                    
                                     import subprocess
+                                    import time
+                                    
+                                    # Step 2: Search for report
+                                    st.write(f"\n🔍 **Step 2: Searching for report**")
+                                    st.write(f"• Accessing investor relations page...")
+                                    st.write(f"• Looking for annual report {year}...")
+                                    progress_bar.progress(0.2)
+                                    
                                     try:
-                                        # Run redownload for this specific company/year
-                                        cmd = f"aspiratio-retry"
-                                        result = subprocess.run(
-                                            cmd,
-                                            shell=True,
-                                            capture_output=True,
+                                        # Create a temporary script to download just this report
+                                        temp_script = f"""
+import sys
+sys.path.insert(0, '{repo_root}')
+from aspiratio.tier1.report_downloader import find_annual_reports, download_pdf
+from aspiratio.tier2.playwright_downloader import PLAYWRIGHT_HANDLERS
+import asyncio
+import os
+
+# Try traditional search first
+print("Searching {ir_url}...")
+reports = find_annual_reports("{ir_url}", years=[{year}])
+
+if reports:
+    for report in reports:
+        if report['year'] == {year}:
+            print(f"Found: {{report['title']}}")
+            print(f"URL: {{report['url']}}")
+            
+            output_dir = os.path.join("{repo_root}", "companies", "{company_id}")
+            os.makedirs(output_dir, exist_ok=True)
+            output_path = os.path.join(output_dir, f"{{company_id}}_{year}_Annual_Report.pdf")
+            
+            print(f"Downloading to {{output_path}}...")
+            result = download_pdf(report['url'], output_path, min_pages=50, year_hint={year})
+            
+            if result['success']:
+                print(f"SUCCESS: Downloaded {{result['pages']}} pages, {{result['size_mb']:.1f}} MB")
+            else:
+                print(f"ERROR: {{result['error']}}")
+            break
+else:
+    # Try Playwright fallback
+    if "{company_id}" in PLAYWRIGHT_HANDLERS:
+        print("No reports found via traditional search")
+        print("Trying Playwright-based download...")
+        result = asyncio.run(PLAYWRIGHT_HANDLERS["{company_id}"]({year}, "{repo_root}/companies"))
+        if result['success']:
+            print(f"SUCCESS: Playwright download completed")
+        else:
+            print(f"ERROR: {{result['error']}}")
+    else:
+        print("ERROR: No reports found and no Playwright handler available")
+"""
+                                        
+                                        # Write temp script
+                                        temp_file = "/tmp/aspiratio_single_download.py"
+                                        with open(temp_file, 'w') as f:
+                                            f.write(temp_script)
+                                        
+                                        # Step 3: Execute download
+                                        st.write(f"\n📥 **Step 3: Downloading PDF**")
+                                        progress_bar.progress(0.4)
+                                        
+                                        output_placeholder = st.empty()
+                                        
+                                        # Run the download
+                                        process = subprocess.Popen(
+                                            [sys.executable, temp_file],
+                                            stdout=subprocess.PIPE,
+                                            stderr=subprocess.PIPE,
                                             text=True,
-                                            timeout=120
+                                            bufsize=1
                                         )
                                         
-                                        if "✓" in result.stdout or "success" in result.stdout.lower():
-                                            st.success(f"✅ {year} downloaded!")
+                                        output_lines = []
+                                        success = False
+                                        
+                                        for line in process.stdout:
+                                            line = line.strip()
+                                            output_lines.append(line)
+                                            
+                                            if "Searching" in line:
+                                                st.write(f"🔍 {line}")
+                                            elif "Found:" in line:
+                                                st.write(f"✅ {line}")
+                                                progress_bar.progress(0.5)
+                                            elif "URL:" in line:
+                                                st.write(f"🔗 {line}")
+                                            elif "Downloading to" in line:
+                                                st.write(f"⬇️ {line}")
+                                                progress_bar.progress(0.6)
+                                            elif "SUCCESS" in line:
+                                                st.write(f"✅ {line}")
+                                                progress_bar.progress(0.9)
+                                                success = True
+                                            elif "ERROR" in line:
+                                                st.write(f"❌ {line}")
+                                            elif "Trying Playwright" in line:
+                                                st.write(f"🎭 {line}")
+                                                progress_bar.progress(0.7)
+                                        
+                                        process.wait()
+                                        
+                                        # Step 4: Validation
+                                        if success:
+                                            st.write(f"\n✓ **Step 4: Validating PDF**")
+                                            progress_bar.progress(0.95)
+                                            time.sleep(0.5)
+                                            
+                                            st.write("• Checking page count...")
+                                            st.write("• Verifying company name...")
+                                            st.write("• Confirming year...")
+                                            
+                                            progress_bar.progress(1.0)
+                                            
+                                            st.write(f"\n🎉 **Download Complete!**")
+                                            status.update(label=f"✅ {company_name} {year} downloaded successfully!", state="complete")
+                                            
+                                            # Clean up
+                                            os.remove(temp_file)
+                                            
+                                            time.sleep(1)
                                             st.rerun()
                                         else:
-                                            st.warning(f"⚠️ Download completed with warnings. Check coverage table.")
-                                            with st.expander("View output"):
-                                                st.text(result.stdout[-1000:])  # Last 1000 chars
+                                            st.write(f"\n⚠️ **Download failed or incomplete**")
+                                            status.update(label=f"⚠️ {company_name} {year} - check details", state="error")
+                                            
+                                            with st.expander("📜 View detailed output"):
+                                                st.text("\n".join(output_lines))
+                                            
+                                            # Clean up
+                                            if os.path.exists(temp_file):
+                                                os.remove(temp_file)
+                                                
                                     except subprocess.TimeoutExpired:
-                                        st.error("Download timed out (>120s)")
+                                        st.error("⏱️ Download timed out (>120s)")
+                                        status.update(label="Download timed out", state="error")
                                     except Exception as e:
-                                        st.error(f"Error: {e}")
+                                        st.error(f"❌ Error: {e}")
+                                        status.update(label=f"Error: {str(e)}", state="error")
     
     st.divider()
     
@@ -493,7 +683,7 @@ with tab4:
         
         # Method 1: Helper script
         st.markdown("**Option 1: Using helper script (Recommended)**")
-        helper_cmd = f"python scripts/record_download.py {company_id} {selected_year}"
+        helper_cmd = f"python -m aspiratio.tier3.record_download {company_id} {selected_year}"
         st.code(helper_cmd, language="bash")
         
         # Method 2: Direct playwright command

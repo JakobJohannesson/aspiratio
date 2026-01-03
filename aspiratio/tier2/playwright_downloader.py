@@ -235,32 +235,78 @@ async def download_atlas_copco_report(year, output_dir='companies'):
                 }
             
             # Find the annual report link for the specific year
+            # Try two different navigation patterns based on year
             try:
-                # Try exact year match first
+                # Pattern 1: Direct link (works for 2024)
                 link_text = f"Annual Report {year} (PDF)"
                 print(f"  Looking for: {link_text}")
                 
-                # Get the link element first
-                link = page.get_by_role("link", name=link_text)
-                
-                # Extract href before clicking
-                pdf_url = await link.get_attribute('href')
-                if pdf_url:
-                    # Make absolute URL if relative
-                    if not pdf_url.startswith('http'):
-                        pdf_url = urljoin(ir_url, pdf_url)
-                    print(f"  ✓ Found report URL: {pdf_url}")
-                else:
-                    # Try clicking and capturing popup if no direct href
-                    async with page.expect_popup(timeout=5000) as popup_info:
-                        await link.click()
-                    popup = await popup_info.value
-                    pdf_url = popup.url
-                    print(f"  ✓ Found report URL (via popup): {pdf_url}")
-                    await popup.close()
+                try:
+                    link = page.get_by_role("link", name=link_text)
+                    
+                    # Extract href before clicking
+                    pdf_url = await link.get_attribute('href', timeout=3000)
+                    if pdf_url:
+                        # Make absolute URL if relative
+                        if not pdf_url.startswith('http'):
+                            pdf_url = urljoin(ir_url, pdf_url)
+                        print(f"  ✓ Found report URL (direct link): {pdf_url}")
+                    else:
+                        # Try clicking and capturing popup if no direct href
+                        async with page.expect_popup(timeout=5000) as popup_info:
+                            await link.click()
+                        popup = await popup_info.value
+                        pdf_url = popup.url
+                        print(f"  ✓ Found report URL (via popup): {pdf_url}")
+                        await popup.close()
+                except:
+                    # Pattern 2: Tab navigation (works for 2023 and earlier)
+                    print(f"  ⊙ Direct link not found, trying tab navigation...")
+                    
+                    # Click year tab
+                    await page.get_by_role("tab", name=str(year)).click(timeout=5000)
+                    print(f"  ✓ Clicked {year} tab")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Click Annual Report button (this expands the section)
+                    await page.get_by_role("button", name="Annual Report").click(timeout=5000)
+                    print(f"  ✓ Clicked Annual Report button")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Click the link to go to the press release page
+                    # This link typically says something like "Atlas Copco Group publishes"
+                    publish_link = page.get_by_role("link").filter(has_text=re.compile("publishes", re.IGNORECASE)).first
+                    await publish_link.click(timeout=5000)
+                    print(f"  ✓ Navigated to press release page")
+                    await page.wait_for_timeout(2000)  # Give page time to load
+                    
+                    # Now on the press release page, look for the actual annual report PDF link
+                    # This is different from the press release PDF - look for link with year reference
+                    # The pattern from recording: "20240321 Annual report incl."
+                    # More generally: date + "annual report" + "incl" (for "including sustainability")
+                    links = page.locator('a')
+                    
+                    # Try multiple patterns
+                    try:
+                        # Pattern 1: Date + "Annual report incl"
+                        pdf_link = links.filter(has_text=re.compile(r"\d{8}.*[Aa]nnual.*[Rr]eport.*incl", re.IGNORECASE)).first
+                        link_text = await pdf_link.text_content()
+                        print(f"  → Found link: {link_text.strip()}")
+                    except:
+                        # Pattern 2: Just look for PDF links in the content area
+                        pdf_link = links.filter(has=page.locator('text=/\\.pdf/i')).first
+                    
+                    # Get the href
+                    pdf_url = await pdf_link.get_attribute('href', timeout=5000)
+                    
+                    if pdf_url:
+                        # Make absolute URL if relative
+                        if not pdf_url.startswith('http'):
+                            pdf_url = urljoin(ir_url, pdf_url)
+                        print(f"  ✓ Found report URL (tab navigation): {pdf_url}")
                 
             except Exception as e:
-                print(f"  ✗ Failed to find report link: {e}")
+                print(f"  ✗ Failed to find report: {e}")
                 await browser.close()
                 return {
                     'success': False,
