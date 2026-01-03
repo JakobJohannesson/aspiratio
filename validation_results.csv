@@ -1,75 +1,25 @@
 CID,Company_Name,Year,Filename,Valid,Confidence,Pages,Company_Found,Year_Found,Issues,Source_Path,Validated_Date,IR_URL,Pattern_Type
-S5,AstraZeneca,2023,annual_report_2023.pdf,True,100.0,240,True,True,,companies/S5/annual_report_2023.pdf,2025-12-22 00:45:56,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S5,AstraZeneca,2022,annual_report_2022.pdf,True,100.0,228,True,True,,companies/S5/annual_report_2022.pdf,2025-12-22 00:45:56,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S5,AstraZeneca,2020,annual_report_2020.pdf,True,100.0,288,True,True,,companies/S5/annual_report_2020.pdf,2025-12-22 00:45:56,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S5,AstraZeneca,2021,annual_report_2021.pdf,True,100.0,232,True,True,,companies/S5/annual_report_2021.pdf,2025-12-22 00:45:57,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S5,AstraZeneca,2019,annual_report_2019.pdf,True,100.0,276,True,True,,companies/S5/annual_report_2019.pdf,2025-12-22 00:45:57,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S5,AstraZeneca,2024,annual_report_2024.pdf,True,100.0,248,True,True,,companies/S5/annual_report_2024.pdf,2025-12-22 00:45:58,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
-S2,Addtech B,2023,annual_report_2023.pdf,True,88.0,155,True,True,,companies/S2/annual_report_2023.pdf,2025-12-22 00:45:59,https://www.addtech.com/investors-and-media,To be analyzed
-S2,Addtech B,2022,annual_report_2022.pdf,True,68.0,80,True,True,,companies/S2/annual_report_2022.pdf,2025-12-22 00:46:00,https://www.addtech.com/investors-and-media,To be analyzed
-S2,Addtech B,2020,annual_report_2020.pdf,True,66.4,74,True,True,,companies/S2/annual_report_2020.pdf,2025-12-22 00:46:02,https://www.addtech.com/investors-and-media,To be analyzed
-S2,Addtech B,2021,annual_report_2021.pdf,True,66.4,74,True,True,,companies/S2/annual_report_2021.pdf,2025-12-22 00:46:04,https://www.addtech.com/investors-and-media,To be analyzed
-S2,Addtech B,2019,annual_report_2019.pdf,True,62.9,61,True,True,,companies/S2/annual_report_2019.pdf,2025-12-22 00:46:04,https://www.addtech.com/investors-and-media,To be analyzed
-S2,Addtech B,2024,annual_report_2024.pdf,True,87.2,152,True,True,,companies/S2/annual_report_2024.pdf,2025-12-22 00:46:05,https://www.addtech.com/investors-and-media,To be analyzed
-S4,ASSA ABLOY B,2023,annual_report_2023.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2023.pdf,2025-12-22 00:46:05,https://www.assaabloy.com/group/en/investors,To be analyzed
-S4,ASSA ABLOY B,2022,annual_report_2022.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2022.pdf,2025-12-22 00:46:05,https://www.assaabloy.com/group/en/investors,To be analyzed
-S4,ASSA ABLOY B,2020,annual_report_2020.pdf,True,76.5,112,True,True,,companies/S4/annual_report_2020.pdf,2025-12-22 00:46:05,https://www.assaabloy.com/group/en/investors,To be analyzed
-S4,ASSA ABLOY B,2021,annual_report_2021.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2021.pdf,2025-12-22 00:46:05,https://www.assaabloy.com/group/en/investors,To be analyzed
-S4,ASSA ABLOY B,2019,annual_report_2019.pdf,True,75.5,108,True,True,,companies/S4/annual_report_2019.pdf,2025-12-22 00:46:05,https://www.assaabloy.com/group/en/investors,To be analyzed
-S4,ASSA ABLOY B,2024,annual_report_2024.pdf,True,90.4,164,True,True,,companies/S4/annual_report_2024.pdf,2025-12-22 00:46:06,https://www.assaabloy.com/group/en/investors,To be analyzed
-S21,Sandvik,2023,S21_2023_Annual_Report.pdf,True,91.5,168,True,True,,companies/S21/S21_2023_Annual_Report.pdf,2025-12-22 00:46:06,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2024,S21_2024_Annual_Report.pdf,True,89.3,160,True,True,,companies/S21/S21_2024_Annual_Report.pdf,2025-12-22 00:46:06,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2023,annual_report_2023.pdf,True,91.5,168,True,True,,companies/S21/annual_report_2023.pdf,2025-12-22 00:46:06,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2022,annual_report_2022.pdf,True,89.3,160,True,True,,companies/S21/annual_report_2022.pdf,2025-12-22 00:46:10,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2020,annual_report_2020.pdf,True,86.1,148,True,True,,companies/S21/annual_report_2020.pdf,2025-12-22 00:46:18,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2021,annual_report_2021.pdf,True,89.3,160,True,True,,companies/S21/annual_report_2021.pdf,2025-12-22 00:46:25,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2019,annual_report_2019.pdf,True,86.1,148,True,True,,companies/S21/annual_report_2019.pdf,2025-12-22 00:46:32,https://www.home.sandvik/en/investors/,To be analyzed
-S21,Sandvik,2024,annual_report_2024.pdf,True,89.3,160,True,True,,companies/S21/annual_report_2024.pdf,2025-12-22 00:46:32,https://www.home.sandvik/en/investors/,To be analyzed
-S17,Lifco B,2020,S17_2020_Annual_Report.pdf,False,41.2,92,True,False,Year 2020 not found in PDF,companies/S17/S17_2020_Annual_Report.pdf,2025-12-22 00:46:33,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2023,annual_report_2023.pdf,True,88.8,158,True,True,,companies/S17/annual_report_2023.pdf,2025-12-22 00:46:33,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2022,annual_report_2022.pdf,True,88.3,156,True,True,,companies/S17/annual_report_2022.pdf,2025-12-22 00:46:34,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2020,annual_report_2020.pdf,False,41.2,92,True,False,Year 2020 not found in PDF,companies/S17/annual_report_2020.pdf,2025-12-22 00:46:34,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2021,annual_report_2021.pdf,True,78.7,120,True,True,,companies/S17/annual_report_2021.pdf,2025-12-22 00:46:34,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2019,annual_report_2019.pdf,True,74.4,104,True,True,,companies/S17/annual_report_2019.pdf,2025-12-22 00:46:34,https://www.lifco.se/investors/financial-reports,To be analyzed
-S17,Lifco B,2024,annual_report_2024.pdf,True,87.7,154,True,True,,companies/S17/annual_report_2024.pdf,2025-12-22 00:46:35,https://www.lifco.se/investors/financial-reports,To be analyzed
-S28,Tele2 B,2023,annual_report_2023.pdf,True,90.4,164,True,True,,companies/S28/annual_report_2023.pdf,2025-12-22 00:46:35,https://www.tele2.com/investors,To be analyzed
-S28,Tele2 B,2022,annual_report_2022.pdf,True,89.9,162,True,True,,companies/S28/annual_report_2022.pdf,2025-12-22 00:46:35,https://www.tele2.com/investors,To be analyzed
-S28,Tele2 B,2020,annual_report_2020.pdf,False,30.0,17,True,False,Too few pages (17 < 50); Year 2020 not found in PDF,companies/S28/annual_report_2020.pdf,2025-12-22 00:46:35,https://www.tele2.com/investors,To be analyzed
-S28,Tele2 B,2021,annual_report_2021.pdf,False,30.0,31,True,False,Too few pages (31 < 50); Year 2021 not found in PDF,companies/S28/annual_report_2021.pdf,2025-12-22 00:46:35,https://www.tele2.com/investors,To be analyzed
-S28,Tele2 B,2024,annual_report_2024.pdf,True,100.0,211,True,True,,companies/S28/annual_report_2024.pdf,2025-12-22 00:46:35,https://www.tele2.com/investors,To be analyzed
-S10,Ericsson B,2023,annual_report_2023.pdf,True,100.0,241,True,True,,companies/S10/annual_report_2023.pdf,2025-12-22 00:46:35,https://www.ericsson.com/en/investors,To be analyzed
-S10,Ericsson B,2022,annual_report_2022.pdf,True,100.0,240,True,True,,companies/S10/annual_report_2022.pdf,2025-12-22 00:46:36,https://www.ericsson.com/en/investors,To be analyzed
-S10,Ericsson B,2021,annual_report_2021.pdf,True,100.0,219,True,True,,companies/S10/annual_report_2021.pdf,2025-12-22 00:46:36,https://www.ericsson.com/en/investors,To be analyzed
-S10,Ericsson B,2024,annual_report_2024.pdf,True,100.0,244,True,True,,companies/S10/annual_report_2024.pdf,2025-12-22 00:46:36,https://www.ericsson.com/en/investors,To be analyzed
-S11,Essity B,2023,annual_report_2023.pdf,True,96.8,188,True,True,,companies/S11/annual_report_2023.pdf,2025-12-22 00:46:37,https://www.essity.com/investors/,To be analyzed
-S11,Essity B,2022,annual_report_2022.pdf,True,90.4,164,True,True,,companies/S11/annual_report_2022.pdf,2025-12-22 00:46:38,https://www.essity.com/investors/,To be analyzed
-S11,Essity B,2020,annual_report_2020.pdf,True,86.1,148,True,True,,companies/S11/annual_report_2020.pdf,2025-12-22 00:46:38,https://www.essity.com/investors/,To be analyzed
-S11,Essity B,2024,annual_report_2024.pdf,True,97.9,192,True,True,,companies/S11/annual_report_2024.pdf,2025-12-22 00:46:39,https://www.essity.com/investors/,To be analyzed
-S1,ABB Ltd,2021,ABB-Group-Annual-Report-2021-English.pdf,True,100.0,272,True,True,,companies/S1/ABB-Group-Annual-Report-2021-English.pdf,2025-12-22 00:46:39,https://global.abb/group/en/investors,To be analyzed
-S1,ABB Ltd,2019,ABB-Group-Annual-Report-2019-English.pdf,True,100.0,242,True,True,,companies/S1/ABB-Group-Annual-Report-2019-English.pdf,2025-12-22 00:46:39,https://global.abb/group/en/investors,To be analyzed
-S1,ABB Ltd,2024,Integrated Report 2024_ENGLISH.pdf,True,86.4,149,True,True,,companies/S1/Integrated Report 2024_ENGLISH.pdf,2025-12-22 00:46:40,https://global.abb/group/en/investors,To be analyzed
-S1,ABB Ltd,2020,ABB-Group-Annual-Report-2020-English.pdf,True,100.0,252,True,True,,companies/S1/ABB-Group-Annual-Report-2020-English.pdf,2025-12-22 00:46:40,https://global.abb/group/en/investors,To be analyzed
-S1,ABB Ltd,2022,Annual Reporting Suite_Integrated Report 2022_English.pdf,True,100.0,210,True,True,,companies/S1/Annual Reporting Suite_Integrated Report 2022_English.pdf,2025-12-22 00:46:40,https://global.abb/group/en/investors,To be analyzed
-S1,ABB Ltd,2023,ABB Integrated Report 2023.pdf,True,76.5,112,True,True,,companies/S1/ABB Integrated Report 2023.pdf,2025-12-22 00:46:40,https://global.abb/group/en/investors,To be analyzed
-S6,Atlas Copco A,2020,S6_2020_Annual_Report.pdf,True,91.7,169,True,True,,companies/S6/S6_2020_Annual_Report.pdf,2025-12-22 00:46:40,https://www.atlascopcogroup.com/en/investors,To be analyzed
-S6,Atlas Copco A,2024,annual_report_2024.pdf,True,91.7,169,True,True,,companies/S6/annual_report_2024.pdf,2025-12-22 00:46:40,https://www.atlascopcogroup.com/en/investors,To be analyzed
-S22,SCA B,2024,annual_report_2024.pdf,True,100.0,202,True,True,,companies/S22/annual_report_2024.pdf,2025-12-22 00:46:44,https://www.sca.com/en/investors/,To be analyzed
-S14,Hexagon B,2023,annual_report_2023.pdf,True,100.0,201,True,True,,companies/S14/annual_report_2023.pdf,2025-12-22 00:46:44,https://hexagongroup.com/investors/,To be analyzed
-S14,Hexagon B,2022,annual_report_2022.pdf,True,93.9,177,True,True,,companies/S14/annual_report_2022.pdf,2025-12-22 00:46:45,https://hexagongroup.com/investors/,To be analyzed
-S14,Hexagon B,2020,annual_report_2020.pdf,False,58.3,156,True,False,Year 2020 not found in PDF,companies/S14/annual_report_2020.pdf,2025-12-22 00:46:45,https://hexagongroup.com/investors/,To be analyzed
-S14,Hexagon B,2021,annual_report_2021.pdf,True,96.0,185,True,True,,companies/S14/annual_report_2021.pdf,2025-12-22 00:46:45,https://hexagongroup.com/investors/,To be analyzed
-S14,Hexagon B,2019,annual_report_2019.pdf,True,94.1,178,True,True,,companies/S14/annual_report_2019.pdf,2025-12-22 00:46:45,https://hexagongroup.com/investors/,To be analyzed
-S14,Hexagon B,2024,annual_report_2024.pdf,True,100.0,234,True,True,,companies/S14/annual_report_2024.pdf,2025-12-22 00:46:45,https://hexagongroup.com/investors/,To be analyzed
-S12,Evolution,2023,annual_report_2023.pdf,True,78.9,121,True,True,,companies/S12/annual_report_2023.pdf,2025-12-22 00:46:45,https://www.evolution.com/investors/ir-contacts/,To be analyzed
-S12,Evolution,2020,annual_report_2020.pdf,True,81.1,129,True,True,,companies/S12/annual_report_2020.pdf,2025-12-22 00:46:46,https://www.evolution.com/investors/ir-contacts/,To be analyzed
-S12,Evolution,2021,annual_report_2021.pdf,True,77.9,117,True,True,,companies/S12/annual_report_2021.pdf,2025-12-22 00:46:46,https://www.evolution.com/investors/ir-contacts/,To be analyzed
-S12,Evolution,2024,annual_report_2024.pdf,True,77.9,117,True,True,,companies/S12/annual_report_2024.pdf,2025-12-22 00:46:46,https://www.evolution.com/investors/ir-contacts/,To be analyzed
-S24,Skanska B,2020,S24_2020_Annual_Report.pdf,True,95.2,182,True,True,,companies/S24/S24_2020_Annual_Report.pdf,2025-12-22 00:46:46,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2021,S24_2021_Annual_Report.pdf,True,100.0,208,True,True,,companies/S24/S24_2021_Annual_Report.pdf,2025-12-22 00:46:47,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2024,S24_2024_Annual_Report.pdf,True,100.0,232,True,True,,companies/S24/S24_2024_Annual_Report.pdf,2025-12-22 00:46:47,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2023,annual_report_2023.pdf,True,100.0,226,True,True,,companies/S24/annual_report_2023.pdf,2025-12-22 00:46:48,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2022,annual_report_2022.pdf,True,100.0,224,True,True,,companies/S24/annual_report_2022.pdf,2025-12-22 00:46:48,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2020,annual_report_2020.pdf,True,95.2,182,True,True,,companies/S24/annual_report_2020.pdf,2025-12-22 00:46:48,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2021,annual_report_2021.pdf,True,100.0,208,True,True,,companies/S24/annual_report_2021.pdf,2025-12-22 00:46:49,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2019,annual_report_2019.pdf,False,70.0,212,True,False,Year 2019 not found in PDF,companies/S24/annual_report_2019.pdf,2025-12-22 00:46:49,https://group.skanska.com/investors/,To be analyzed
-S24,Skanska B,2024,annual_report_2024.pdf,True,100.0,232,True,True,,companies/S24/annual_report_2024.pdf,2025-12-22 00:46:50,https://group.skanska.com/investors/,To be analyzed
+S5,AstraZeneca,2023,annual_report_2023.pdf,True,100.0,240,True,True,,companies/S5/annual_report_2023.pdf,2026-01-03 15:39:34,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S5,AstraZeneca,2022,annual_report_2022.pdf,True,100.0,228,True,True,,companies/S5/annual_report_2022.pdf,2026-01-03 15:39:34,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S5,AstraZeneca,2020,annual_report_2020.pdf,True,100.0,288,True,True,,companies/S5/annual_report_2020.pdf,2026-01-03 15:39:34,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S5,AstraZeneca,2021,annual_report_2021.pdf,True,100.0,232,True,True,,companies/S5/annual_report_2021.pdf,2026-01-03 15:39:35,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S5,AstraZeneca,2019,annual_report_2019.pdf,True,100.0,276,True,True,,companies/S5/annual_report_2019.pdf,2026-01-03 15:39:35,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S5,AstraZeneca,2024,annual_report_2024.pdf,True,100.0,248,True,True,,companies/S5/annual_report_2024.pdf,2026-01-03 15:39:36,https://www.astrazeneca.com/investor-relations/contacts-information.html,To be analyzed
+S2,Addtech B,2023,annual_report_2023.pdf,True,88.0,155,True,True,,companies/S2/annual_report_2023.pdf,2026-01-03 15:39:37,https://www.addtech.com/investors-and-media,To be analyzed
+S2,Addtech B,2022,annual_report_2022.pdf,True,68.0,80,True,True,,companies/S2/annual_report_2022.pdf,2026-01-03 15:39:38,https://www.addtech.com/investors-and-media,To be analyzed
+S2,Addtech B,2020,annual_report_2020.pdf,True,66.4,74,True,True,,companies/S2/annual_report_2020.pdf,2026-01-03 15:39:40,https://www.addtech.com/investors-and-media,To be analyzed
+S2,Addtech B,2021,annual_report_2021.pdf,True,66.4,74,True,True,,companies/S2/annual_report_2021.pdf,2026-01-03 15:39:42,https://www.addtech.com/investors-and-media,To be analyzed
+S2,Addtech B,2019,annual_report_2019.pdf,True,62.9,61,True,True,,companies/S2/annual_report_2019.pdf,2026-01-03 15:39:42,https://www.addtech.com/investors-and-media,To be analyzed
+S2,Addtech B,2024,annual_report_2024.pdf,True,87.2,152,True,True,,companies/S2/annual_report_2024.pdf,2026-01-03 15:39:42,https://www.addtech.com/investors-and-media,To be analyzed
+S4,ASSA ABLOY B,2023,annual_report_2023.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2023.pdf,2026-01-03 15:39:43,https://www.assaabloy.com/group/en/investors,To be analyzed
+S4,ASSA ABLOY B,2022,annual_report_2022.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2022.pdf,2026-01-03 15:39:43,https://www.assaabloy.com/group/en/investors,To be analyzed
+S4,ASSA ABLOY B,2020,annual_report_2020.pdf,True,76.5,112,True,True,,companies/S4/annual_report_2020.pdf,2026-01-03 15:39:43,https://www.assaabloy.com/group/en/investors,To be analyzed
+S4,ASSA ABLOY B,2021,annual_report_2021.pdf,True,77.6,116,True,True,,companies/S4/annual_report_2021.pdf,2026-01-03 15:39:43,https://www.assaabloy.com/group/en/investors,To be analyzed
+S4,ASSA ABLOY B,2019,annual_report_2019.pdf,True,75.5,108,True,True,,companies/S4/annual_report_2019.pdf,2026-01-03 15:39:43,https://www.assaabloy.com/group/en/investors,To be analyzed
+S4,ASSA ABLOY B,2024,annual_report_2024.pdf,True,90.4,164,True,True,,companies/S4/annual_report_2024.pdf,2026-01-03 15:39:44,https://www.assaabloy.com/group/en/investors,To be analyzed
+S17,Lifco B,2020,S17_2020_Annual_Report.pdf,False,41.2,92,True,False,Year 2020 not found in PDF,companies/S17/S17_2020_Annual_Report.pdf,2026-01-03 15:39:44,https://www.lifco.se/investors/financial-reports,To be analyzed
+S17,Lifco B,2020,annual_report_2020.pdf,False,41.2,92,True,False,Year 2020 not found in PDF,companies/S17/annual_report_2020.pdf,2026-01-03 15:39:44,https://www.lifco.se/investors/financial-reports,To be analyzed
+S28,Tele2 B,2020,annual_report_2020.pdf,False,30.0,17,True,False,Too few pages (17 < 50); Year 2020 not found in PDF,companies/S28/annual_report_2020.pdf,2026-01-03 15:39:44,https://www.tele2.com/investors,To be analyzed
+S28,Tele2 B,2021,annual_report_2021.pdf,False,30.0,31,True,False,Too few pages (31 < 50); Year 2021 not found in PDF,companies/S28/annual_report_2021.pdf,2026-01-03 15:39:44,https://www.tele2.com/investors,To be analyzed
+S14,Hexagon B,2020,annual_report_2020.pdf,False,58.3,156,True,False,Year 2020 not found in PDF,companies/S14/annual_report_2020.pdf,2026-01-03 15:39:44,https://hexagongroup.com/investors/,To be analyzed
+S24,Skanska B,2019,annual_report_2019.pdf,False,70.0,212,True,False,Year 2019 not found in PDF,companies/S24/annual_report_2019.pdf,2026-01-03 15:39:44,https://group.skanska.com/investors/,To be analyzed

@@ -28,3 +28,30 @@ async def main() -> None:
 
 
 asyncio.run(main())
+
+
+# Step 1: Check what's missing from coverage table
+python3 -c "
+import pandas as pd
+df = pd.read_csv('coverage_table_updated.csv', sep='\t')
+missing = df[df['Priority'] != 'Complete ✓']
+print(f'Missing: {len(missing)} reports')
+by_company = missing.groupby('CompanyName').size().sort_values(ascending=False)
+for company, count in by_company.items():
+    print(f'  {company}: {count}')
+"
+
+# Step 2: Download reports (only fetches missing ones)
+aspiratio-download
+
+# Step 3: Validate downloaded PDFs
+aspiratio-validate
+
+# Step 4: Update coverage table
+aspiratio-update
+
+# Step 5: Retry failures with smart logic (Playwright fallback)
+aspiratio-retry
+
+# Interactive UI
+streamlit run scripts/app.py
