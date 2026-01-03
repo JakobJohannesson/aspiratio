@@ -14,6 +14,8 @@ from datetime import datetime
 # Import connection error utilities
 from ..common.connection_errors import categorize_connection_error, format_error_message
 
+# Import wget-based search for fallback
+from .wget_search import find_reports_via_wget
 # Import MFN search for fallback
 from .mfn_search import find_reports_via_mfn
 
@@ -803,6 +805,17 @@ def download_company_reports(cid, company_name, ir_url, years=None, output_dir='
     # Find reports (may raise DownloadError)
     # Pass company_name to enable MFN fallback
     reports = find_annual_reports(ir_url, years, company_name=company_name)
+    
+    # WGET FALLBACK: If no reports found, try wget mirroring for MFN and Cision
+    if not reports:
+        print("⚠ Standard search methods failed, trying wget-based mirroring...")
+        try:
+            wget_results = find_reports_via_wget(company_name, cid, years, source='both')
+            if wget_results:
+                reports = wget_results
+                print(f"  ✓ Wget mirroring found {len(reports)} reports")
+        except Exception as e:
+            print(f"  ✗ Wget fallback failed: {e}")
     
     if not reports:
         print("⚠ No annual reports found")
