@@ -411,8 +411,8 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
             # Patterns to identify annual reports (more flexible - allow words in between)
             annual_patterns = [
                 r'annual.*report',
-                r'årsredovisning',
-                r'årsbericht',
+                r'[åa]rsredovisning',  # Swedish: årsredovisning (also match ASCII 'a' in URLs)
+                r'[åa]rsbericht',      # German variant with ASCII fallback
                 r'rapport.*annuel',
                 r'financial.*report',
                 r'integrated.*report',
@@ -503,34 +503,51 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
                     # Make absolute URL
                     abs_url = urljoin(url, href)
                     
-                    # Try to extract year from URL or text
-                    # Support formats: 2024, 24, 24-25, 2024-25, 2024/25
-                    year_match = re.search(r'(?:20)?(?:19|20|21|22|23|24)(?:[/-](?:20)?(?:20|21|22|23|24|25))?', combined)
-                    if year_match:
-                        # Extract the first year mentioned
-                        year_str = year_match.group(0)
-                        # Parse just the first year (e.g., "24-25" -> 24 -> 2024)
-                        first_year = re.search(r'(?:20)?(19|20|21|22|23|24)', year_str)
-                        if first_year:
-                            year_num = int(first_year.group(1))
-                            # Convert short year to full year (24 -> 2024)
-                            year = 2000 + year_num if year_num > 10 else 2000 + year_num
-                            
-                            if year in years:
-                                # Show what we found with URL snippet for debugging
-                                url_snippet = abs_url.split('/')[-1][:40] if '/' in abs_url else abs_url[:40]
-                                print(f"{'  ' * depth}    ✓ Found report: {year} - {text[:60]}")
-                                if depth <= 1:  # Show URL for transparency
-                                    print(f"{'  ' * depth}      URL: .../{url_snippet}")
-                                results.append({
-                                    'year': year,
-                                    'url': abs_url,
-                                    'title': link.get_text(strip=True),
-                                    'source_page': url
-                                })
-                            elif depth <= 1:
-                                # Year detected but not in our target years - show why we're skipping
-                                print(f"{'  ' * depth}    ⊘ Skipped: {year} (year {year} not in target years {years})")
+                    # PRIORITY FIX: Extract year from URL FIRST, then fall back to text
+                    # This prevents mismatches where text says "2020" but URL points to different year
+                    year = None
+                    
+                    # Try URL first - look for year in filename/path (most reliable)
+                    # Match any year 2010-2025 to properly identify and skip old reports
+                    url_year_match = re.search(r'[-_/](20(?:1[0-9]|2[0-5]))[-_.]', href.lower())
+                    if url_year_match:
+                        year = int(url_year_match.group(1))
+                    else:
+                        # Try URL with short year format (e.g., _24_ or -24- or _19_)
+                        url_short_match = re.search(r'[-_/](1[5-9]|2[0-5])[-_.]', href.lower())
+                        if url_short_match:
+                            year_num = int(url_short_match.group(1))
+                            year = 2000 + year_num
+                    
+                    # Fall back to text/title context only if URL didn't have year
+                    if year is None:
+                        # Try to find a 4-digit year first (more reliable)
+                        full_year_match = re.search(r'\b(201[0-9]|202[0-5])\b', combined)
+                        if full_year_match:
+                            year = int(full_year_match.group(1))
+                        else:
+                            # Fall back to short year format (e.g., 24, 24-25)
+                            short_year_match = re.search(r'\b(19|2[0-5])(?:[/-](19|2[0-5]))?\b', combined)
+                            if short_year_match:
+                                year_num = int(short_year_match.group(1))
+                                year = 2000 + year_num
+                    
+                    if year is not None:
+                        if year in years:
+                            # Show what we found with URL snippet for debugging
+                            url_snippet = abs_url.split('/')[-1][:40] if '/' in abs_url else abs_url[:40]
+                            print(f"{'  ' * depth}    ✓ Found report: {year} - {text[:60]}")
+                            if depth <= 1:  # Show URL for transparency
+                                print(f"{'  ' * depth}      URL: .../{url_snippet}")
+                            results.append({
+                                'year': year,
+                                'url': abs_url,
+                                'title': link.get_text(strip=True),
+                                'source_page': url
+                            })
+                        elif depth <= 1:
+                            # Year detected but not in our target years - show why we're skipping
+                            print(f"{'  ' * depth}    ⊘ Skipped: {year} (year {year} not in target years {years})")
                     elif depth <= 1 and is_pdf_link:
                         # Found a PDF link but couldn't extract year
                         print(f"{'  ' * depth}    ? No year found: {text[:50]}")
@@ -582,10 +599,18 @@ def find_annual_reports(ir_url, years=None, max_depth=2, max_failures=3, enable_
             f"{base_path}/annual-reports",
             f"{base_path}/annual-reporting-suite",
             f"{base_path}/reports-and-publications",
+            f"{base_path}/arsredovisningar",  # Swedish: annual reports
             '/annual-reports',
             '/annual-reporting-suite',
             '/reports-and-publications',
             '/financial-reports/annual-reports',
+            # Swedish language paths
+            '/investerare/finansiella-rapporter/arsredovisningar',
+            '/investors/financial-reports/annual-reports',
+            '/investerare/finansiella-rapporter',
+            # With language parameter
+            f"{base_path}/annual-reports?lang=sv",
+            f"{base_path}/arsredovisningar?lang=sv",
         ]
         
         # Reset failure counter when trying alternative patterns

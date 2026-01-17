@@ -126,22 +126,24 @@ def scan_mfn_feed_for_reports(company_page_url, years):
     
     This method directly scans the news feed on the MFN company page
     for press releases announcing annual reports, then follows the
-    detail page links to extract the embedded Cision PDF links.
+    detail page links to extract the embedded Cision or storage.mfn.se PDF links.
     
     Args:
         company_page_url: MFN company page URL (e.g., https://mfn.se/all/a/alfa-laval)
         years: List of years to search for
     
     Returns:
-        List of dicts: [{'year': 2020, 'url': 'https://mb.cision.com/...', ...}]
+        List of dicts: [{'year': 2020, 'url': 'https://storage.mfn.se/...', ...}]
     """
     results = []
     found_years = set()
     
     try:
-        print(f"  📡 Scanning MFN feed: {company_page_url}")
+        # Add limit parameter to get more results - use large limit to reach older reports (2019, 2020)
+        feed_url = f"{company_page_url}?query&limit=100000"
+        print(f"  📡 Scanning MFN feed: {feed_url}")
         headers = {"User-Agent": get_random_user_agent()}
-        resp = requests.get(company_page_url, headers=headers, timeout=20)
+        resp = requests.get(feed_url, headers=headers, timeout=20)
         
         if resp.status_code != 200:
             print(f"    ✗ HTTP {resp.status_code}")
@@ -166,13 +168,16 @@ def scan_mfn_feed_for_reports(company_page_url, years):
             'july-september', 'october-december'
         ]
         
-        # First check for direct Cision PDF links on the main page
+        # First check for direct PDF links on the main page
+        # Look for storage.mfn.se, cision.com, and globenewswire PDFs
         for link in soup.find_all('a', href=True):
             href = link.get('href', '')
             text = link.get_text(strip=True).lower()
             
-            # Check if this is a Cision PDF link
-            if 'cision.com' in href and '.pdf' in href.lower():
+            # Check if this is a PDF link from known sources
+            is_pdf = '.pdf' in href.lower()
+            is_known_source = any(s in href for s in ['cision.com', 'storage.mfn.se', 'globenewswire.com'])
+            if is_pdf and is_known_source:
                 # Get the parent element to find context
                 parent = link.find_parent()
                 context = parent.get_text(strip=True).lower() if parent else text
@@ -196,13 +201,17 @@ def scan_mfn_feed_for_reports(company_page_url, years):
                             print(f"    ✓ Found {year} report (direct): {href[:70]}...")
                             break
         
-        # Now find and follow links to report detail pages (mfn.se/cis/...)
+        # Now find and follow links to report detail pages
+        # Look for both /cis/ (older) and /a/ (newer) patterns
         detail_pages_to_check = []
         for link in soup.find_all('a', href=True):
             href = link.get('href', '')
             text = link.get_text(strip=True).lower()
             
-            if '/cis/' in href:
+            # Match both old (/cis/) and new (/a/) MFN URL patterns
+            # Also match /one/a/ pattern
+            is_detail_page = '/cis/' in href or ('/a/' in href and '/all/a/' not in href) or '/one/a/' in href
+            if is_detail_page:
                 combined = f"{href} {text}".lower()
                 
                 # Check for annual report keywords
@@ -288,12 +297,14 @@ def search_mfn_for_report(company_page_url, year):
             soup = BeautifulSoup(resp.text, 'html.parser')
             
             # Look for links to report pages
+            # Match both old (/cis/) and new (/a/, /one/a/) patterns
             for link in soup.find_all('a', href=True):
                 href = link.get('href', '')
                 text = link.get_text(strip=True).lower()
                 
-                # Check if this is a report link
-                if '/cis/' in href:
+                # Check if this is a report detail link
+                is_detail_page = '/cis/' in href or ('/a/' in href and '/all/a/' not in href) or '/one/a/' in href
+                if is_detail_page:
                     # Make absolute URL
                     abs_url = urljoin(search_url, href)
                     
@@ -338,10 +349,15 @@ def search_mfn_for_report(company_page_url, year):
 
 def extract_cision_attachments(report_page_url):
     """
-    Extract Cision PDF attachments from MFN report page.
+    Extract PDF attachments from MFN report page.
+    
+    Looks for PDFs from:
+    - storage.mfn.se (newer MFN pages)
+    - mb.cision.com (Cision-hosted PDFs)
+    - globenewswire.com (GlobeNewswire PDFs)
     
     Args:
-        report_page_url: MFN report page URL (e.g., https://mfn.se/cis/a/hexagon/...)
+        report_page_url: MFN report page URL (e.g., https://mfn.se/a/company/...)
     
     Returns:
         List of PDF URLs found
@@ -357,19 +373,30 @@ def extract_cision_attachments(report_page_url):
         
         soup = BeautifulSoup(resp.text, 'html.parser')
         
-        # Look for Cision links (mb.cision.com)
+        # Look for PDF links from known sources
         pdf_links = []
+        known_pdf_sources = ['storage.mfn.se', 'cision.com', 'globenewswire.com', 'ml-eu.globenewswire.com']
         
         for link in soup.find_all('a', href=True):
             href = link.get('href', '')
             text = link.get_text(strip=True).lower()
             
-            # Check for Cision PDF links
-            if 'cision.com' in href and '.pdf' in href.lower():
+            # Check for PDF links from known sources
+            is_pdf = '.pdf' in href.lower()
+            is_known_source = any(s in href for s in known_pdf_sources)
+            
+            if is_pdf and is_known_source:
                 # Make absolute URL
-                abs_url = urljoin(report_page_url, href)
-                pdf_links.append(abs_url)
-                print(f"    ✓ Found Cision PDF: {abs_url}")
+                if href.startswith('//'):
+                    abs_url = 'https:' + href
+                elif href.startswith('http'):
+                    abs_url = href
+                else:
+                    abs_url = urljoin(report_page_url, href)
+                
+                if abs_url not in pdf_links:
+                    pdf_links.append(abs_url)
+                    print(f"    ✓ Found PDF: {abs_url[:70]}...")
         
         # Also look for direct PDF links
         for link in soup.find_all('a', href=True):
