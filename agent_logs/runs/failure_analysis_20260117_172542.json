@@ -1,0 +1,1325 @@
+{
+  "timestamp": "20260117_172542",
+  "summary": {
+    "total_incomplete": 61,
+    "by_category": {
+      "no_ir_url": 0,
+      "ir_unreachable": 0,
+      "no_candidates": 18,
+      "download_failed": 43,
+      "validation_failed": 0
+    }
+  },
+  "categories": {
+    "no_ir_url": [],
+    "ir_unreachable": [],
+    "no_candidates": [
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2019,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2020,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2021,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2022,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2023,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S5",
+        "company": "AstraZeneca",
+        "year": 2024,
+        "ir_url": "https://www.astrazeneca.com/investor-relations/contacts-information.html",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2019,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2020,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2021,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2022,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2023,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S15",
+        "company": "Industriv\u00e4rden C",
+        "year": 2024,
+        "ir_url": "https://www.industrivarden.se/en-gb/investors/",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S18",
+        "company": "NIBE Industrier B",
+        "year": 2019,
+        "ir_url": "https://www.nibe.com/investors",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S18",
+        "company": "NIBE Industrier B",
+        "year": 2020,
+        "ir_url": "https://www.nibe.com/investors",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S18",
+        "company": "NIBE Industrier B",
+        "year": 2021,
+        "ir_url": "https://www.nibe.com/investors",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S18",
+        "company": "NIBE Industrier B",
+        "year": 2022,
+        "ir_url": "https://www.nibe.com/investors",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S18",
+        "company": "NIBE Industrier B",
+        "year": 2023,
+        "ir_url": "https://www.nibe.com/investors",
+        "reason": "No PDF candidates found for this year"
+      },
+      {
+        "cid": "S24",
+        "company": "Skanska B",
+        "year": 2019,
+        "ir_url": "https://group.skanska.com/investors/",
+        "reason": "No PDF candidates found for this year"
+      }
+    ],
+    "download_failed": [
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2019,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2020,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2021,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2022,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2023,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S1",
+        "company": "ABB Ltd",
+        "year": 2024,
+        "ir_url": "https://global.abb/group/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S7",
+        "company": "Boliden",
+        "year": 2019,
+        "ir_url": "https://investors.boliden.com/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S9",
+        "company": "EQT",
+        "year": 2020,
+        "ir_url": "https://eqtgroup.com/shareholders/reports-and-presentations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S11",
+        "company": "Essity B",
+        "year": 2019,
+        "ir_url": "https://www.essity.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S11",
+        "company": "Essity B",
+        "year": 2020,
+        "ir_url": "https://www.essity.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S13",
+        "company": "Hennes & Mauritz B",
+        "year": 2020,
+        "ir_url": "https://hmgroup.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S13",
+        "company": "Hennes & Mauritz B",
+        "year": 2022,
+        "ir_url": "https://hmgroup.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S13",
+        "company": "Hennes & Mauritz B",
+        "year": 2023,
+        "ir_url": "https://hmgroup.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S13",
+        "company": "Hennes & Mauritz B",
+        "year": 2024,
+        "ir_url": "https://hmgroup.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S16",
+        "company": "Investor B",
+        "year": 2019,
+        "ir_url": "https://www.investorab.com/investors-media/reports-presentations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S17",
+        "company": "Lifco B",
+        "year": 2020,
+        "ir_url": "https://www.lifco.se/investors/financial-reports",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2019,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2020,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2021,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2022,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2023,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S19",
+        "company": "Nordea Bank Abp",
+        "year": 2024,
+        "ir_url": "https://www.nordea.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S21",
+        "company": "Sandvik",
+        "year": 2019,
+        "ir_url": "https://www.home.sandvik/en/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S22",
+        "company": "SCA B",
+        "year": 2021,
+        "ir_url": "https://www.sca.com/en/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S23",
+        "company": "SEB A",
+        "year": 2019,
+        "ir_url": "https://sebgroup.com/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S23",
+        "company": "SEB A",
+        "year": 2020,
+        "ir_url": "https://sebgroup.com/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S23",
+        "company": "SEB A",
+        "year": 2021,
+        "ir_url": "https://sebgroup.com/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S23",
+        "company": "SEB A",
+        "year": 2022,
+        "ir_url": "https://sebgroup.com/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S23",
+        "company": "SEB A",
+        "year": 2023,
+        "ir_url": "https://sebgroup.com/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S24",
+        "company": "Skanska B",
+        "year": 2020,
+        "ir_url": "https://group.skanska.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S24",
+        "company": "Skanska B",
+        "year": 2021,
+        "ir_url": "https://group.skanska.com/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S25",
+        "company": "SKF B",
+        "year": 2019,
+        "ir_url": "https://www.skf.com/group/investors/",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2019,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2020,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2021,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2022,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2023,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S26",
+        "company": "Sv. Handelsbanken A",
+        "year": 2024,
+        "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S27",
+        "company": "Swedbank A",
+        "year": 2019,
+        "ir_url": "https://www.swedbank.com/investor-relations/the-share/shareholders.html",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S27",
+        "company": "Swedbank A",
+        "year": 2020,
+        "ir_url": "https://www.swedbank.com/investor-relations/the-share/shareholders.html",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S27",
+        "company": "Swedbank A",
+        "year": 2023,
+        "ir_url": "https://www.swedbank.com/investor-relations/the-share/shareholders.html",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S29",
+        "company": "Telia Company",
+        "year": 2020,
+        "ir_url": "https://www.teliacompany.com/en/investors",
+        "reason": "Candidates found but not validated"
+      },
+      {
+        "cid": "S29",
+        "company": "Telia Company",
+        "year": 2024,
+        "ir_url": "https://www.teliacompany.com/en/investors",
+        "reason": "Candidates found but not validated"
+      }
+    ],
+    "validation_failed": []
+  },
+  "company_diagnoses": {
+    "S23": {
+      "cid": "S23",
+      "company": "SEB A",
+      "ir_url": "https://sebgroup.com/investor-relations",
+      "ir_diagnosis": {
+        "url": "https://sebgroup.com/investor-relations",
+        "company": "SEB A",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [
+          2024
+        ],
+        "issues": [
+          "No PDF links found on page",
+          "Page appears to use heavy JavaScript (may need Playwright)",
+          "Page contains 1 iframe(s)"
+        ],
+        "suggestions": [
+          "Use Playwright tier for JavaScript-rendered content",
+          "Check iframe sources for PDF links"
+        ],
+        "final_url": "https://sebgroup.com/investor-relations"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "JavaScript-rendered page",
+      "recommendations": [
+        "Use Playwright-based scraping"
+      ]
+    },
+    "S25": {
+      "cid": "S25",
+      "company": "SKF B",
+      "ir_url": "https://www.skf.com/group/investors/",
+      "ir_diagnosis": {
+        "url": "https://www.skf.com/group/investors/",
+        "company": "SKF B",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [],
+        "issues": [
+          "No PDF links found on page",
+          "Page appears to use heavy JavaScript (may need Playwright)"
+        ],
+        "suggestions": [
+          "Use Playwright tier for JavaScript-rendered content"
+        ],
+        "final_url": "https://www.skf.com/group/investors/"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "JavaScript-rendered page",
+      "recommendations": [
+        "Use Playwright-based scraping"
+      ]
+    },
+    "S21": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "ir_url": "https://www.home.sandvik/en/investors/",
+      "ir_diagnosis": {
+        "url": "https://www.home.sandvik/en/investors/",
+        "company": "Sandvik",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [],
+        "issues": [
+          "No PDF links found on page",
+          "Page appears to use heavy JavaScript (may need Playwright)",
+          "Page contains 1 iframe(s)"
+        ],
+        "suggestions": [
+          "Use Playwright tier for JavaScript-rendered content",
+          "Check iframe sources for PDF links"
+        ],
+        "final_url": "https://www.home.sandvik/en/investors/"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "JavaScript-rendered page",
+      "recommendations": [
+        "Use Playwright-based scraping"
+      ]
+    },
+    "S22": {
+      "cid": "S22",
+      "company": "SCA B",
+      "ir_url": "https://www.sca.com/en/investors/",
+      "ir_diagnosis": {
+        "url": "https://www.sca.com/en/investors/",
+        "company": "SCA B",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "has_pdf_links": true,
+        "pdf_count": 4,
+        "years_found": [
+          2023,
+          2024
+        ],
+        "issues": [],
+        "suggestions": [],
+        "final_url": "https://www.sca.com/en/investors/"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "Partial coverage (0/6 years)",
+      "recommendations": [
+        "Some years may be archived or on different pages",
+        "Check for pattern in found years vs missing years"
+      ]
+    },
+    "S29": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "ir_url": "https://www.teliacompany.com/en/investors",
+      "ir_diagnosis": {
+        "url": "https://www.teliacompany.com/en/investors",
+        "company": "Telia Company",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [],
+        "issues": [
+          "No PDF links found on page"
+        ],
+        "suggestions": [],
+        "final_url": "https://www.teliacompany.com/en/investors"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "No PDF links on page",
+      "recommendations": [
+        "Check if reports are behind navigation/subpages",
+        "Look for alternative IR page URL"
+      ]
+    },
+    "S17": {
+      "cid": "S17",
+      "company": "Lifco B",
+      "ir_url": "https://www.lifco.se/investors/financial-reports",
+      "ir_diagnosis": {
+        "url": "https://www.lifco.se/investors/financial-reports",
+        "company": "Lifco B",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "has_pdf_links": true,
+        "pdf_count": 2,
+        "years_found": [
+          2024
+        ],
+        "issues": [],
+        "suggestions": [],
+        "final_url": "https://www.lifco.se/investors/financial-reports"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "Partial coverage (0/6 years)",
+      "recommendations": [
+        "Some years may be archived or on different pages",
+        "Check for pattern in found years vs missing years"
+      ]
+    },
+    "S7": {
+      "cid": "S7",
+      "company": "Boliden",
+      "ir_url": "https://investors.boliden.com/",
+      "ir_diagnosis": {
+        "url": "https://investors.boliden.com/",
+        "company": "Boliden",
+        "accessible": false,
+        "status_code": 403,
+        "content_type": "text/html; charset=UTF-8",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [],
+        "issues": [
+          "HTTP 403 error"
+        ],
+        "suggestions": [],
+        "final_url": "https://investors.boliden.com/"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "IR page not accessible",
+      "recommendations": [
+        "Check if URL is correct or if site is down"
+      ]
+    },
+    "S18": {
+      "cid": "S18",
+      "company": "NIBE Industrier B",
+      "ir_url": "https://www.nibe.com/investors",
+      "ir_diagnosis": {
+        "url": "https://www.nibe.com/investors",
+        "company": "NIBE Industrier B",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html;charset=UTF-8",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [
+          2024
+        ],
+        "issues": [
+          "No PDF links found on page",
+          "Page appears to use heavy JavaScript (may need Playwright)",
+          "Page contains 1 iframe(s)"
+        ],
+        "suggestions": [
+          "Use Playwright tier for JavaScript-rendered content",
+          "Check iframe sources for PDF links"
+        ],
+        "final_url": "https://www.nibe.com/investors"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "JavaScript-rendered page",
+      "recommendations": [
+        "Use Playwright-based scraping"
+      ]
+    },
+    "S26": {
+      "cid": "S26",
+      "company": "Sv. Handelsbanken A",
+      "ir_url": "https://www.handelsbanken.com/sv/investor-relations",
+      "ir_diagnosis": {
+        "url": "https://www.handelsbanken.com/sv/investor-relations",
+        "company": "Sv. Handelsbanken A",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "has_pdf_links": false,
+        "pdf_count": 0,
+        "years_found": [],
+        "issues": [
+          "No PDF links found on page",
+          "Page contains 1 iframe(s)"
+        ],
+        "suggestions": [
+          "Check iframe sources for PDF links"
+        ],
+        "final_url": "https://www.handelsbanken.com/sv/investor-relations"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "No PDF links on page",
+      "recommendations": [
+        "Check if reports are behind navigation/subpages",
+        "Look for alternative IR page URL"
+      ]
+    },
+    "S24": {
+      "cid": "S24",
+      "company": "Skanska B",
+      "ir_url": "https://group.skanska.com/investors/",
+      "ir_diagnosis": {
+        "url": "https://group.skanska.com/investors/",
+        "company": "Skanska B",
+        "accessible": true,
+        "status_code": 200,
+        "content_type": "text/html; charset=utf-8",
+        "has_pdf_links": true,
+        "pdf_count": 2,
+        "years_found": [
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "issues": [],
+        "suggestions": [],
+        "final_url": "https://group.skanska.com/investors/"
+      },
+      "search_results": {
+        "error": "find_annual_reports() got an unexpected keyword argument 'verbose'"
+      },
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "found_years": [],
+      "root_cause": "Partial coverage (0/6 years)",
+      "recommendations": [
+        "Some years may be archived or on different pages",
+        "Check for pattern in found years vs missing years"
+      ]
+    }
+  },
+  "patterns": {
+    "domains": {
+      "global.abb": {
+        "companies": [
+          "ABB Ltd",
+          "ABB Ltd",
+          "ABB Ltd",
+          "ABB Ltd",
+          "ABB Ltd",
+          "ABB Ltd"
+        ],
+        "complete": 0,
+        "incomplete": 6
+      },
+      "www.addtech.com": {
+        "companies": [
+          "Addtech B",
+          "Addtech B",
+          "Addtech B",
+          "Addtech B",
+          "Addtech B",
+          "Addtech B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.alfalaval.com": {
+        "companies": [
+          "Alfa Laval",
+          "Alfa Laval",
+          "Alfa Laval",
+          "Alfa Laval",
+          "Alfa Laval",
+          "Alfa Laval"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.assaabloy.com": {
+        "companies": [
+          "ASSA ABLOY B",
+          "ASSA ABLOY B",
+          "ASSA ABLOY B",
+          "ASSA ABLOY B",
+          "ASSA ABLOY B",
+          "ASSA ABLOY B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.astrazeneca.com": {
+        "companies": [
+          "AstraZeneca",
+          "AstraZeneca",
+          "AstraZeneca",
+          "AstraZeneca",
+          "AstraZeneca",
+          "AstraZeneca"
+        ],
+        "complete": 0,
+        "incomplete": 6
+      },
+      "www.atlascopcogroup.com": {
+        "companies": [
+          "Atlas Copco A",
+          "Atlas Copco A",
+          "Atlas Copco A",
+          "Atlas Copco A",
+          "Atlas Copco A",
+          "Atlas Copco A"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "investors.boliden.com": {
+        "companies": [
+          "Boliden",
+          "Boliden",
+          "Boliden",
+          "Boliden",
+          "Boliden",
+          "Boliden"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.epirocgroup.com": {
+        "companies": [
+          "Epiroc A",
+          "Epiroc A",
+          "Epiroc A",
+          "Epiroc A",
+          "Epiroc A",
+          "Epiroc A"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "eqtgroup.com": {
+        "companies": [
+          "EQT",
+          "EQT",
+          "EQT",
+          "EQT",
+          "EQT",
+          "EQT"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.ericsson.com": {
+        "companies": [
+          "Ericsson B",
+          "Ericsson B",
+          "Ericsson B",
+          "Ericsson B",
+          "Ericsson B",
+          "Ericsson B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.essity.com": {
+        "companies": [
+          "Essity B",
+          "Essity B",
+          "Essity B",
+          "Essity B",
+          "Essity B",
+          "Essity B"
+        ],
+        "complete": 4,
+        "incomplete": 2
+      },
+      "www.evolution.com": {
+        "companies": [
+          "Evolution",
+          "Evolution",
+          "Evolution",
+          "Evolution",
+          "Evolution",
+          "Evolution"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "hmgroup.com": {
+        "companies": [
+          "Hennes & Mauritz B",
+          "Hennes & Mauritz B",
+          "Hennes & Mauritz B",
+          "Hennes & Mauritz B",
+          "Hennes & Mauritz B",
+          "Hennes & Mauritz B"
+        ],
+        "complete": 2,
+        "incomplete": 4
+      },
+      "hexagongroup.com": {
+        "companies": [
+          "Hexagon B",
+          "Hexagon B",
+          "Hexagon B",
+          "Hexagon B",
+          "Hexagon B",
+          "Hexagon B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.industrivarden.se": {
+        "companies": [
+          "Industriv\u00e4rden C",
+          "Industriv\u00e4rden C",
+          "Industriv\u00e4rden C",
+          "Industriv\u00e4rden C",
+          "Industriv\u00e4rden C",
+          "Industriv\u00e4rden C"
+        ],
+        "complete": 0,
+        "incomplete": 6
+      },
+      "www.investorab.com": {
+        "companies": [
+          "Investor B",
+          "Investor B",
+          "Investor B",
+          "Investor B",
+          "Investor B",
+          "Investor B"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.lifco.se": {
+        "companies": [
+          "Lifco B",
+          "Lifco B",
+          "Lifco B",
+          "Lifco B",
+          "Lifco B",
+          "Lifco B"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.nibe.com": {
+        "companies": [
+          "NIBE Industrier B",
+          "NIBE Industrier B",
+          "NIBE Industrier B",
+          "NIBE Industrier B",
+          "NIBE Industrier B",
+          "NIBE Industrier B"
+        ],
+        "complete": 1,
+        "incomplete": 5
+      },
+      "www.nordea.com": {
+        "companies": [
+          "Nordea Bank Abp",
+          "Nordea Bank Abp",
+          "Nordea Bank Abp",
+          "Nordea Bank Abp",
+          "Nordea Bank Abp",
+          "Nordea Bank Abp"
+        ],
+        "complete": 0,
+        "incomplete": 6
+      },
+      "www.saab.com": {
+        "companies": [
+          "SAAB B",
+          "SAAB B",
+          "SAAB B",
+          "SAAB B",
+          "SAAB B",
+          "SAAB B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.home.sandvik": {
+        "companies": [
+          "Sandvik",
+          "Sandvik",
+          "Sandvik",
+          "Sandvik",
+          "Sandvik",
+          "Sandvik"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.sca.com": {
+        "companies": [
+          "SCA B",
+          "SCA B",
+          "SCA B",
+          "SCA B",
+          "SCA B",
+          "SCA B"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "sebgroup.com": {
+        "companies": [
+          "SEB A",
+          "SEB A",
+          "SEB A",
+          "SEB A",
+          "SEB A",
+          "SEB A"
+        ],
+        "complete": 1,
+        "incomplete": 5
+      },
+      "group.skanska.com": {
+        "companies": [
+          "Skanska B",
+          "Skanska B",
+          "Skanska B",
+          "Skanska B",
+          "Skanska B",
+          "Skanska B"
+        ],
+        "complete": 3,
+        "incomplete": 3
+      },
+      "www.skf.com": {
+        "companies": [
+          "SKF B",
+          "SKF B",
+          "SKF B",
+          "SKF B",
+          "SKF B",
+          "SKF B"
+        ],
+        "complete": 5,
+        "incomplete": 1
+      },
+      "www.handelsbanken.com": {
+        "companies": [
+          "Sv. Handelsbanken A",
+          "Sv. Handelsbanken A",
+          "Sv. Handelsbanken A",
+          "Sv. Handelsbanken A",
+          "Sv. Handelsbanken A",
+          "Sv. Handelsbanken A"
+        ],
+        "complete": 0,
+        "incomplete": 6
+      },
+      "www.swedbank.com": {
+        "companies": [
+          "Swedbank A",
+          "Swedbank A",
+          "Swedbank A",
+          "Swedbank A",
+          "Swedbank A",
+          "Swedbank A"
+        ],
+        "complete": 3,
+        "incomplete": 3
+      },
+      "www.tele2.com": {
+        "companies": [
+          "Tele2 B",
+          "Tele2 B",
+          "Tele2 B",
+          "Tele2 B",
+          "Tele2 B",
+          "Tele2 B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      },
+      "www.teliacompany.com": {
+        "companies": [
+          "Telia Company",
+          "Telia Company",
+          "Telia Company",
+          "Telia Company",
+          "Telia Company",
+          "Telia Company"
+        ],
+        "complete": 4,
+        "incomplete": 2
+      },
+      "www.volvogroup.com": {
+        "companies": [
+          "Volvo B",
+          "Volvo B",
+          "Volvo B",
+          "Volvo B",
+          "Volvo B",
+          "Volvo B"
+        ],
+        "complete": 6,
+        "incomplete": 0
+      }
+    },
+    "url_patterns": {},
+    "success_by_domain": {}
+  },
+  "priority_fixes": [
+    {
+      "company": "AstraZeneca",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "no_candidates"
+    },
+    {
+      "company": "Industriv\u00e4rden C",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "no_candidates"
+    },
+    {
+      "company": "ABB Ltd",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "download_failed"
+    },
+    {
+      "company": "Nordea Bank Abp",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "download_failed"
+    },
+    {
+      "company": "Sv. Handelsbanken A",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "download_failed"
+    },
+    {
+      "company": "NIBE Industrier B",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "primary_category": "no_candidates"
+    },
+    {
+      "company": "SEB A",
+      "missing_years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "primary_category": "download_failed"
+    },
+    {
+      "company": "Hennes & Mauritz B",
+      "missing_years": [
+        2020,
+        2022,
+        2023,
+        2024
+      ],
+      "primary_category": "download_failed"
+    },
+    {
+      "company": "Skanska B",
+      "missing_years": [
+        2019,
+        2020,
+        2021
+      ],
+      "primary_category": "no_candidates"
+    },
+    {
+      "company": "Swedbank A",
+      "missing_years": [
+        2019,
+        2020,
+        2023
+      ],
+      "primary_category": "download_failed"
+    }
+  ]
+}

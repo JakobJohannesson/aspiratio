@@ -4,7 +4,7 @@
 
 An automated system to download and validate annual reports for Swedish OMXS30 companies (2019-2024). The pipeline discovers investor relations URLs, downloads reports, and validates them for completeness.
 
-**Status**: ✅ Core pipeline complete with validation feedback loop
+**Status**: ✅ **119/180 reports validated (66%)** - Core pipeline complete with validation feedback loop
 
 ### Workflow
 
