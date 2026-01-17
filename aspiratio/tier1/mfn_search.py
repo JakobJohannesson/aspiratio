@@ -27,23 +27,56 @@ def normalize_company_name(company_name):
     Normalize company name for MFN search.
     
     Args:
-        company_name: Company name (e.g., "Hexagon AB")
+        company_name: Company name (e.g., "Hexagon AB", "Alfa Laval")
     
     Returns:
-        Normalized name for URL (e.g., "hexagon")
+        Normalized name for URL (e.g., "hexagon", "alfa-laval")
     """
+    # Known company mappings for MFN URLs
+    known_mappings = {
+        'alfa laval': 'alfa-laval',
+        'atlas copco': 'atlas-copco',
+        'assa abloy': 'assa-abloy',
+        'sv. handelsbanken': 'handelsbanken',
+        'svenska handelsbanken': 'handelsbanken',
+        'handelsbanken': 'handelsbanken',
+        'nibe industrier': 'nibe-industrier',
+        'telia company': 'telia-company',
+        'swedish match': 'swedish-match',
+        # Banks - need special handling
+        'nordea bank abp': 'nordea-bank',
+        'nordea bank': 'nordea-bank',
+        'nordea': 'nordea-bank',
+        'seb': 'seb',
+        'seb a': 'seb',
+        'skandinaviska enskilda banken': 'seb',
+    }
+    
     # Remove common suffixes
-    name = re.sub(r'\s+(ab|ltd|corp|inc|group|abp|as|asa|sa|nv|plc)$', '', company_name, flags=re.IGNORECASE)
-    # Remove special characters and convert to lowercase
-    name = re.sub(r'[^a-z0-9\s]', '', name.lower())
-    # Take first word (usually the main company name)
-    name = name.strip().split()[0] if name.strip() else company_name.lower()
-    return name
+    name = re.sub(r'\s+(ab|ltd|corp|inc|group|abp|as|asa|sa|nv|plc|b|a)$', '', company_name, flags=re.IGNORECASE)
+    name = name.strip().lower()
+    
+    # Check known mappings
+    if name in known_mappings:
+        return known_mappings[name]
+    
+    # Remove special characters except spaces
+    name = re.sub(r'[^a-z0-9\s-]', '', name)
+    
+    # Replace spaces with hyphens (common MFN pattern)
+    name_hyphen = name.replace(' ', '-')
+    
+    # Also try first word only
+    name_first = name.split()[0] if name.split() else name
+    
+    return name_hyphen  # Return hyphenated version as default
 
 
 def find_mfn_company_page(company_name):
     """
     Find the MFN page for a company.
+    
+    Tries multiple URL patterns to find the company's MFN page.
     
     Args:
         company_name: Company name to search for
@@ -53,48 +86,175 @@ def find_mfn_company_page(company_name):
     """
     normalized_name = normalize_company_name(company_name)
     
-    # Try direct URL pattern first (most common)
-    # Pattern: https://mfn.se/all/a/{company_name}
-    test_url = f"https://mfn.se/all/a/{normalized_name}"
+    # Also try first word only as alternative
+    name_parts = re.sub(r'[^a-z0-9\s]', '', company_name.lower()).split()
+    first_word = name_parts[0] if name_parts else normalized_name
     
-    try:
-        print(f"  🔍 Trying MFN direct URL: {test_url}")
-        headers = {"User-Agent": get_random_user_agent()}
-        resp = requests.get(test_url, headers=headers, timeout=15, allow_redirects=True)
-        
-        if resp.status_code == 200:
-            # Verify this is a company page (not a 404 soft page)
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            # Check for company indicators
-            if soup.find('h1') or soup.find(class_=re.compile(r'company|ticker', re.I)):
-                print(f"    ✓ Found MFN company page")
-                return test_url
-    except Exception as e:
-        print(f"    ✗ Error checking direct URL: {e}")
+    # URLs to try
+    url_variants = [
+        f"https://mfn.se/all/a/{normalized_name}",  # Full hyphenated name
+        f"https://mfn.se/all/a/{first_word}",        # First word only
+    ]
     
-    # Try alternative patterns (some companies use different naming)
-    # Pattern: https://mfn.se/all/{company_name}
-    alternative_url = f"https://mfn.se/all/{normalized_name}"
-    try:
-        print(f"  🔍 Trying MFN alternative URL: {alternative_url}")
-        headers = {"User-Agent": get_random_user_agent()}
-        resp = requests.get(alternative_url, headers=headers, timeout=15, allow_redirects=True)
-        
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            if soup.find('h1') or soup.find(class_=re.compile(r'company|ticker', re.I)):
-                print(f"    ✓ Found MFN company page (alternative)")
-                return alternative_url
-    except Exception as e:
-        print(f"    ✗ Error checking alternative URL: {e}")
+    # Remove duplicates while preserving order
+    url_variants = list(dict.fromkeys(url_variants))
+    
+    headers = {"User-Agent": get_random_user_agent()}
+    
+    for test_url in url_variants:
+        try:
+            print(f"  🔍 Trying MFN URL: {test_url}")
+            resp = requests.get(test_url, headers=headers, timeout=15, allow_redirects=True)
+            
+            if resp.status_code == 200:
+                # Verify this is a company page (not a 404 soft page)
+                soup = BeautifulSoup(resp.text, 'html.parser')
+                # Check for company indicators or news feed items
+                if soup.find('h1') or soup.find(class_=re.compile(r'company|ticker', re.I)) or soup.find_all(href=re.compile(r'/cis/')):
+                    print(f"    ✓ Found MFN company page")
+                    return test_url
+        except Exception as e:
+            print(f"    ✗ Error checking URL: {e}")
     
     print(f"    ✗ Could not find MFN page for {company_name}")
     return None
 
 
+def scan_mfn_feed_for_reports(company_page_url, years):
+    """
+    Scan the MFN news feed for annual report PDFs.
+    
+    This method directly scans the news feed on the MFN company page
+    for press releases announcing annual reports, then follows the
+    detail page links to extract the embedded Cision PDF links.
+    
+    Args:
+        company_page_url: MFN company page URL (e.g., https://mfn.se/all/a/alfa-laval)
+        years: List of years to search for
+    
+    Returns:
+        List of dicts: [{'year': 2020, 'url': 'https://mb.cision.com/...', ...}]
+    """
+    results = []
+    found_years = set()
+    
+    try:
+        print(f"  📡 Scanning MFN feed: {company_page_url}")
+        headers = {"User-Agent": get_random_user_agent()}
+        resp = requests.get(company_page_url, headers=headers, timeout=20)
+        
+        if resp.status_code != 200:
+            print(f"    ✗ HTTP {resp.status_code}")
+            return []
+        
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        
+        # Keywords for annual reports in Swedish and English
+        annual_keywords = [
+            'annual report', 'årsredovisning', 'year-end report',
+            'bokslutskommuniké', 'annual and sustainability report',
+            'års- och hållbarhetsredovisning', 'annual reporting',
+            'publishes the annual', 'published its annual',
+            'publicerar årsredovisning', 'års- och koncernredovisning'
+        ]
+        
+        # Keywords to exclude (quarterly reports)
+        exclude_keywords = [
+            'q1', 'q2', 'q3', 'q4', 'quarter', 'interim', 
+            'delårs', 'kvartals', 'halvårs', 'january-march',
+            'january-june', 'january-september', 'april-june',
+            'july-september', 'october-december'
+        ]
+        
+        # First check for direct Cision PDF links on the main page
+        for link in soup.find_all('a', href=True):
+            href = link.get('href', '')
+            text = link.get_text(strip=True).lower()
+            
+            # Check if this is a Cision PDF link
+            if 'cision.com' in href and '.pdf' in href.lower():
+                # Get the parent element to find context
+                parent = link.find_parent()
+                context = parent.get_text(strip=True).lower() if parent else text
+                
+                # Check if it's an annual report (not quarterly)
+                is_annual = any(kw in context for kw in annual_keywords)
+                is_quarterly = any(kw in context for kw in exclude_keywords)
+                
+                if is_annual and not is_quarterly:
+                    # Try to extract year from context
+                    for year in years:
+                        if year not in found_years and (str(year) in context or str(year) in href):
+                            results.append({
+                                'year': year,
+                                'url': href,
+                                'title': f'Annual Report {year} (via MFN)',
+                                'source_page': company_page_url,
+                                'source': 'mfn_feed'
+                            })
+                            found_years.add(year)
+                            print(f"    ✓ Found {year} report (direct): {href[:70]}...")
+                            break
+        
+        # Now find and follow links to report detail pages (mfn.se/cis/...)
+        detail_pages_to_check = []
+        for link in soup.find_all('a', href=True):
+            href = link.get('href', '')
+            text = link.get_text(strip=True).lower()
+            
+            if '/cis/' in href:
+                combined = f"{href} {text}".lower()
+                
+                # Check for annual report keywords
+                is_annual = any(kw in combined for kw in annual_keywords)
+                is_quarterly = any(kw in combined for kw in exclude_keywords)
+                
+                if is_annual and not is_quarterly:
+                    for year in years:
+                        if year not in found_years and str(year) in combined:
+                            abs_url = href if href.startswith('http') else f"https://mfn.se{href}"
+                            detail_pages_to_check.append((year, abs_url, text[:80]))
+                            break
+        
+        # Follow detail pages to extract PDFs
+        for year, detail_url, title in detail_pages_to_check[:10]:  # Limit to 10 pages
+            if year in found_years:
+                continue
+            
+            print(f"    📄 Checking detail page for {year}: {title}...")
+            pdf_urls = extract_cision_attachments(detail_url)
+            
+            if pdf_urls:
+                # Take the first PDF (usually the main annual report)
+                for pdf_url in pdf_urls[:2]:  # Take up to 2 PDFs per page
+                    results.append({
+                        'year': year,
+                        'url': pdf_url,
+                        'title': f'Annual Report {year} (via MFN)',
+                        'source_page': detail_url,
+                        'source': 'mfn_detail'
+                    })
+                found_years.add(year)
+                print(f"      ✓ Found {year} report PDF")
+            
+            time.sleep(0.3)  # Small delay between requests
+        
+        if results:
+            print(f"    ✓ Found {len(results)} annual reports from feed scan")
+        else:
+            print(f"    ⚠ No annual reports found in feed")
+            
+    except Exception as e:
+        print(f"    ✗ Error scanning feed: {e}")
+    
+    return results
+
+
 def search_mfn_for_report(company_page_url, year):
     """
     Search MFN company page for annual report for a specific year.
+    
+    Tries multiple search queries to find the annual report announcement.
     
     Args:
         company_page_url: MFN company page URL
@@ -104,52 +264,70 @@ def search_mfn_for_report(company_page_url, year):
         List of report page URLs found
     """
     try:
-        # Build search query
-        search_query = f"{year} annual report"
-        search_url = f"{company_page_url}?query={quote(search_query)}"
-        
-        print(f"  🔍 Searching MFN for {year} report: {search_url}")
         headers = {"User-Agent": get_random_user_agent()}
-        resp = requests.get(search_url, headers=headers, timeout=15)
         
-        if resp.status_code != 200:
-            print(f"    ✗ HTTP {resp.status_code}")
-            return []
+        # Try multiple search queries
+        search_queries = [
+            f"{year} annual report",
+            f"årsredovisning {year}",
+            f"annual reporting {year}",
+            f"publishes annual {year}",
+        ]
         
-        soup = BeautifulSoup(resp.text, 'html.parser')
-        
-        # Look for links to report pages
-        # Pattern: https://mfn.se/cis/a/{company}/...
         report_links = []
         
-        for link in soup.find_all('a', href=True):
-            href = link.get('href', '')
-            text = link.get_text(strip=True).lower()
+        for search_query in search_queries:
+            search_url = f"{company_page_url}?query={quote(search_query)}"
             
-            # Check if this is a report link
-            if '/cis/' in href:
-                # Make absolute URL
-                abs_url = urljoin(search_url, href)
+            print(f"  🔍 Searching MFN: {search_query}")
+            resp = requests.get(search_url, headers=headers, timeout=15)
+            
+            if resp.status_code != 200:
+                continue
+            
+            soup = BeautifulSoup(resp.text, 'html.parser')
+            
+            # Look for links to report pages
+            for link in soup.find_all('a', href=True):
+                href = link.get('href', '')
+                text = link.get_text(strip=True).lower()
                 
-                # Filter for annual reports
-                combined = f"{href} {text}".lower()
-                
-                # Check for annual report keywords
-                is_annual_report = any(kw in combined for kw in [
-                    'annual report', 'årsredovisning', 'annual', 'year-end', 
-                    'publishes', 'report', str(year)
-                ])
-                
-                # Exclude quarterly reports
-                is_quarterly = any(kw in combined for kw in [
-                    'q1', 'q2', 'q3', 'q4', 'quarter', 'interim', 'delårs', 'kvartals'
-                ])
-                
-                if is_annual_report and not is_quarterly:
-                    # Extra check: year should be in the link or text
-                    if str(year) in combined:
+                # Check if this is a report link
+                if '/cis/' in href:
+                    # Make absolute URL
+                    abs_url = urljoin(search_url, href)
+                    
+                    # Already found this link?
+                    if abs_url in report_links:
+                        continue
+                    
+                    combined = f"{href} {text}".lower()
+                    
+                    # Check for annual report keywords
+                    is_annual_report = any(kw in combined for kw in [
+                        'annual report', 'årsredovisning', 'annual', 'year-end', 
+                        'publishes', 'published', 'annual reporting'
+                    ])
+                    
+                    # Exclude quarterly reports
+                    is_quarterly = any(kw in combined for kw in [
+                        'q1', 'q2', 'q3', 'q4', 'quarter', 'interim', 
+                        'delårs', 'kvartals', 'january-march', 'january-june',
+                        'january-september', 'april-june', 'july-september'
+                    ])
+                    
+                    # Year should be in the link or text
+                    has_year = str(year) in combined
+                    
+                    if is_annual_report and not is_quarterly and has_year:
                         report_links.append(abs_url)
-                        print(f"    ✓ Found potential report link: {text[:60]}")
+                        print(f"    ✓ Found potential report: {text[:60]}")
+            
+            # If we found something, don't try other queries
+            if report_links:
+                break
+            
+            time.sleep(0.3)
         
         return report_links
     
@@ -218,6 +396,9 @@ def find_reports_via_mfn(company_name, years):
     Search MFN.se for annual reports for a company.
     
     This is a fallback method when standard IR page search fails.
+    Uses two strategies:
+    1. Scan the news feed for annual report announcements with embedded PDFs
+    2. Search for each year individually (slower, more thorough)
     
     Args:
         company_name: Company name (e.g., "Hexagon AB")
@@ -234,34 +415,46 @@ def find_reports_via_mfn(company_name, years):
         return []
     
     results = []
+    found_years = set()
     
-    # Search for each year
-    for year in years:
-        print(f"\n  📅 Searching for {year} report...")
-        
-        # Search for report links
-        report_links = search_mfn_for_report(company_page, year)
-        
-        if not report_links:
-            print(f"    ✗ No report links found for {year}")
-            continue
-        
-        # Extract PDFs from each report page
-        for report_link in report_links[:3]:  # Limit to first 3 results
-            pdf_urls = extract_cision_attachments(report_link)
+    # Strategy 1: Scan feed for all years at once (faster)
+    print(f"\n  📡 Strategy 1: Scanning news feed...")
+    feed_results = scan_mfn_feed_for_reports(company_page, years)
+    if feed_results:
+        results.extend(feed_results)
+        found_years = {r['year'] for r in feed_results}
+        print(f"    ✓ Found reports for years: {sorted(found_years)}")
+    
+    # Strategy 2: Search for remaining years individually (slower but more thorough)
+    remaining_years = [y for y in years if y not in found_years]
+    if remaining_years:
+        print(f"\n  🔍 Strategy 2: Searching for remaining years {remaining_years}...")
+        for year in remaining_years:
+            print(f"\n  📅 Searching for {year} report...")
             
-            # Add each PDF as a candidate
-            for pdf_url in pdf_urls:
-                results.append({
-                    'year': year,
-                    'url': pdf_url,
-                    'title': f'Annual Report {year} (MFN/Cision)',
-                    'source_page': report_link,
-                    'source': 'mfn'
-                })
+            # Search for report links
+            report_links = search_mfn_for_report(company_page, year)
             
-            # Small delay between requests
-            time.sleep(0.5)
+            if not report_links:
+                print(f"    ✗ No report links found for {year}")
+                continue
+            
+            # Extract PDFs from each report page
+            for report_link in report_links[:3]:  # Limit to first 3 results
+                pdf_urls = extract_cision_attachments(report_link)
+                
+                # Add each PDF as a candidate
+                for pdf_url in pdf_urls:
+                    results.append({
+                        'year': year,
+                        'url': pdf_url,
+                        'title': f'Annual Report {year} (MFN/Cision)',
+                        'source_page': report_link,
+                        'source': 'mfn'
+                    })
+                
+                # Small delay between requests
+                time.sleep(0.5)
     
     if results:
         print(f"\n  ✓ MFN search found {len(results)} potential reports")
