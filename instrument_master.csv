@@ -1,5 +1,5 @@
 CompanyName	ISIN	CID	date refreshed	Nasdaq_url	Active_coverage?	investor_relations_url	CCY	MostRecentStockPrice	TradedStockVolume	StockTurnover	validated
-ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	True	https://global.abb/group/en/investors	SEK	683.0	453736	308982606	True
+ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	True	https://global.abb/group/en/investors/annual-reporting-suite#download	SEK	683.0	453736	308982606	True
 Addtech B		S2			True	https://www.addtech.com/investors-and-media	SEK	325.6	350644	114134399	True
 Alfa Laval		S3			True	https://www.alfalaval.com/investors/	SEK	460.6	834570	384199339	True
 ASSA ABLOY B		S4			True	https://www.assaabloy.com/group/en/investors	SEK	355.8	1924559	685032972	True

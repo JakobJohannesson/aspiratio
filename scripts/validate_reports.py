@@ -23,9 +23,20 @@ MIN_PAGES = 50
 MAX_PAGES = 500
 
 # Company name variations to check for
+# Special aliases for companies with common short names
+COMPANY_ALIASES = {
+    'Hennes & Mauritz B': ['H&M', 'H&M Group', 'H & M'],
+    'Hennes & Mauritz': ['H&M', 'H&M Group', 'H & M'],
+}
+
 def get_company_variations(company_name):
     """Generate variations of company name to search in PDF."""
     variations = [company_name]
+    
+    # Add known aliases
+    for key, aliases in COMPANY_ALIASES.items():
+        if key.lower() in company_name.lower():
+            variations.extend(aliases)
     
     # Remove common suffixes
     base_name = re.sub(r'\s+(AB|Ltd|Group|Inc|Corp|Plc|A|B)$', '', company_name, flags=re.IGNORECASE)
