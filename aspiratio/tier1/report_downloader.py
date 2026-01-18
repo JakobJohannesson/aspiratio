@@ -139,6 +139,28 @@ def try_direct_url_patterns(ir_url, years):
             if not found:
                 print(f"    ✗ {year}: Not found")
     
+    # AstraZeneca pattern - predictable URL structure
+    if 'astrazeneca.com' in netloc:
+        print("  Detected AstraZeneca - trying direct PDF pattern...")
+        pattern = "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-{year}/pdf/AstraZeneca_AR_{year}.pdf"
+        
+        for year in years:
+            pdf_url = pattern.format(year=year)
+            try:
+                resp = requests.head(pdf_url, headers=headers, timeout=10, allow_redirects=True)
+                if resp.status_code == 200:
+                    results.append({
+                        'year': year,
+                        'url': pdf_url,
+                        'title': f'AstraZeneca Annual Report {year}',
+                        'source_page': ir_url
+                    })
+                    print(f"    ✓ Found {year} via direct URL")
+                else:
+                    print(f"    ✗ {year}: Not found (HTTP {resp.status_code})")
+            except Exception as e:
+                print(f"    ✗ {year}: Error - {e}")
+    
     # ABB pattern - use search but exclude SEC filings
     if 'abb.com' in netloc or 'abb' in netloc:
         print("  Detected ABB - will search for Group Annual Reports (excluding SEC filings)...")

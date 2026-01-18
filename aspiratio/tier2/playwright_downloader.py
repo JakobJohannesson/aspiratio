@@ -384,16 +384,210 @@ def download_atlas_copco_reports(years=[2019, 2020, 2021, 2022, 2023, 2024], out
     
     return results
 
-if __name__ == '__main__':
-    # Test Atlas Copco downloader
-    print("Testing Atlas Copco downloader...")
-    download_atlas_copco_reports(years=[2024])
+# Placeholder - PLAYWRIGHT_HANDLERS moved to end of file
+
+
+async def download_astrazeneca_report(year, output_dir='companies'):
+    """
+    Download AstraZeneca annual report for specific year using recorded navigation.
+    Based on playwright codegen recording.
     
-    # Uncomment to test ABB
-    # download_abb_reports()
+    AstraZeneca uses a tabbed interface:
+    - Years 2020-2024: Click year tab, then "Download our Annual Report"
+    - Year 2019: Go to Archive, then 2019 tab, then "Full Annual Report 2019 PDF"
+    
+    Args:
+        year: Year to download (2019-2024)
+        output_dir: Output directory (default: 'companies')
+    
+    Returns:
+        dict: {'success': bool, 'url': str, 'path': str, 'error': str}
+    """
+    from aspiratio.tier1.report_downloader import download_pdf
+    
+    company_name = "AstraZeneca"
+    cid = "S3"
+    ir_url = "https://www.astrazeneca.com/investor-relations/annual-reports.html"
+    
+    # Create output directory
+    company_dir = Path(output_dir) / cid
+    company_dir.mkdir(parents=True, exist_ok=True)
+    output_path = company_dir / f"{cid}_{year}_Annual_Report.pdf"
+    
+    # Skip if exists
+    if output_path.exists() and output_path.stat().st_size > 1_000_000:  # > 1MB
+        return {
+            'success': True,
+            'url': None,
+            'path': str(output_path),
+            'error': 'Already exists'
+        }
+    
+    print(f"\n{'='*70}")
+    print(f"AstraZeneca ({cid}) - {year} (Playwright)")
+    print(f"{'='*70}\n")
+    
+    pdf_url = None
+    
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch(headless=True)
+            context = await browser.new_context()
+            page = await context.new_page()
+            
+            print(f"  Loading {ir_url}...")
+            await page.goto(ir_url, timeout=30000)
+            
+            # Handle cookie consent
+            try:
+                await page.get_by_role("button", name="Decline All Optional").click(timeout=5000)
+                print("  ✓ Cookie consent handled")
+            except:
+                try:
+                    # Alternative: click overlay then decline
+                    await page.locator("#CookieReportsOverlay").click(timeout=3000)
+                    await page.get_by_role("button", name="Decline All Optional").click(timeout=3000)
+                    print("  ✓ Cookie consent handled (via overlay)")
+                except:
+                    print("  ⊙ No cookie consent popup or already dismissed")
+            
+            await page.wait_for_timeout(1000)
+            
+            if year >= 2020:
+                # For 2020-2024: Use tab navigation on main annual reports page
+                try:
+                    # Click the year tab
+                    await page.get_by_role("tab", name=str(year)).click(timeout=5000)
+                    print(f"  ✓ Clicked {year} tab")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Click "Download our Annual Report" link - this opens a popup
+                    async with page.expect_popup(timeout=10000) as popup_info:
+                        await page.get_by_role("link", name=" Download our Annual Report").click()
+                    popup = await popup_info.value
+                    pdf_url = popup.url
+                    print(f"  ✓ Found report URL: {pdf_url[:80]}...")
+                    await popup.close()
+                    
+                except Exception as e:
+                    print(f"  ✗ Failed to find {year} report: {e}")
+                    await browser.close()
+                    return {
+                        'success': False,
+                        'url': None,
+                        'path': None,
+                        'error': f'Failed to find report: {e}'
+                    }
+            else:
+                # For 2019: Need to go to Archive section
+                try:
+                    # Click Archive tab
+                    await page.get_by_role("tab", name="Archive").click(timeout=5000)
+                    print("  ✓ Clicked Archive tab")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Click Annual Reports archive link
+                    await page.get_by_role("link", name="Annual Reports archive").click(timeout=5000)
+                    print("  ✓ Navigated to archive page")
+                    await page.wait_for_timeout(2000)
+                    
+                    # Click the year tab (2019)
+                    await page.get_by_role("tab", name=str(year)).click(timeout=5000)
+                    print(f"  ✓ Clicked {year} tab in archive")
+                    await page.wait_for_timeout(1000)
+                    
+                    # Click "Full Annual Report 2019 PDF" link - opens popup
+                    async with page.expect_popup(timeout=10000) as popup_info:
+                        await page.get_by_role("link", name=f" Full Annual Report {year} PDF").click()
+                    popup = await popup_info.value
+                    pdf_url = popup.url
+                    print(f"  ✓ Found archive report URL: {pdf_url[:80]}...")
+                    await popup.close()
+                    
+                except Exception as e:
+                    print(f"  ✗ Failed to find {year} archive report: {e}")
+                    await browser.close()
+                    return {
+                        'success': False,
+                        'url': None,
+                        'path': None,
+                        'error': f'Failed to find archive report: {e}'
+                    }
+            
+            await browser.close()
+            
+        except Exception as e:
+            print(f"  ✗ Playwright error: {e}")
+            return {
+                'success': False,
+                'url': None,
+                'path': None,
+                'error': str(e)
+            }
+    
+    # Download the PDF
+    if pdf_url:
+        print(f"\n  Downloading from {pdf_url[:80]}...")
+        result = download_pdf(pdf_url, str(output_path), min_pages=50)
+        
+        if result['success']:
+            print(f"  ✓ Downloaded: {result['pages']} pages, {result['size_mb']:.1f} MB")
+            return {
+                'success': True,
+                'url': pdf_url,
+                'path': str(output_path),
+                'error': None
+            }
+        else:
+            print(f"  ✗ Download failed: {result.get('error', 'Unknown error')}")
+            return {
+                'success': False,
+                'url': pdf_url,
+                'path': None,
+                'error': result.get('error', 'Download failed')
+            }
+    
+    return {
+        'success': False,
+        'url': None,
+        'path': None,
+        'error': 'No PDF URL found'
+    }
+
+
+def download_astrazeneca_reports(years=[2019, 2020, 2021, 2022, 2023, 2024], output_dir='companies'):
+    """
+    Download AstraZeneca annual reports for multiple years.
+    
+    Args:
+        years: List of years to download
+        output_dir: Output directory
+    
+    Returns:
+        List of results for each year
+    """
+    results = []
+    
+    for year in years:
+        result = asyncio.run(download_astrazeneca_report(year, output_dir))
+        results.append({
+            'year': year,
+            **result
+        })
+        time.sleep(1)  # Be nice to the server
+    
+    # Summary
+    successful = sum(1 for r in results if r['success'])
+    print(f"\n{'='*70}")
+    print(f"✓ AstraZeneca: {successful}/{len(years)} reports downloaded successfully")
+    print(f"{'='*70}\n")
+    
+    return results
 
 
 # Registry of company-specific Playwright handlers
+# Must be at end of file after all functions are defined
+# Note: AstraZeneca now uses direct URL pattern in report_downloader.py
 PLAYWRIGHT_HANDLERS = {
     'S6': download_atlas_copco_report,  # Atlas Copco AB
     # Add more as they're recorded:
@@ -401,3 +595,9 @@ PLAYWRIGHT_HANDLERS = {
     # 'S21': download_saab_report,
     # etc.
 }
+
+
+if __name__ == '__main__':
+    # Test Atlas Copco downloader
+    print("Testing Atlas Copco downloader...")
+    download_atlas_copco_reports(years=[2024])

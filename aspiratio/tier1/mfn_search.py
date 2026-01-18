@@ -124,12 +124,15 @@ def scan_mfn_feed_for_reports(company_page_url, years):
     """
     Scan the MFN news feed for annual report PDFs.
     
-    This method directly scans the news feed on the MFN company page
-    for press releases announcing annual reports, then follows the
-    detail page links to extract the embedded Cision or storage.mfn.se PDF links.
+    Uses the MFN company page with ?limit=10000 to get all press releases,
+    then looks for annual report announcements with PDF attachments.
+    
+    The page contains entries like:
+    - "Årsredovisning 2024" with [pdf download](https://storage.mfn.se/...)
+    - "Annual Report 2023" with [pdf download](https://ml-eu.globenewswire.com/...)
     
     Args:
-        company_page_url: MFN company page URL (e.g., https://mfn.se/all/a/alfa-laval)
+        company_page_url: MFN company page URL (e.g., https://mfn.se/all/a/industrivarden)
         years: List of years to search for
     
     Returns:
@@ -139,11 +142,11 @@ def scan_mfn_feed_for_reports(company_page_url, years):
     found_years = set()
     
     try:
-        # Add limit parameter to get more results - use large limit to reach older reports (2019, 2020)
-        feed_url = f"{company_page_url}?query&limit=100000"
+        # Use limit=10000 to get all press releases including older years
+        feed_url = f"{company_page_url}?limit=10000"
         print(f"  📡 Scanning MFN feed: {feed_url}")
         headers = {"User-Agent": get_random_user_agent()}
-        resp = requests.get(feed_url, headers=headers, timeout=20)
+        resp = requests.get(feed_url, headers=headers, timeout=30)
         
         if resp.status_code != 200:
             print(f"    ✗ HTTP {resp.status_code}")
@@ -154,107 +157,136 @@ def scan_mfn_feed_for_reports(company_page_url, years):
         # Keywords for annual reports in Swedish and English
         annual_keywords = [
             'annual report', 'årsredovisning', 'year-end report',
-            'bokslutskommuniké', 'annual and sustainability report',
-            'års- och hållbarhetsredovisning', 'annual reporting',
-            'publishes the annual', 'published its annual',
-            'publicerar årsredovisning', 'års- och koncernredovisning'
+            'annual and sustainability report', 'års- och hållbarhetsredovisning',
+            'annual reporting', 'publishes the annual', 'publicerar årsredovisning',
+            'års- och koncernredovisning', 'verksamhetsberättelse'
         ]
         
-        # Keywords to exclude (quarterly reports)
+        # Keywords to exclude (quarterly reports, interim reports)
         exclude_keywords = [
             'q1', 'q2', 'q3', 'q4', 'quarter', 'interim', 
             'delårs', 'kvartals', 'halvårs', 'january-march',
             'january-june', 'january-september', 'april-june',
-            'july-september', 'october-december'
+            'july-september', 'october-december', 'jan-mar', 'jan-jun',
+            'jan-sep', 'apr-jun', 'jul-sep', 'oct-dec', 'bokslutskommuniké',
+            'year-end report'  # This is typically Q4, not the full annual report
         ]
         
-        # First check for direct PDF links on the main page
-        # Look for storage.mfn.se, cision.com, and globenewswire PDFs
-        for link in soup.find_all('a', href=True):
+        # Find all links on the page
+        # MFN structure: each press release has a title link and may have a PDF download link
+        all_links = soup.find_all('a', href=True)
+        
+        # Group links by proximity - find PDF links near annual report text
+        for i, link in enumerate(all_links):
             href = link.get('href', '')
             text = link.get_text(strip=True).lower()
             
-            # Check if this is a PDF link from known sources
-            is_pdf = '.pdf' in href.lower()
-            is_known_source = any(s in href for s in ['cision.com', 'storage.mfn.se', 'globenewswire.com'])
-            if is_pdf and is_known_source:
-                # Get the parent element to find context
+            # Check if this is a PDF download link from known sources
+            is_pdf_link = any(source in href for source in [
+                'storage.mfn.se', 'ml-eu.globenewswire.com', 'globenewswire.com',
+                'cision.com', 'prlibrary-eu.nasdaq.com', 'cns.omxgroup.com'
+            ])
+            
+            if is_pdf_link and '.pdf' in href.lower():
+                # Look for context in nearby text (previous links/siblings)
+                # Get parent element and search for context
                 parent = link.find_parent()
-                context = parent.get_text(strip=True).lower() if parent else text
+                context = ''
                 
-                # Check if it's an annual report (not quarterly)
+                # Try to get surrounding text
+                if parent:
+                    context = parent.get_text(strip=True).lower()
+                
+                # Also check previous siblings for press release title
+                prev_sibling = link.find_previous_sibling()
+                if prev_sibling:
+                    context += ' ' + prev_sibling.get_text(strip=True).lower()
+                
+                # Check grandparent too for more context
+                if parent and parent.parent:
+                    grandparent_text = parent.parent.get_text(strip=True).lower()
+                    # Limit to reasonable length to avoid grabbing whole page
+                    if len(grandparent_text) < 500:
+                        context = grandparent_text
+                
+                # Check if context mentions annual report
                 is_annual = any(kw in context for kw in annual_keywords)
                 is_quarterly = any(kw in context for kw in exclude_keywords)
                 
                 if is_annual and not is_quarterly:
-                    # Try to extract year from context
+                    # Try to extract year from context or URL
                     for year in years:
-                        if year not in found_years and (str(year) in context or str(year) in href):
-                            results.append({
-                                'year': year,
-                                'url': href,
-                                'title': f'Annual Report {year} (via MFN)',
-                                'source_page': company_page_url,
-                                'source': 'mfn_feed'
-                            })
-                            found_years.add(year)
-                            print(f"    ✓ Found {year} report (direct): {href[:70]}...")
-                            break
+                        if year not in found_years:
+                            year_str = str(year)
+                            # Year in context or URL
+                            if year_str in context or year_str in href:
+                                results.append({
+                                    'year': year,
+                                    'url': href,
+                                    'title': f'Annual Report {year} (via MFN)',
+                                    'source_page': company_page_url,
+                                    'source': 'mfn_feed'
+                                })
+                                found_years.add(year)
+                                print(f"    ✓ Found {year} report: {href[:60]}...")
+                                break
         
-        # Now find and follow links to report detail pages
-        # Look for both /cis/ (older) and /a/ (newer) patterns
-        detail_pages_to_check = []
-        for link in soup.find_all('a', href=True):
-            href = link.get('href', '')
-            text = link.get_text(strip=True).lower()
-            
-            # Match both old (/cis/) and new (/a/) MFN URL patterns
-            # Also match /one/a/ pattern
-            is_detail_page = '/cis/' in href or ('/a/' in href and '/all/a/' not in href) or '/one/a/' in href
-            if is_detail_page:
-                combined = f"{href} {text}".lower()
+        # Also look for links to detail pages that might have annual report PDFs
+        # These are links to /a/company/press-release-title or /one/a/company/...
+        if len(found_years) < len(years):
+            detail_pages_to_check = []
+            for link in all_links:
+                href = link.get('href', '')
+                text = link.get_text(strip=True).lower()
                 
-                # Check for annual report keywords
-                is_annual = any(kw in combined for kw in annual_keywords)
-                is_quarterly = any(kw in combined for kw in exclude_keywords)
+                # Check if this is a detail page link (not PDF, not feed page)
+                is_detail_page = (
+                    ('/a/' in href or '/one/a/' in href or '/cis/' in href or '/cns/' in href) 
+                    and '/all/a/' not in href 
+                    and '.pdf' not in href.lower()
+                )
                 
-                if is_annual and not is_quarterly:
-                    for year in years:
-                        if year not in found_years and str(year) in combined:
-                            abs_url = href if href.startswith('http') else f"https://mfn.se{href}"
-                            detail_pages_to_check.append((year, abs_url, text[:80]))
-                            break
-        
-        # Follow detail pages to extract PDFs
-        for year, detail_url, title in detail_pages_to_check[:10]:  # Limit to 10 pages
-            if year in found_years:
-                continue
+                if is_detail_page:
+                    combined = f"{href} {text}".lower()
+                    is_annual = any(kw in combined for kw in annual_keywords)
+                    is_quarterly = any(kw in combined for kw in exclude_keywords)
+                    
+                    if is_annual and not is_quarterly:
+                        for year in years:
+                            if year not in found_years and str(year) in combined:
+                                abs_url = href if href.startswith('http') else f"https://mfn.se{href}"
+                                detail_pages_to_check.append((year, abs_url, text[:80]))
+                                break
             
-            print(f"    📄 Checking detail page for {year}: {title}...")
-            pdf_urls = extract_cision_attachments(detail_url)
-            
-            if pdf_urls:
-                # Take the first PDF (usually the main annual report)
-                for pdf_url in pdf_urls[:2]:  # Take up to 2 PDFs per page
-                    results.append({
-                        'year': year,
-                        'url': pdf_url,
-                        'title': f'Annual Report {year} (via MFN)',
-                        'source_page': detail_url,
-                        'source': 'mfn_detail'
-                    })
-                found_years.add(year)
-                print(f"      ✓ Found {year} report PDF")
-            
-            time.sleep(0.3)  # Small delay between requests
+            # Follow detail pages to extract PDFs (limit to avoid too many requests)
+            for year, detail_url, title in detail_pages_to_check[:8]:
+                if year in found_years:
+                    continue
+                
+                print(f"    📄 Checking detail page for {year}: {title[:50]}...")
+                pdf_urls = extract_cision_attachments(detail_url)
+                
+                if pdf_urls:
+                    for pdf_url in pdf_urls[:1]:  # Take first PDF
+                        results.append({
+                            'year': year,
+                            'url': pdf_url,
+                            'title': f'Annual Report {year} (via MFN)',
+                            'source_page': detail_url,
+                            'source': 'mfn_detail'
+                        })
+                    found_years.add(year)
+                    print(f"      ✓ Found {year} report PDF")
+                
+                time.sleep(0.3)
         
         if results:
-            print(f"    ✓ Found {len(results)} annual reports from feed scan")
+            print(f"    ✓ Found {len(results)} annual reports from MFN feed")
         else:
-            print(f"    ⚠ No annual reports found in feed")
+            print(f"    ⚠ No annual reports found in MFN feed")
             
     except Exception as e:
-        print(f"    ✗ Error scanning feed: {e}")
+        print(f"    ✗ Error scanning MFN feed: {e}")
     
     return results
 
