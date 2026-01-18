@@ -1,31 +1,395 @@
 CompanyName	ISIN	CID	date refreshed	Nasdaq_url	Active_coverage?	investor_relations_url	CCY	MostRecentStockPrice	TradedStockVolume	StockTurnover	validated
-ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	True	https://global.abb/group/en/investors/annual-reporting-suite#download	SEK	683.0	453736	308982606	True
-Addtech B		S2			True	https://www.addtech.com/investors-and-media	SEK	325.6	350644	114134399	True
-Alfa Laval		S3			True	https://www.alfalaval.com/investors/	SEK	460.6	834570	384199339	True
-ASSA ABLOY B		S4			True	https://www.assaabloy.com/group/en/investors	SEK	355.8	1924559	685032972	True
-AstraZeneca		S5			True	https://www.astrazeneca.com/investor-relations/contacts-information.html	SEK	1701.0	283942	480673375	True
-Atlas Copco A		S6			True	https://www.atlascopcogroup.com/en/investors	SEK	164.05	5327339	873528240	True
-Boliden		S7			True	https://investors.boliden.com/	SEK	498.2	1621368	806020703	True
-Epiroc A		S8			True	https://www.epirocgroup.com/en/investors/investor-contacts	SEK	206.7	2926875	605520732	True
-EQT		S9			True	https://eqtgroup.com/shareholders/reports-and-presentations	SEK	351.8	6554439	2300568085	True
-Ericsson B		S10			True	https://www.ericsson.com/en/investors	SEK	90.42	8433509	762114500	True
-Essity B		S11			True	https://www.essity.com/investors/	SEK	265.1	1857487	492519760	True
-Evolution		S12			True	https://www.evolution.com/investors/ir-contacts/	SEK	624.8	1266337	790983032	True
-Hennes & Mauritz B		S13			True	https://hmgroup.com/investors/	SEK	183.9	4538822	836489758	True
-Hexagon B		S14			True	https://hexagongroup.com/investors/	SEK	107.0	4964511	531028156	True
-Industrivärden C		S15			True	https://www.industrivarden.se/en-gb/investors/	SEK	408.2	424135	173042714	True
-Investor B		S16			True	https://www.investorab.com/investors-media/reports-presentations	SEK	323.1	4327625	1395810389	True
-Lifco B		S17			True	https://www.lifco.se/investors/financial-reports	SEK	351.8	429040	150895807	True
-NIBE Industrier B		S18			True	https://www.nibe.com/investors	SEK	34.99	6297781	220747092	True
-Nordea Bank Abp		S19			True	https://www.nordea.com/en/investors	SEK	171.85	5078865	873474999	True
-SAAB B		S20			True	https://www.saab.com/investors	SEK	508.7	2028470	1027868849	True
-Sandvik		S21			True	https://www.home.sandvik/en/investors/	SEK	295.7	3213548	949483303	True
-SCA B		S22			True	https://www.sca.com/en/investors/	SEK	120.85	1852731	224037825	True
-SEB A		S23			True	https://sebgroup.com/investor-relations	SEK	192.75	4099697	790115703	True
-Skanska B		S24			True	https://group.skanska.com/investors/	SEK	250.0	1037568	259368643	True
-SKF B		S25			True	https://www.skf.com/group/investors/	SEK	241.9	1347701	325801125	True
-Sv. Handelsbanken A		S26			True	https://www.handelsbanken.com/sv/investor-relations	SEK	132.55	6583809	871875783	True
-Swedbank A		S27			True	https://www.swedbank.com/investor-relations/the-share/shareholders.html	SEK	315.7	2936891	926118768	True
-Tele2 B		S28			True	https://www.tele2.com/investors	SEK	153.1	2288603	350402942	True
-Telia Company		S29			True	https://www.teliacompany.com/en/investors	SEK	38.6	8164111	315247592	True
-Volvo B		S30			True	https://www.volvogroup.com/en/investors/reports-and-presentations.html	SEK	294.2	4335808	1276278853	True
+ABB Ltd		S1		https://www.nasdaq.com/european-market-activity/shares/abb?id=TX291	TRUE	https://global.abb/group/en/investors/annual-reporting-suite#download	SEK	683	453736	308982606	TRUE
+Addtech B		S2			TRUE	https://www.addtech.com/investors-and-media	SEK	325.6	350644	114134399	TRUE
+Alfa Laval		S3			TRUE	https://www.alfalaval.com/investors/	SEK	460.6	834570	384199339	TRUE
+ASSA ABLOY B		S4			TRUE	https://www.assaabloy.com/group/en/investors	SEK	355.8	1924559	685032972	TRUE
+AstraZeneca		S5			TRUE	https://www.astrazeneca.com/investor-relations/contacts-information.html	SEK	1701	283942	480673375	TRUE
+Atlas Copco A		S6			TRUE	https://www.atlascopcogroup.com/en/investors	SEK	164.05	5327339	873528240	TRUE
+Boliden		S7			TRUE	https://investors.boliden.com/	SEK	498.2	1621368	806020703	TRUE
+Epiroc A		S8			TRUE	https://www.epirocgroup.com/en/investors/investor-contacts	SEK	206.7	2926875	605520732	TRUE
+EQT		S9			TRUE	https://eqtgroup.com/shareholders/reports-and-presentations	SEK	351.8	6554439	2300568085	TRUE
+Ericsson B		S10			TRUE	https://www.ericsson.com/en/investors	SEK	90.42	8433509	762114500	TRUE
+Essity B		S11			TRUE	https://www.essity.com/investors/	SEK	265.1	1857487	492519760	TRUE
+Evolution		S12			TRUE	https://www.evolution.com/investors/ir-contacts/	SEK	624.8	1266337	790983032	TRUE
+Hennes & Mauritz B		S13			TRUE	https://hmgroup.com/investors/	SEK	183.9	4538822	836489758	TRUE
+Hexagon B		S14			TRUE	https://hexagongroup.com/investors/	SEK	107	4964511	531028156	TRUE
+Industrivärden C		S15			TRUE	https://www.industrivarden.se/en-gb/investors/	SEK	408.2	424135	173042714	TRUE
+Investor B		S16			TRUE	https://www.investorab.com/investors-media/reports-presentations	SEK	323.1	4327625	1395810389	TRUE
+Lifco B		S17			TRUE	https://www.lifco.se/investors/financial-reports	SEK	351.8	429040	150895807	TRUE
+NIBE Industrier B		S18			TRUE	https://www.nibe.com/investors	SEK	34.99	6297781	220747092	TRUE
+Nordea Bank Abp		S19			TRUE	https://www.nordea.com/en/investors	SEK	171.85	5078865	873474999	TRUE
+SAAB B		S20			TRUE	https://www.saab.com/investors	SEK	508.7	2028470	1027868849	TRUE
+Sandvik		S21			TRUE	https://www.home.sandvik/en/investors/	SEK	295.7	3213548	949483303	TRUE
+SCA B		S22			TRUE	https://www.sca.com/en/investors/	SEK	120.85	1852731	224037825	TRUE
+SEB A		S23			TRUE	https://sebgroup.com/investor-relations	SEK	192.75	4099697	790115703	TRUE
+Skanska B		S24			TRUE	https://group.skanska.com/investors/	SEK	250	1037568	259368643	TRUE
+SKF B		S25			TRUE	https://www.skf.com/group/investors/	SEK	241.9	1347701	325801125	TRUE
+Sv. Handelsbanken A		S26			TRUE	https://www.handelsbanken.com/sv/investor-relations	SEK	132.55	6583809	871875783	TRUE
+Swedbank A		S27			TRUE	https://www.swedbank.com/investor-relations/the-share/shareholders.html	SEK	315.7	2936891	926118768	TRUE
+Tele2 B		S28			TRUE	https://www.tele2.com/investors	SEK	153.1	2288603	350402942	TRUE
+Telia Company		S29			TRUE	https://www.teliacompany.com/en/investors	SEK	38.6	8164111	315247592	TRUE
+Volvo B		S30			TRUE	https://www.volvogroup.com/en/investors/reports-and-presentations.html	SEK	294.2	4335808	1276278853	TRUE
+AAK		S31				https://www.aak.com/investors/					TRUE
+AFRY		S32				https://afry.com/en/investor-relations					TRUE
+AQ Group		S33				https://www.aqgroup.com/en/investor					TRUE
+AcadeMedia		S34				https://academedia.se/en/about-us/investors/					TRUE
+Acast		S35				https://investors.acast.com/					TRUE
+Acrinova A		S36				https://www.acrinova.se/hem/investor-relations/					TRUE
+Acrinova B		S37									
+Actic Group		S38									
+Active Biotech		S39									
+AddLife B		S40				https://www.add.life/investors					TRUE
+Addnode Group B		S41				https://www.addnodegroup.com/investors/					TRUE
+Alimak Group		S42									
+Alleima		S43				https://www.alleima.com/en/investors/					TRUE
+Alligator Bioscience		S44									
+Alligo B		S45									
+Alvotech SDB		S46									
+Ambea		S47									
+Annehem Fastigheter B		S48									
+Anoto Group		S49									
+Apotea		S50									
+Arctic Paper		S51									
+Arion Banki SDB		S52									
+Arjo B		S53									
+Arla Plast		S54									
+Ascelia Pharma		S55									
+Asker Healthcare Group		S56									
+Asmodee Group B		S57									
+Atlas Copco B		S58									
+Atrium Ljungberg B		S59									
+Attendo		S60									
+Autoliv SDB		S61									
+Avanza Bank Holding		S62									
+Axfood		S63									
+B3 Consulting Group		S64									
+BE Group		S65									
+BHG Group		S66									
+BICO Group		S67									
+BONESUPPORT HOLDING		S68									
+BTS Group B		S69									
+Bactiguard Holding B		S70									
+Balco Group		S71									
+Beijer Alma B		S72									
+Beijer Ref B		S73									
+Bergman & Beving B		S74									
+Berner Industrier B		S75									
+Besqab		S76									
+Betsson B		S77									
+Better Collective		S78									
+Bilia A		S79									
+Billerud		S80									
+BioArctic B		S81									
+BioGaia B		S82									
+BioInvent International		S83									
+Björn Borg		S84									
+Bonava A		S85									
+Bonava B		S86									
+Bong		S87									
+Boozt		S88									
+Boule Diagnostics		S89									
+Bravida Holding		S90									
+Brinova Fastigheter B		S91									
+Bufab		S92									
+Bulten		S93									
+Bure Equity		S94									
+Byggmax Group		S95									
+C-RAD B		S96									
+CTEK		S97									
+CTT Systems		S98									
+Camurus		S99									
+Cantargia		S100									
+Carasent		S101									
+Castellum		S102									
+Catella A		S103									
+Catella B		S104									
+Catena		S105									
+Catena Media		S106									
+Cavotec Group		S107									
+CellaVision		S108									
+Cibus Nordic Real Estate		S109									
+Cinclus Pharma Holding		S110									
+Cint Group		S111									
+Clas Ohlson B		S112									
+Cloetta B		S113									
+CoinShares International		S114									
+Concejo B		S115									
+Coor Service Management Hold.		S116									
+Corem Property Group A		S117									
+Corem Property Group B		S118									
+Corem Property Group D		S119									
+Dedicare B		S120									
+Diös Fastigheter		S121									
+Dometic Group		S122									
+Duni		S123									
+Duroc B		S124									
+Dustin Group		S125									
+Dynavox Group		S126									
+EQL Pharma		S127									
+Eastnine		S128									
+Egetis Therapeutics		S129									
+Elanders B		S130									
+Electrolux A		S131									
+Electrolux B		S132									
+Electrolux Professional B		S133									
+Elekta B		S134									
+Elon		S135									
+Eltel		S136									
+Embracer Group B		S137									
+Enad Global 7		S138									
+Enea		S139									
+Eniro Group		S140									
+Enity Holding		S141									
+Eolus B		S142									
+Ependion		S143									
+Epiroc B		S144									
+Episurf B		S145									
+Ericsson A		S146									
+Essity A		S147									
+Ework Group		S148									
+FM Mattsson B		S149									
+Fabege		S150									
+Fagerhult Group		S151									
+Fasadgruppen Group		S152									
+Fast. Balder B		S153									
+Fastator		S154									
+Fastighetsbolaget Emilshus B		S155									
+Fastpartner A		S156									
+Fastpartner D		S157									
+Fenix Outdoor International B		S158									
+Ferronordic		S159									
+Fingerprint Cards B		S160									
+Flerie		S161									
+Formpipe Software		S162									
+Fortinova Fastigheter ser. B		S163									
+G5 Entertainment		S164									
+Garo		S165									
+Genova Property Group		S166									
+Gentoo Media		S167									
+Getinge B		S168									
+Green Landscaping Group		S169									
+Gruvaktiebolaget Viscaria		S170									
+Gränges		S171									
+HAKI Safety A		S172									
+HAKI Safety B		S173									
+HANZA		S174									
+HEBA B		S175									
+HEXPOL B		S176									
+HMS Networks		S177									
+Hacksaw		S178									
+Hansa Biopharma		S179									
+Hemnet Group		S180									
+Hexatronic Group		S181									
+Hoist Finance		S182									
+Holmen A		S183									
+Holmen B		S184									
+Hufvudstaden A		S185									
+Humana		S186									
+Humble Group		S187									
+Husqvarna A		S188									
+Husqvarna B		S189									
+INVISIO		S190									
+IRLAB Therapeutics A		S191									
+ITAB Shop Concept		S192									
+Image Systems		S193									
+Immunovia		S194									
+Industrivärden A		S195									
+Indutrade		S196									
+Infant Bacterial TherapeuticsB		S197									
+Infrea		S198									
+Inission B		S199									
+Instalco		S200									
+Intea Fastigheter B		S201									
+Intea Fastigheter D		S202									
+International Petroleum Corp.		S203									
+Intrum		S204									
+Investor A		S205									
+Inwido		S206									
+Isofol Medical		S207									
+JM		S208									
+John Mattson Fastighetsföret.		S209									
+K-Fast Holding B		S210									
+K2A Knaust & Andersson B		S211									
+KABE Group B		S212									
+Karnell Group B		S213									
+Karnov Group		S214									
+Karolinska Development B		S215									
+Kinnevik A		S216									
+Kinnevik B		S217									
+KlaraBo Sverige B		S218									
+Knowit		S219									
+Lagercrantz Group B		S220									
+Lammhults Design Group B		S221									
+Latour B		S222									
+Lime Technologies		S223									
+Lindab International		S224									
+Logistea A		S225									
+Logistea B		S226									
+Loomis		S227									
+Lundbergföretagen B		S228									
+Lundin Gold		S229									
+Lundin Mining Corporation		S230									
+MEKO		S231									
+Maha Capital		S232									
+Malmbergs Elektriska B		S233									
+Mangold		S234									
+MedCap		S235									
+Medicover B		S236									
+Medivir		S237									
+Mendus		S238									
+Meren Energy		S239									
+Micro Systemation B		S240									
+Midsona A		S241									
+Midsona B		S242									
+Mildef Group		S243									
+Mips		S244									
+Moberg Pharma		S245									
+Modern Times Group A		S246									
+Modern Times Group B		S247									
+Moment Group		S248									
+Momentum Group B		S249									
+Morrow Bank		S250									
+Munters Group		S251									
+Mycronic		S252									
+NAXS		S253									
+NCAB Group		S254									
+NCC A		S255									
+NCC B		S256									
+NOBA Bank Group		S257									
+NOTE		S258									
+NOVOTEK B		S259									
+NP3 Fastigheter		S260									
+Nanologica		S261									
+Nederman Holding		S262									
+Nelly Group		S263									
+Neobo Fastigheter		S264									
+Net Insight B		S265									
+Netel Holding		S266									
+New Wave B		S267									
+Nilörngruppen B		S268									
+Nivika Fastigheter B		S269									
+Nobia		S270									
+Nokia Oyj		S271									
+Nolato B		S272									
+Nordisk Bergteknik B		S273									
+Nordnet		S274									
+Norion Bank		S275									
+Nyfosa		S276									
+OEM International B		S277									
+Oncopeptides		S278									
+Orexo		S279									
+Orrön Energy		S280									
+Ovzon		S281									
+PION Group B		S282									
+Pandox B		S283									
+Peab B		S284									
+Pierce Group		S285									
+Platzer Fastigheter Holding B		S286									
+PowerCell Sweden		S287									
+Precise Biometrics		S288									
+Prevas B		S289									
+Pricer B		S290									
+Prisma Properties		S291									
+Proact IT Group		S292									
+Profilgruppen B		S293									
+Profoto Holding		S294									
+Q-Linea		S295									
+Qliro		S296									
+RVRC Holding		S297									
+Railcare Group		S298									
+Ratos A		S299									
+Ratos B		S300									
+RaySearch Laboratories B		S301									
+Rejlers B		S302									
+Rottneros		S303									
+Rusta		S304									
+Röko B		S305									
+SCA A		S306									
+SEB C		S307									
+SECTRA B		S308									
+SKF A		S309									
+SSAB A		S310									
+SSAB B		S311									
+SWECO A		S312									
+SWECO B		S313									
+Sagax A		S314									
+Sagax B		S315									
+Sagax D		S316									
+Samhällsbyggnadsbo. i Norden B		S317									
+Samhällsbyggnadsbo. i Norden D		S318									
+Sampo Oyj SDB		S319									
+Saniona		S320									
+Scandi Standard		S321									
+Scandic Hotels Group		S322									
+Sdiptech B		S323									
+Seafire		S324									
+Securitas B		S325									
+Sedana Medical		S326									
+Sensys Gatso Group		S327									
+Senzime		S328									
+Sinch		S329									
+SinterCast		S330									
+Sivers Semiconductors		S331									
+SkiStar B		S332									
+Sleep Cycle		S333									
+Softronic B		S334									
+Solid Försäkringsaktiebolag		S335									
+Starbreeze A		S336									
+Starbreeze B		S337									
+Stendörren Fastigheter B		S338									
+Stenhus Fastigheter i Norden		S339									
+Stillfront Group		S340									
+Stockwik Förvaltning		S341									
+Stora Enso A		S342									
+Stora Enso R		S343									
+Storskogen Group B		S344									
+Studsvik		S345									
+Sv. Handelsbanken B		S346									
+Sveafastigheter		S347									
+Svedbergs Group B		S348									
+Swedish Logistic Property B		S349									
+Swedish Orphan Biovitrum		S350									
+SynAct Pharma		S351									
+Synsam		S352									
+Systemair		S353									
+TF Bank		S354									
+TRATON		S355									
+Tele2 A		S356									
+Thule Group		S357									
+TietoEVRY Oyj		S358									
+Tobii		S359									
+Traction B		S360									
+TradeDoubler		S361									
+Transtema Group		S362									
+Trelleborg B		S363									
+Trianon B		S364									
+Troax Group		S365									
+Truecaller B		S366									
+VBG GROUP B		S367									
+VNV Global		S368									
+Verisure		S369									
+Vestum		S370									
+Viaplay Group A		S371									
+Viaplay Group B		S372									
+Vicore Pharma Holding		S373									
+Vimian Group		S374									
+Vitec Software Group B		S375									
+Vitrolife		S376									
+Viva Wine Group		S377									
+Vivesto		S378									
+Volati		S379									
+Volvo A		S380									
+Volvo Car B		S381									
+Wall to Wall Group A		S382									
+Wallenstam B		S383									
+Wihlborgs Fastigheter		S384									
+Wise Group		S385									
+Wästbygg Gruppen B		S386									
+XANO Industri B		S387									
+Xbrane Biopharma		S388									
+Xspray Pharma		S389									
+Xvivo Perfusion		S390									
+Yubico		S391									
+engcon B		S392									
+mySafety Group B		S393									
+Öresund		S394									
