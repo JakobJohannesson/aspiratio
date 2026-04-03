@@ -1,0 +1,156 @@
+# Aspiratio - Annual Report Sources
+# OMXS30 companies with IR URLs for automated downloading
+# Strategy: fetch IR page → find PDF links → filter for annual report + year → download
+
+target_years: [2019, 2020, 2021, 2022, 2023, 2024]
+
+companies:
+  - cid: S1
+    name: ABB Ltd
+    ir_url: https://global.abb/group/en/investors/annual-reporting-suite
+    aliases: [ABB]
+
+  - cid: S2
+    name: Addtech
+    ir_url: https://www.addtech.com/investors-and-media
+    aliases: [Addtech]
+
+  - cid: S3
+    name: Alfa Laval
+    ir_url: https://www.alfalaval.com/investors/
+    aliases: [Alfa Laval]
+
+  - cid: S4
+    name: ASSA ABLOY
+    ir_url: https://www.assaabloy.com/group/en/investors
+    aliases: [ASSA ABLOY, Assa Abloy]
+
+  - cid: S5
+    name: AstraZeneca
+    ir_url: https://www.astrazeneca.com/investor-relations.html
+    aliases: [AstraZeneca, Astra Zeneca]
+
+  - cid: S6
+    name: Atlas Copco
+    ir_url: https://www.atlascopcogroup.com/en/investors
+    aliases: [Atlas Copco]
+
+  - cid: S7
+    name: Boliden
+    ir_url: https://investors.boliden.com/
+    aliases: [Boliden]
+
+  - cid: S8
+    name: Epiroc
+    ir_url: https://www.epirocgroup.com/en/investors
+    aliases: [Epiroc]
+
+  - cid: S9
+    name: EQT
+    ir_url: https://eqtgroup.com/shareholders/reports-and-presentations
+    aliases: [EQT]
+
+  - cid: S10
+    name: Ericsson
+    ir_url: https://www.ericsson.com/en/investors
+    aliases: [Ericsson, Telefonaktiebolaget LM Ericsson]
+
+  - cid: S11
+    name: Essity
+    ir_url: https://www.essity.com/investors/
+    aliases: [Essity]
+
+  - cid: S12
+    name: Evolution
+    ir_url: https://www.evolution.com/investors/
+    aliases: [Evolution, Evolution Gaming]
+
+  - cid: S13
+    name: Hennes & Mauritz
+    ir_url: https://hmgroup.com/investors/
+    aliases: [H&M, HM, Hennes & Mauritz]
+
+  - cid: S14
+    name: Hexagon
+    ir_url: https://hexagongroup.com/investors/
+    aliases: [Hexagon]
+
+  - cid: S15
+    name: "Industrivärden"
+    ir_url: https://www.industrivarden.se/en-gb/investors/
+    aliases: ["Industrivärden", Industrivarden]
+
+  - cid: S16
+    name: Investor
+    ir_url: https://www.investorab.com/investors-media/reports-presentations
+    aliases: [Investor AB, Investor]
+
+  - cid: S17
+    name: Lifco
+    ir_url: https://www.lifco.se/investors/financial-reports
+    aliases: [Lifco]
+
+  - cid: S18
+    name: NIBE Industrier
+    ir_url: https://www.nibe.com/investors
+    aliases: [NIBE, Nibe]
+
+  - cid: S19
+    name: Nordea
+    ir_url: https://www.nordea.com/en/investors
+    aliases: [Nordea, Nordea Bank]
+
+  - cid: S20
+    name: SAAB
+    ir_url: https://www.saab.com/investors
+    aliases: [SAAB, Saab]
+
+  - cid: S21
+    name: Sandvik
+    ir_url: https://www.home.sandvik/en/investors/
+    aliases: [Sandvik]
+
+  - cid: S22
+    name: SCA
+    ir_url: https://www.sca.com/en/investors/
+    aliases: [SCA, Svenska Cellulosa]
+
+  - cid: S23
+    name: SEB
+    ir_url: https://sebgroup.com/investor-relations
+    aliases: [SEB, Skandinaviska Enskilda Banken]
+
+  - cid: S24
+    name: Skanska
+    ir_url: https://group.skanska.com/investors/
+    aliases: [Skanska]
+
+  - cid: S25
+    name: SKF
+    ir_url: https://www.skf.com/group/investors/
+    aliases: [SKF]
+
+  - cid: S26
+    name: Handelsbanken
+    ir_url: https://www.handelsbanken.com/en/investor-relations
+    aliases: [Handelsbanken, Svenska Handelsbanken, SHB]
+
+  - cid: S27
+    name: Swedbank
+    ir_url: https://www.swedbank.com/investor-relations.html
+    aliases: [Swedbank]
+
+  - cid: S28
+    name: Tele2
+    ir_url: https://www.tele2.com/investors
+    aliases: [Tele2]
+
+  - cid: S29
+    name: Telia Company
+    ir_url: https://www.teliacompany.com/en/investors
+    aliases: [Telia, Telia Company]
+
+  - cid: S30
+    name: Volvo
+    ir_url: https://www.volvogroup.com/en/investors/reports-and-presentations.html
+    aliases: [Volvo, Volvo Group]

@@ -1,0 +1,89 @@
+name: Download Reports
+
+on:
+  workflow_dispatch:
+    inputs:
+      company:
+        description: "Single company CID (e.g. S1) or blank for all"
+        required: false
+  schedule:
+    # Weekly on Sundays at 06:00 UTC
+    - cron: "0 6 * * 0"
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Initialize manifest
+        run: python scripts/init_manifest.py
+
+      - name: Process transactions
+        run: |
+          if [ -n "${{ github.event.inputs.company }}" ]; then
+            python scripts/download.py --company "${{ github.event.inputs.company }}"
+          else
+            python scripts/download.py
+          fi
+
+      - name: Copy manifest to dashboard
+        run: cp manifest.json dashboard/public/data/manifest.json
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add manifest.json dashboard/public/data/manifest.json
+          git diff --cached --quiet || git commit -m "chore: update manifest ($(date -u +%Y-%m-%d))"
+          git push
+
+  deploy-dashboard:
+    needs: download
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install & build dashboard
+        working-directory: dashboard
+        run: |
+          npm ci
+          npx next build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard/out
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

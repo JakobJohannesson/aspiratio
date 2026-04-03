@@ -1,1 +1,0 @@
-../tier1/ir_search.py

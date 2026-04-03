@@ -1,0 +1,1840 @@
+{
+  "meta": {
+    "target_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "companies_count": 30,
+    "updated_at": "2026-04-03T16:53:53.414352+00:00"
+  },
+  "transactions": {
+    "S1_2019": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S1_2020": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S1_2021": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S1_2022": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S1_2023": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S1_2024": {
+      "cid": "S1",
+      "company": "ABB Ltd",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S2_2019": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2019_Annual_Report.pdf",
+      "pages": 61,
+      "size_mb": 11.2,
+      "sha256": "9b00c3b26005d0e710aaa022fb018524fcf410ded5c6a0046feb68ed9e73c39e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S2_2020": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2020_Annual_Report.pdf",
+      "pages": 74,
+      "size_mb": 13.5,
+      "sha256": "161522301d747a4114801cc3d2aa75d7aaf912bfa4c17f98e3e92d3f5fcdb985",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S2_2021": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2021_Annual_Report.pdf",
+      "pages": 74,
+      "size_mb": 12.5,
+      "sha256": "c2a02cfffcbc16c1167f8953862dda428a3130a3b4634e145d4edcc770f21082",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S2_2022": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2022_Annual_Report.pdf",
+      "pages": 80,
+      "size_mb": 14.2,
+      "sha256": "7e5641ce88072047ceaa2e167ffde5a7fc8ad6b47ade2885b063e64a0c8c5298",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S2_2023": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2023_Annual_Report.pdf",
+      "pages": 155,
+      "size_mb": 11.4,
+      "sha256": "e56d71ec6e37a0683a3417af487e5395b0dd1f14e99d5eb8842bc4ace201c18f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S2_2024": {
+      "cid": "S2",
+      "company": "Addtech",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S2/S2_2024_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 7.5,
+      "sha256": "5b423494a991ea2d62b9dfb4711b283ff93083d94342c45f6d0f5243e8715cfb",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2019": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2019_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 8.6,
+      "sha256": "47019a1791a30bd09d5fa8ccb6f434d6ce2a9531ed1387c561e57f3db58f8d77",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2020": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2020_Annual_Report.pdf",
+      "pages": 160,
+      "size_mb": 3.8,
+      "sha256": "4b188b5d1b7dd357eaa9603b54702738b1b15b69fe0a6e8449c2f64dd50f5118",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2021": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2021_Annual_Report.pdf",
+      "pages": 194,
+      "size_mb": 6.9,
+      "sha256": "b01848ebeddd479dee73c1b1fe7a9f5631a404255dc42577f32c0851f6f0a538",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2022": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2022_Annual_Report.pdf",
+      "pages": 200,
+      "size_mb": 10.6,
+      "sha256": "dd7da3f88307ea3f1ca2ddca42d1a03f69b2ff08c236b2991303f7c1e66b3245",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2023": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2023_Annual_Report.pdf",
+      "pages": 192,
+      "size_mb": 6.3,
+      "sha256": "79ef62b3c17329f8d502b9de17a3a1e29191be40213a495a650aace70c29972c",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S3_2024": {
+      "cid": "S3",
+      "company": "Alfa Laval",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S3/S3_2024_Annual_Report.pdf",
+      "pages": 81,
+      "size_mb": 4.8,
+      "sha256": "034d748603f351fe8a7405ccd4142f6aefc62927c2c528ff28b75f7980d7e10e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2019": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2019_Annual_Report.pdf",
+      "pages": 108,
+      "size_mb": 5.4,
+      "sha256": "5dfd34410c929fbb3e1dbf8349682941adec582e365919d9bacb7aa1f669f5cf",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2020": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2020_Annual_Report.pdf",
+      "pages": 112,
+      "size_mb": 7.2,
+      "sha256": "90817717a561a40cff3691a8028bf9b565bde981a7c5730c1183ee9653e955b8",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2021": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2021_Annual_Report.pdf",
+      "pages": 116,
+      "size_mb": 6.2,
+      "sha256": "32aa260534ca02d5194476196641841df77df756042608b1e24152d74107c218",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2022": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2022_Annual_Report.pdf",
+      "pages": 116,
+      "size_mb": 5.2,
+      "sha256": "719c2d2bdbaf19bd8028889a9b2e5a159e47ffedb442fd46ad3ccc6453ea8a9c",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2023": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2023_Annual_Report.pdf",
+      "pages": 116,
+      "size_mb": 9.4,
+      "sha256": "88eb510a91e32073c8a3e28ebbd2aed022728d860a6416945f8357159326823b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S4_2024": {
+      "cid": "S4",
+      "company": "ASSA ABLOY",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S4/S4_2024_Annual_Report.pdf",
+      "pages": 164,
+      "size_mb": 12.5,
+      "sha256": "4fe9643d908d9e79069700548615de675d7eb27c16242c896a4411a6fd42df0c",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S5_2019": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S5_2020": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S5_2021": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S5_2022": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S5_2023": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S5_2024": {
+      "cid": "S5",
+      "company": "AstraZeneca",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S6_2019": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2019_Annual_Report.pdf",
+      "pages": 150,
+      "size_mb": 6.9,
+      "sha256": "a57cbddebf869b360ef557e7f374d9200794d744f45c6e9f9d9e3c66a6ed149a",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S6_2020": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2020_Annual_Report.pdf",
+      "pages": 144,
+      "size_mb": 9.8,
+      "sha256": "d6331ea1277084bcc31a077fcb48244a48a796096687d8b6b59cd7b963ce624b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S6_2021": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2021_Annual_Report.pdf",
+      "pages": 148,
+      "size_mb": 15.3,
+      "sha256": "8acd88b02da59f8756d9909633e32c933000f43417533c209ff8f68c4c41b0c9",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S6_2022": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2022_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 8.7,
+      "sha256": "b01941ac35f144cc41f0ed4953afb0af0bd66376c7f47d1bb9ced711f2c01b26",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S6_2023": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2023_Annual_Report.pdf",
+      "pages": 154,
+      "size_mb": 10.2,
+      "sha256": "647696baa3d0c2d7ddb3a92f15b17612c2a5e9f49b96bf6e7cfca52d508685fe",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S6_2024": {
+      "cid": "S6",
+      "company": "Atlas Copco",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S6/S6_2024_Annual_Report.pdf",
+      "pages": 169,
+      "size_mb": 10.1,
+      "sha256": "75a27effabb8c31e19845e5033759d5b3a13b2a3ad9420d7f17a5c59caac7794",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S7_2019": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S7_2020": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S7/S7_2020_Annual_Report.pdf",
+      "pages": 124,
+      "size_mb": 12.6,
+      "sha256": "5071fd69f6f5b082d65a2af5a085136fbb3a43415082c9cf3b1a1d785b45c483",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S7_2021": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S7/S7_2021_Annual_Report.pdf",
+      "pages": 128,
+      "size_mb": 8.1,
+      "sha256": "b359c9a82404760730bc1fb3078dd0c06c5dfef3cb37e1364f7e424efd739ba3",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S7_2022": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S7/S7_2022_Annual_Report.pdf",
+      "pages": 136,
+      "size_mb": 7.4,
+      "sha256": "c019b040b90c91f9e35640f7e6a88cbd338a3246501a2d094ad9cbdb39158f49",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S7_2023": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S7/S7_2023_Annual_Report.pdf",
+      "pages": 144,
+      "size_mb": 8.7,
+      "sha256": "3e13f0cdd977147f0c3dbb4eb987c673c748661cae29271a330fc6de677daa52",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S7_2024": {
+      "cid": "S7",
+      "company": "Boliden",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S7/S7_2024_Annual_Report.pdf",
+      "pages": 192,
+      "size_mb": 20.9,
+      "sha256": "e73e3c9a61861d24c47f84cd5dd215d31e861adc4e698bbd06829932b15a49ce",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2019": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2019_Annual_Report.pdf",
+      "pages": 140,
+      "size_mb": 4.4,
+      "sha256": "9324fd2d52321632c09895364dfbb65a436a387a3305923dca90c5a14e20335b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2020": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2020_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 12.5,
+      "sha256": "56dda9574520c505edbffd6bf1fef38314d8e16d0a1506a10a13add576c8e5a5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2021": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2021_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 12.5,
+      "sha256": "d9dc16410284ea94d4590193907b2384277ecf0804ef1974a7c885fd0772368d",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2022": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2022_Annual_Report.pdf",
+      "pages": 164,
+      "size_mb": 16.0,
+      "sha256": "7241538c4295fc88935e9dd82406e22b09caec32fa845818aa7acc347c2b540a",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2023": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2023_Annual_Report.pdf",
+      "pages": 176,
+      "size_mb": 9.8,
+      "sha256": "beab0dc2deca6a0ff5ec7bc248a3623271ea1ee602e2795bc06f9502e1ee3554",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S8_2024": {
+      "cid": "S8",
+      "company": "Epiroc",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S8/S8_2024_Annual_Report.pdf",
+      "pages": 212,
+      "size_mb": 10.3,
+      "sha256": "4e71ade65ff920a9e6686ea4d7e5d3086593ad0e8248d4e4c8fde98f7986e20a",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2019": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2019_Annual_Report.pdf",
+      "pages": 143,
+      "size_mb": 7.9,
+      "sha256": "e4eefd56aa214d4c093a1cb3c71dec8be4cf9c947d4feed33843a25d1cdea302",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2020": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2020_Annual_Report.pdf",
+      "pages": 170,
+      "size_mb": 7.5,
+      "sha256": "f0e64faf6d77321386ac3b53810c87dfff046293e49349e51dc3a650f6febe80",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2021": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2021_Annual_Report.pdf",
+      "pages": 180,
+      "size_mb": 10.5,
+      "sha256": "98c07ed2717eee1e1aad4a09d8c53497cad6a6bbb67e68705e45f75de335682b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2022": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2022_Annual_Report.pdf",
+      "pages": 191,
+      "size_mb": 10.6,
+      "sha256": "efe6bfd9707daa79824a247f226fd8e2dc88057bf4b1b515986a6c38ab74583e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2023": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2023_Annual_Report.pdf",
+      "pages": 171,
+      "size_mb": 8.5,
+      "sha256": "905e1ca602df26d1a0ca998ca7c0fe3de9e0cc0c012466ec173c8a11f024abd6",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S9_2024": {
+      "cid": "S9",
+      "company": "EQT",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S9/S9_2024_Annual_Report.pdf",
+      "pages": 194,
+      "size_mb": 8.2,
+      "sha256": "8da1ad00ad69b80a9e815f341544e4740e5717b37e215e82788229085156f5c2",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2019": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2019_Annual_Report.pdf",
+      "pages": 220,
+      "size_mb": 4.8,
+      "sha256": "929371d56e2f3143fb9e427a83e894e5036f1026f1cc38df47f39053e1098290",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2020": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2020_Annual_Report.pdf",
+      "pages": 216,
+      "size_mb": 4.2,
+      "sha256": "cf2823c55f608ecfdc0e47a8ad234338fe06f67fff93fc633c7bad823e07b25b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2021": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2021_Annual_Report.pdf",
+      "pages": 219,
+      "size_mb": 4.6,
+      "sha256": "c7c52221e64d5449c9d5a7a4854038826c8a346d0ea0cd6bb7ea01b7201b94fe",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2022": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2022_Annual_Report.pdf",
+      "pages": 240,
+      "size_mb": 4.3,
+      "sha256": "41abdda53a04a443896c183838d3b99fe8ad262546971bfd60f2de0322e3fd4f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2023": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2023_Annual_Report.pdf",
+      "pages": 241,
+      "size_mb": 3.8,
+      "sha256": "5826ce62343683ee6597be5b49c09f831ad43b722c9a5fa8d907bac67dc654b4",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S10_2024": {
+      "cid": "S10",
+      "company": "Ericsson",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S10/S10_2024_Annual_Report.pdf",
+      "pages": 244,
+      "size_mb": 8.9,
+      "sha256": "c1509f09ade37cdc94c2cfae1e5d37c8f31455c7f3bf851200cf55ffc05965ee",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S11_2019": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S11_2020": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S11_2021": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S11/S11_2021_Annual_Report.pdf",
+      "pages": 148,
+      "size_mb": 8.1,
+      "sha256": "b839cb3df9c3923587ae2da4fecd2b452b583c33a55ef89d66dc6ce90fbd52a7",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S11_2022": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S11/S11_2022_Annual_Report.pdf",
+      "pages": 164,
+      "size_mb": 13.1,
+      "sha256": "cbe4091dfeb729a6d5a055039c0748d1759b9ef3f9c2485f7577191c768ec400",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S11_2023": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S11/S11_2023_Annual_Report.pdf",
+      "pages": 188,
+      "size_mb": 15.4,
+      "sha256": "ebf807df397ea716abf9c38d12d15171fe78504c0666024d5df9a1d495a321a5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S11_2024": {
+      "cid": "S11",
+      "company": "Essity",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S11/S11_2024_Annual_Report.pdf",
+      "pages": 192,
+      "size_mb": 16.4,
+      "sha256": "f23480dd0ae92ab8305b9cd543d62a2201f34ab2b09584b23766ec094a26a875",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2019": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2019_Annual_Report.pdf",
+      "pages": 116,
+      "size_mb": 9.3,
+      "sha256": "4e8f876781820eb28afa61afbda9baf0366c3c7581d8c0e623909f90b377b79e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2020": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2020_Annual_Report.pdf",
+      "pages": 129,
+      "size_mb": 6.6,
+      "sha256": "0b9379d136a9ad9aa374762233151f1317ee1b0292c7633cf90834f424525cd6",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2021": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2021_Annual_Report.pdf",
+      "pages": 117,
+      "size_mb": 8.9,
+      "sha256": "12279823837470e548b55ae3cb504d6a19dbcff8931297d3b02d5e9f13edddab",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2022": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2022_Annual_Report.pdf",
+      "pages": 121,
+      "size_mb": 8.6,
+      "sha256": "8b23a6fe28014130efcb9611669178aeba15a5ee739a29f6cbf402ec2575052d",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2023": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2023_Annual_Report.pdf",
+      "pages": 121,
+      "size_mb": 8.6,
+      "sha256": "8b23a6fe28014130efcb9611669178aeba15a5ee739a29f6cbf402ec2575052d",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S12_2024": {
+      "cid": "S12",
+      "company": "Evolution",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S12/S12_2024_Annual_Report.pdf",
+      "pages": 117,
+      "size_mb": 7.4,
+      "sha256": "8b9511e8786444d4c2fc3e204dba2e2760a2e8f8ff74a294890ea4e34bf09f78",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2019": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2019_Annual_Report.pdf",
+      "pages": 88,
+      "size_mb": 3.8,
+      "sha256": "b2b88145550a6b6d6366a2d22c3efd43ca9566e01308116a2567271ce6f8f6f6",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2020": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2020_Annual_Report.pdf",
+      "pages": 87,
+      "size_mb": 8.3,
+      "sha256": "dea67df5ae226f864c14ee2a683d2d25a737ea6a882bc0f70ab733db188c9ba0",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2021": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2021_Annual_Report.pdf",
+      "pages": 118,
+      "size_mb": 11.7,
+      "sha256": "a76f42b7d4b0481ca137b0c39356d96c59d9c29a26a9c461c56eb56fc6b52459",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2022": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2022_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 4.3,
+      "sha256": "0b2ff20bb0d4ac6e36539088ba2fe98f57dc9abc93caa39b1b847342432c67f8",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2023": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2023_Annual_Report.pdf",
+      "pages": 148,
+      "size_mb": 12.8,
+      "sha256": "6b70c42ae9d0ac4b76bb2f601626ce707d7edd065f01603104410445cec8c865",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S13_2024": {
+      "cid": "S13",
+      "company": "Hennes & Mauritz",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S13/S13_2024_Annual_Report.pdf",
+      "pages": 87,
+      "size_mb": 9.2,
+      "sha256": "21a0705edc9ebc3f0e9ca536b3c4c761179a2af3c1c52409cc5cd09420751d80",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2019": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2019_Annual_Report.pdf",
+      "pages": 88,
+      "size_mb": 3.8,
+      "sha256": "e9fd8e03ae9521a0a0e182fd0a6e4ab76758b6f168022100f5a6b81c8b599797",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2020": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2020_Annual_Report.pdf",
+      "pages": 88,
+      "size_mb": 5.1,
+      "sha256": "19bd417bbc0ab2ed0d5c478dbe3b8ea8a28cee2ac20325fa774a708d07ea33b8",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2021": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2021_Annual_Report.pdf",
+      "pages": 88,
+      "size_mb": 5.1,
+      "sha256": "76f14c0d162eeabede3c78e52f12b47b57bb96cd7ac8c69c5afcdc3c24596fd5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2022": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2022_Annual_Report.pdf",
+      "pages": 88,
+      "size_mb": 3.5,
+      "sha256": "e2557b98d1a74a5e634070560a2a3a284d6dfc19ead460a84fd9cf26587ea89c",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2023": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2023_Annual_Report.pdf",
+      "pages": 148,
+      "size_mb": 8.4,
+      "sha256": "5a6c76745f6a2b529edebb69d965cb35ccea73f1bbbc8c6fd94d99f10fa3f13e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S14_2024": {
+      "cid": "S14",
+      "company": "Hexagon",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S14/S14_2024_Annual_Report.pdf",
+      "pages": 180,
+      "size_mb": 7.6,
+      "sha256": "c04a506759a3d39165af69f22b80d535234a344b0568160d8cf92850f6003b6f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S15_2019": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S15_2020": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S15_2021": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S15_2022": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S15_2023": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S15_2024": {
+      "cid": "S15",
+      "company": "Industrivärden",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S16_2019": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S16_2020": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S16/S16_2020_Annual_Report.pdf",
+      "pages": 128,
+      "size_mb": 14.8,
+      "sha256": "39c27aa6018642b7eaefac9732c877db3c0c0be8996d35476ed05e46ea665a34",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S16_2021": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S16/S16_2021_Annual_Report.pdf",
+      "pages": 132,
+      "size_mb": 7.1,
+      "sha256": "27da3cea41c86b8fbd17a393ed41274e40cca1bea114b7f34854df0e081c50c6",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S16_2022": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S16/S16_2022_Annual_Report.pdf",
+      "pages": 156,
+      "size_mb": 3.7,
+      "sha256": "ee153a70282606e79247e030ad05038b47d864e275e27f3cc5b81bd1b2fd1de9",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S16_2023": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S16/S16_2023_Annual_Report.pdf",
+      "pages": 168,
+      "size_mb": 8.9,
+      "sha256": "3771011fb61405bff66980d27e076fc209171f808ab5308ffc685b685127ab5c",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S16_2024": {
+      "cid": "S16",
+      "company": "Investor",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S16/S16_2024_Annual_Report.pdf",
+      "pages": 172,
+      "size_mb": 6.8,
+      "sha256": "1c33a3e283adec9747625984b4a706d2cb5333c8ce947bbb408bf28c89a835a5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S17_2019": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S17/S17_2019_Annual_Report.pdf",
+      "pages": 104,
+      "size_mb": 2.9,
+      "sha256": "d5fa7d60cb69f8b0c32916d5d52dccff13a8a97b001c1e4ccf01e187f5e7f2f0",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S17_2020": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S17_2021": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S17/S17_2021_Annual_Report.pdf",
+      "pages": 120,
+      "size_mb": 4.5,
+      "sha256": "e161f0c277c0d7a68712b6ef7228025025c421cb458f1b1e164a7c0da42a0fd9",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S17_2022": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S17/S17_2022_Annual_Report.pdf",
+      "pages": 156,
+      "size_mb": 5.7,
+      "sha256": "5e4b5aaf613b4fd45de4ffab350f1c4adb89db6b9102c8b1ac86455de95b3bd5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S17_2023": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S17/S17_2023_Annual_Report.pdf",
+      "pages": 158,
+      "size_mb": 5.4,
+      "sha256": "f87c9ee4e8f0afae27f94fbae8f93951515708331d0e3efeb87b3ac8d4c389d3",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S17_2024": {
+      "cid": "S17",
+      "company": "Lifco",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S17/S17_2024_Annual_Report.pdf",
+      "pages": 154,
+      "size_mb": 8.9,
+      "sha256": "fb9f0e1357000f6f4d602833b7586dd2c7c8ae556a2b41c5ea38b78d89915c20",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S18_2019": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S18_2020": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S18_2021": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S18_2022": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S18_2023": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S18_2024": {
+      "cid": "S18",
+      "company": "NIBE Industrier",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S18/S18_2024_Annual_Report.pdf",
+      "pages": 200,
+      "size_mb": 17.5,
+      "sha256": "80721cf8cc8f501f8b337da67255847595a5ab6ad9343863c7bc7b345321f984",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S19_2019": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S19_2020": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S19_2021": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S19_2022": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S19_2023": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S19_2024": {
+      "cid": "S19",
+      "company": "Nordea",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S20_2019": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2019_Annual_Report.pdf",
+      "pages": 152,
+      "size_mb": 7.5,
+      "sha256": "a5788c8776f1e908df6fb6eb9a6370ca1ab842834f74235db498b416ba00c5db",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S20_2020": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2020_Annual_Report.pdf",
+      "pages": 166,
+      "size_mb": 6.9,
+      "sha256": "b8b983f17f69833152df4b0092362092523289585458c4bb9925ce50f25111fd",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S20_2021": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2021_Annual_Report.pdf",
+      "pages": 168,
+      "size_mb": 12.1,
+      "sha256": "690c0cff9eb589824eeb5e73a70fdbbaa685879323f655777f96ec9cfe33aaa0",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S20_2022": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2022_Annual_Report.pdf",
+      "pages": 172,
+      "size_mb": 10.3,
+      "sha256": "63290da9e7ec11da6fc4b9fb6e3587356ebb52aa3bbccd3c5d4f1467822f9656",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S20_2023": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2023_Annual_Report.pdf",
+      "pages": 180,
+      "size_mb": 12.9,
+      "sha256": "03d8bc5aba746d597e50b0dec20c679746f559e21e98cda3d0a7986de3679017",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S20_2024": {
+      "cid": "S20",
+      "company": "SAAB",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S20/S20_2024_Annual_Report.pdf",
+      "pages": 228,
+      "size_mb": 9.8,
+      "sha256": "0817e759826f2464a232d677841d0c7e44a4e36f7095da6e2d22fce2e6143c1f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S21_2019": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S21_2020": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S21/S21_2020_Annual_Report.pdf",
+      "pages": 148,
+      "size_mb": 7.9,
+      "sha256": "97c75f1c4ea2b7f53b3f25ef07efd1da6e0881fcc58a6aa5ca5b9e722b0ac2ff",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S21_2021": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S21/S21_2021_Annual_Report.pdf",
+      "pages": 160,
+      "size_mb": 6.6,
+      "sha256": "55560c39be4cbcea000386be2d6a5b24158c838a63c3c70c098681d5c2347b64",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S21_2022": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S21/S21_2022_Annual_Report.pdf",
+      "pages": 160,
+      "size_mb": 9.8,
+      "sha256": "3d23dcf5c72639afc34b1059b277be64e0b1b525935d0ee8cad91bb59ef12249",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S21_2023": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S21/S21_2023_Annual_Report.pdf",
+      "pages": 168,
+      "size_mb": 9.7,
+      "sha256": "f39f4ca047081d0fd614ef972af7d49a99b555be350ee258f6b6559989bfec8f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S21_2024": {
+      "cid": "S21",
+      "company": "Sandvik",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S21/S21_2024_Annual_Report.pdf",
+      "pages": 160,
+      "size_mb": 8.1,
+      "sha256": "8d6a79668d65851f520f433e35522c8ebbbdd26bd3570c5c0b6dbbf1ede75be8",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S22_2019": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S22/S22_2019_Annual_Report.pdf",
+      "pages": 168,
+      "size_mb": 14.0,
+      "sha256": "be383d3204580c350bffdac1006a9a8ca3581b330530b3a91e0886ca8517fe17",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S22_2020": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S22/S22_2020_Annual_Report.pdf",
+      "pages": 180,
+      "size_mb": 12.3,
+      "sha256": "095884a1033fcd8559913ecac554c46456ea246ee3b4085bf548920aee7d4eae",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S22_2021": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S22_2022": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S22/S22_2022_Annual_Report.pdf",
+      "pages": 192,
+      "size_mb": 11.5,
+      "sha256": "7289e3831d37deb901004aec66de62ca0328502f7e0392953cd83a9a59ce904b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S22_2023": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S22/S22_2023_Annual_Report.pdf",
+      "pages": 196,
+      "size_mb": 11.8,
+      "sha256": "47727f8498e3e080f89053e098c0cc7b09328d8fc9247076a2060e4cc3e92d72",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S22_2024": {
+      "cid": "S22",
+      "company": "SCA",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S22/S22_2024_Annual_Report.pdf",
+      "pages": 202,
+      "size_mb": 15.8,
+      "sha256": "2cfa5a8a0b756cddaead47b2cb8c1281dcd002addb62e25aeaa85b1f00d36cd4",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S23_2019": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S23_2020": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S23_2021": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S23_2022": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S23_2023": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S23_2024": {
+      "cid": "S23",
+      "company": "SEB",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S23/S23_2024_Annual_Report.pdf",
+      "pages": 307,
+      "size_mb": 9.5,
+      "sha256": "b2551132499ee1ebf76dace1232617352a700b2fdd577bf20919e8c7ae77c57d",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S24_2019": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S24_2020": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S24_2021": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S24_2022": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S24/S24_2022_Annual_Report.pdf",
+      "pages": 224,
+      "size_mb": 15.8,
+      "sha256": "8546a8b42808b23d9d4a830124c264ece0a11fbfe032dd027fb2b056f6e7f16a",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S24_2023": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S24/S24_2023_Annual_Report.pdf",
+      "pages": 226,
+      "size_mb": 19.3,
+      "sha256": "69a8db38fbbfcc3a0c5924f86fb4ef6090ab9af2451429185a168be07b957d49",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S24_2024": {
+      "cid": "S24",
+      "company": "Skanska",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S24/S24_2024_Annual_Report.pdf",
+      "pages": 232,
+      "size_mb": 14.5,
+      "sha256": "e16830b9644907bbbbaef975e7e901276315b95adb607d9a06e65091fdd57739",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S25_2019": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S25_2020": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S25/S25_2020_Annual_Report.pdf",
+      "pages": 162,
+      "size_mb": 7.4,
+      "sha256": "a5955f841a25f4eb6a6a916db1dc03df212181df7594fef053a36b1b42bab65e",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S25_2021": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S25/S25_2021_Annual_Report.pdf",
+      "pages": 162,
+      "size_mb": 8.8,
+      "sha256": "aee7f51602ebc8aebe5cf07a0f7e9913c2d9c50bd81ae96e3ffe765042e4a6a6",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S25_2022": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S25/S25_2022_Annual_Report.pdf",
+      "pages": 150,
+      "size_mb": 9.8,
+      "sha256": "e0945f7a6a2a29ffde673b4aa5880f35223bca87ae82e874c34a10eebfb32538",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S25_2023": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S25/S25_2023_Annual_Report.pdf",
+      "pages": 160,
+      "size_mb": 14.4,
+      "sha256": "ba81fbb932dc2a7ddaa92210529a1138cfba884e6bd4d5afba5836a7eddfbe62",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S25_2024": {
+      "cid": "S25",
+      "company": "SKF",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S25/S25_2024_Annual_Report.pdf",
+      "pages": 175,
+      "size_mb": 6.6,
+      "sha256": "e847c19955f73b424eaf16004895da7aa179698b9aa047bc4515b0bbba28aac0",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S26_2019": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S26_2020": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S26_2021": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2021,
+      "status": "pending"
+    },
+    "S26_2022": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2022,
+      "status": "pending"
+    },
+    "S26_2023": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S26_2024": {
+      "cid": "S26",
+      "company": "Handelsbanken",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S27_2019": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2019,
+      "status": "pending"
+    },
+    "S27_2020": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S27_2021": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S27/S27_2021_Annual_Report.pdf",
+      "pages": 256,
+      "size_mb": 5.0,
+      "sha256": "974034c323c1c30b100e2182f08bd67c5301c02056ed5abdced95f7d60f29bf9",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S27_2022": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S27/S27_2022_Annual_Report.pdf",
+      "pages": 260,
+      "size_mb": 6.5,
+      "sha256": "5061c948b99a01ac8720c44df9d204684419b29b5b92a7eb63d6fb0682902673",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S27_2023": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2023,
+      "status": "pending"
+    },
+    "S27_2024": {
+      "cid": "S27",
+      "company": "Swedbank",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S27/S27_2024_Annual_Report.pdf",
+      "pages": 386,
+      "size_mb": 7.8,
+      "sha256": "add35457e9f89e966b2c05bed12f35c0cb7d465a2bce08591573e42eed5e2d2f",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2019": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2019_Annual_Report.pdf",
+      "pages": 94,
+      "size_mb": 8.1,
+      "sha256": "5eaea124f24aaa43811082d713dff3dfa0f0b6333305c05390a595dc08725314",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2020": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2020_Annual_Report.pdf",
+      "pages": 136,
+      "size_mb": 4.0,
+      "sha256": "04a4c831b3d0642c24839f39754c03fbe5d83c91b6142714493631066a25cd26",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2021": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2021_Annual_Report.pdf",
+      "pages": 151,
+      "size_mb": 9.9,
+      "sha256": "2a93cc892ef2cbeb4dca7779dda6f9783fdc206805efd51f7f72d0e42273e25b",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2022": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2022_Annual_Report.pdf",
+      "pages": 162,
+      "size_mb": 10.2,
+      "sha256": "87682fbe6fab3842c209a1b0d46e7caf058aeae5604ccbe7835357bfa7f42dc3",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2023": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2023_Annual_Report.pdf",
+      "pages": 164,
+      "size_mb": 12.8,
+      "sha256": "be652f5d89f4b887c4c239616216c2bee646eedc50c94fa4f6d3dcd8efd20c52",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S28_2024": {
+      "cid": "S28",
+      "company": "Tele2",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S28/S28_2024_Annual_Report.pdf",
+      "pages": 211,
+      "size_mb": 8.3,
+      "sha256": "1889755e3033dfa56c5b05ee3af44c714109faa0df81dcd828343116a331aeb1",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S29_2019": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S29/S29_2019_Annual_Report.pdf",
+      "pages": 241,
+      "size_mb": 7.0,
+      "sha256": "7cd0d30e3cb782bbb5d3082e34ff3ca8108c85588588f94b0277897a64d272c3",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S29_2020": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2020,
+      "status": "pending"
+    },
+    "S29_2021": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S29/S29_2021_Annual_Report.pdf",
+      "pages": 266,
+      "size_mb": 13.9,
+      "sha256": "d23b519b9122aa0ab918380188ff74c0e42fa345d487fc9f6064928462117cfd",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S29_2022": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S29/S29_2022_Annual_Report.pdf",
+      "pages": 263,
+      "size_mb": 8.1,
+      "sha256": "d7ac6d2e8d01cc3ac5417ab947a57b6dcd83710ed91294663cbc272f49745671",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S29_2023": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S29/S29_2023_Annual_Report.pdf",
+      "pages": 271,
+      "size_mb": 6.5,
+      "sha256": "ad2439c44c6d703e4ac0de71120eca23f670e84f83f9819bb69d26aa57c094fe",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S29_2024": {
+      "cid": "S29",
+      "company": "Telia Company",
+      "year": 2024,
+      "status": "pending"
+    },
+    "S30_2019": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2019,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2019_Annual_Report.pdf",
+      "pages": 230,
+      "size_mb": 10.7,
+      "sha256": "bc50aadbd0ec400b777ab89206a94fa5bad3812c2a80fef079aa3e6f91624136",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S30_2020": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2020,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2020_Annual_Report.pdf",
+      "pages": 210,
+      "size_mb": 10.7,
+      "sha256": "31b590a7354edd4f4ae39f0e878bce8c01daaec808343af5f18ce9a35dfebf45",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S30_2021": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2021,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2021_Annual_Report.pdf",
+      "pages": 218,
+      "size_mb": 10.8,
+      "sha256": "329a0288f6bca70bcfa41714fb790e3d6ccb97b91c476918052dbae8715147b5",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S30_2022": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2022,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2022_Annual_Report.pdf",
+      "pages": 226,
+      "size_mb": 13.0,
+      "sha256": "e96b02276268cabbea0a3be0798c1bc1ef2c1704f4697e3f4a331691b2e8f2fb",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S30_2023": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2023,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2023_Annual_Report.pdf",
+      "pages": 232,
+      "size_mb": 14.4,
+      "sha256": "6745536ececc8a9714fd43f505d6303d899f6b61a74758124e460f470cc68779",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    },
+    "S30_2024": {
+      "cid": "S30",
+      "company": "Volvo",
+      "year": 2024,
+      "status": "complete",
+      "filename": "companies_validated/S30/S30_2024_Annual_Report.pdf",
+      "pages": 220,
+      "size_mb": 10.6,
+      "sha256": "5dbce3d40d8daa8ae207c32d1ef22e173027babae92a447d911c6f159dd07893",
+      "verified_at": "2026-04-03T16:53:43.411213+00:00",
+      "source": "migrated"
+    }
+  }
+}

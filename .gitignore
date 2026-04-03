@@ -21,20 +21,20 @@ venv/
 # macOS
 .DS_Store
 
-# Streamlit
-.streamlit/
+# Downloaded reports (large PDFs — not tracked in git)
+companies/
+companies_validated/
 
-# Logs & Downloads
+# Logs
 *.log
 *.tmp
 download_summary_*.json
+download_results.json
 
-# Downloaded reports (keep out of git)
-companies/
-companies_validated/
-companies_validated/S1
+# Node
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
 
-# Debug files
+# Debug
 debug_*.py
-test_downloader.py
-debug_reports.py

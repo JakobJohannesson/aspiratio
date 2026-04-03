@@ -1,1 +1,0 @@
-../tier2/playwright_downloader.py
