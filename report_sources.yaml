@@ -1,14 +1,18 @@
 # Aspiratio - Annual Report Sources
-# OMXS30 companies with IR URLs for automated downloading
-# Strategy: fetch IR page → find PDF links → filter for annual report + year → download
+# OMXS30 companies with IR URLs + direct PDF overrides for stubborn sites
 
 target_years: [2019, 2020, 2021, 2022, 2023, 2024]
 
 companies:
   - cid: S1
     name: ABB Ltd
-    ir_url: https://global.abb/group/en/investors/annual-reporting-suite
+    ir_url: https://www.abb.com/global/en/company/annual-reporting-suite
     aliases: [ABB]
+    direct_urls:
+      "2024": "https://library.e.abb.com/public/ab32fda35c6f4a3cb62f8c5e2e4476c6/Integrated%20Report%202024_ENGLISH.pdf"
+      "2023": "https://library.e.abb.com/public/2179ba115d0b4e95abaf587c8f065623/ABB%20Integrated%20Report%202023.pdf"
+      "2022": "https://library.e.abb.com/public/ef5852f1e2e54cad97abcc4fc48d1d58/Annual%20Reporting%20Suite_Integrated%20Report%202022_English.pdf"
+      "2021": "https://mb.cision.com/Main/417/3513202/1540816.pdf"
 
   - cid: S2
     name: Addtech
@@ -27,8 +31,13 @@ companies:
 
   - cid: S5
     name: AstraZeneca
-    ir_url: https://www.astrazeneca.com/investor-relations.html
-    aliases: [AstraZeneca, Astra Zeneca]
+    ir_url: https://www.astrazeneca.com/investor-relations/annual-reports.html
+    aliases: [AstraZeneca]
+    direct_urls:
+      "2024": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2024/pdf/AstraZeneca_AR_2024.pdf"
+      "2022": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2022/pdf/AstraZeneca_AR_2022.pdf"
+      "2021": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2021/pdf/AstraZeneca_AR_2021.pdf"
+      "2020": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2020/pdf/AstraZeneca_AR_2020.pdf"
 
   - cid: S6
     name: Atlas Copco
@@ -53,12 +62,15 @@ companies:
   - cid: S10
     name: Ericsson
     ir_url: https://www.ericsson.com/en/investors
-    aliases: [Ericsson, Telefonaktiebolaget LM Ericsson]
+    aliases: [Ericsson]
 
   - cid: S11
     name: Essity
-    ir_url: https://www.essity.com/investors/
+    ir_url: https://www.essity.com/investors/financial-reports/annual-reports/
     aliases: [Essity]
+    direct_urls:
+      "2020": "https://www.essity.com/Images/Essity_2020_EN_tcm339-112722.pdf"
+      "2019": "https://www.essity.com/Images/Essity-Annual-and-Sustainability-Report-2019_tcm339-89480.pdf"
 
   - cid: S12
     name: Evolution
@@ -77,8 +89,15 @@ companies:
 
   - cid: S15
     name: "Industrivärden"
-    ir_url: https://www.industrivarden.se/en-gb/investors/
+    ir_url: https://www.industrivarden.se/en-gb/investors/reports/Annual-reports/
     aliases: ["Industrivärden", Industrivarden]
+    direct_urls:
+      "2024": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2024.pdf"
+      "2023": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2023-2.pdf"
+      "2022": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2022.pdf"
+      "2021": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2021.pdf"
+      "2020": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2020.pdf"
+      "2019": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2019.pdf"
 
   - cid: S16
     name: Investor
@@ -92,13 +111,18 @@ companies:
 
   - cid: S18
     name: NIBE Industrier
-    ir_url: https://www.nibe.com/investors
+    ir_url: https://www.nibegroup.com/investors
     aliases: [NIBE, Nibe]
 
   - cid: S19
     name: Nordea
-    ir_url: https://www.nordea.com/en/investors
+    ir_url: https://www.nordea.com/en/investors/group-annual-reports
     aliases: [Nordea, Nordea Bank]
+    direct_urls:
+      "2024": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2024-0.pdf"
+      "2023": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2023.pdf"
+      "2022": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2022.pdf"
+      "2021": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2021.pdf"
 
   - cid: S20
     name: SAAB
@@ -117,28 +141,50 @@ companies:
 
   - cid: S23
     name: SEB
-    ir_url: https://sebgroup.com/investor-relations
+    ir_url: https://sebgroup.com/investor-relations/reports-and-presentations
     aliases: [SEB, Skandinaviska Enskilda Banken]
+    direct_urls:
+      "2024": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/0C76B7571DFB23F5C1258C4900320544/$FILE/SEB_Annual_Report_2024_ENG.pdf"
+      "2022": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/90A6F3B0C1DDAFB8C1258960004B71A2/$FILE/annual_report_2022.pdf"
+      "2021": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/44DC29E047E8FABDC12587F7002A8F15/$FILE/annual_report_2021.pdf"
+      "2020": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/BA2E5E1963C4203DC125869C0054821A/$FILE/annual_report_2020.pdf"
+      "2023": "https://www.annualreports.com/HostedData/AnnualReportArchive/s/seb-group_2023.pdf"
+      "2019": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/5186A40EFFD1DC41C125869C00549CE3/$FILE/annual_report_2019.pdf"
 
   - cid: S24
     name: Skanska
-    ir_url: https://group.skanska.com/investors/
+    ir_url: https://group.skanska.com/investors/reports-publications/annual-reports/
     aliases: [Skanska]
+    direct_urls:
+      "2021": "https://group.skanska.com/4938df/siteassets/investors/reports-publications/annual-reports/2021/annual-and-sustainability-report-2021.pdf"
+      "2020": "https://group.skanska.com/4a1971/siteassets/investors/reports-publications/annual-reports/2020/annual-and-sustainability-report-2020.pdf"
+      "2019": "https://group.skanska.com/4a194f/siteassets/investors/reports-publications/annual-reports/2019/annual-and-sustainability-report-2019.pdf"
 
   - cid: S25
     name: SKF
     ir_url: https://www.skf.com/group/investors/
     aliases: [SKF]
+    direct_urls:
+      "2019": "https://investors.skf.com/sites/default/files/library/SKF_AR2019_eng.pdf"
 
   - cid: S26
     name: Handelsbanken
-    ir_url: https://www.handelsbanken.com/en/investor-relations
+    ir_url: https://www.handelsbanken.com/en/investor-relations/reports-and-presentations
     aliases: [Handelsbanken, Svenska Handelsbanken, SHB]
+    direct_urls:
+      "2024": "https://mb.cision.com/Main/3555/4111826/3288310.pdf"
+      "2023": "https://mb.cision.com/Main/3555/3934274/2623353.pdf"
+      "2022": "https://mb.cision.com/Main/3555/3723067/1874784.pdf"
+      "2021": "https://mb.cision.com/Main/3555/3519940/1545190.pdf"
 
   - cid: S27
     name: Swedbank
-    ir_url: https://www.swedbank.com/investor-relations.html
+    ir_url: https://www.swedbank.com/investor-relations/reports-and-presentations/annual-reports.html
     aliases: [Swedbank]
+    direct_urls:
+      "2023": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE175406578"
+      "2020": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE78501331"
+      "2019": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE53581973"
 
   - cid: S28
     name: Tele2
@@ -147,8 +193,11 @@ companies:
 
   - cid: S29
     name: Telia Company
-    ir_url: https://www.teliacompany.com/en/investors
+    ir_url: https://www.teliacompany.com/en/investors/reports-and-presentations/annual-reports/
     aliases: [Telia, Telia Company]
+    direct_urls:
+      "2024": "https://www.teliacompany.com/assets/u5c1v3pt22v8/4LVJsLuOlr3SbbnB7DT3X/fdd30eea5fefca67f2a9104af30fd104/Telia_Annual_report_2024.pdf"
+      "2020": "https://www.teliacompany.com/globalassets/telia-company/documents/reports/2020/annual/telia-company--annual-and-sustainability-report-2020.pdf"
 
   - cid: S30
     name: Volvo

@@ -9,8 +9,8 @@
       2024
     ],
     "companies_count": 30,
-    "updated_at": "2026-04-03T17:03:53.045285+00:00",
-    "live": true,
+    "updated_at": "2026-04-03T18:08:57.603677+00:00",
+    "live": false,
     "current_tx": null
   },
   "transactions": {
@@ -18,37 +18,69 @@
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2019,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:39.636583+00:00"
     },
     "S1_2020": {
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2020,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:41.935599+00:00"
     },
     "S1_2021": {
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://mb.cision.com/Main/417/3513202/1540816.pdf",
+      "filename": "companies_validated/S1/S1_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:44.167667+00:00",
+      "pages": 273,
+      "size_mb": 15.9,
+      "sha256": "580735762725b3ec7b02cba0157c82fb0187b5f335726b5de53e2fa56e2cd3b0",
+      "verified_at": "2026-04-03T18:08:44.167667+00:00"
     },
     "S1_2022": {
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://library.e.abb.com/public/ef5852f1e2e54cad97abcc4fc48d1d58/Annual%20Reporting%20Suite_Integrated%20Report%202022_English.pdf",
+      "filename": "companies_validated/S1/S1_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:28.036332+00:00",
+      "pages": 210,
+      "size_mb": 12.1,
+      "sha256": "e910a553c09922177b2e88b766b5d782c1db821f02450df3697da597a52f8935",
+      "verified_at": "2026-04-03T18:06:28.036332+00:00"
     },
     "S1_2023": {
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://library.e.abb.com/public/2179ba115d0b4e95abaf587c8f065623/ABB%20Integrated%20Report%202023.pdf",
+      "filename": "companies_validated/S1/S1_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:30.215541+00:00",
+      "pages": 112,
+      "size_mb": 7.7,
+      "sha256": "b1a21d57ce1e2db981043c43e77637a1fc132d37a461b338fdede09652325eb6",
+      "verified_at": "2026-04-03T18:06:30.215541+00:00"
     },
     "S1_2024": {
       "cid": "S1",
       "company": "ABB Ltd",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://library.e.abb.com/public/ab32fda35c6f4a3cb62f8c5e2e4476c6/Integrated%20Report%202024_ENGLISH.pdf",
+      "filename": "companies_validated/S1/S1_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:31.802726+00:00",
+      "pages": 149,
+      "size_mb": 9.9,
+      "sha256": "14bcd35cc32d9e86ce0516b102ed465f55aad483dd013d034aff856e7f60d03e",
+      "verified_at": "2026-04-03T18:06:31.802726+00:00"
     },
     "S2_2019": {
       "cid": "S2",
@@ -270,37 +302,79 @@
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2019/pdf/AstraZeneca_AR_2019.pdf",
+      "filename": "companies_validated/S5/S5_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:07:49.801861+00:00",
+      "pages": 276,
+      "size_mb": 11.0,
+      "sha256": "0c46d09b06dfc85a1a9e60df5a6e641d71d5b7b6f2f794e24e1d2055c2156f7c",
+      "verified_at": "2026-04-03T17:07:49.801861+00:00"
     },
     "S5_2020": {
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2020/pdf/AstraZeneca_AR_2020.pdf",
+      "filename": "companies_validated/S5/S5_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:18.930259+00:00",
+      "pages": 288,
+      "size_mb": 12.3,
+      "sha256": "f318180fc7c51c4854c1a834c4b4afea2f2373a2f8f9dec4785612e4ef08796e",
+      "verified_at": "2026-04-03T18:07:18.930259+00:00"
     },
     "S5_2021": {
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2021/pdf/AstraZeneca_AR_2021.pdf",
+      "filename": "companies_validated/S5/S5_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:20.901962+00:00",
+      "pages": 232,
+      "size_mb": 12.9,
+      "sha256": "40aae9dcd8c5bff5a9f11badc17602dceed3a4eb2a312ad99b366e34ba69071a",
+      "verified_at": "2026-04-03T18:07:20.901962+00:00"
     },
     "S5_2022": {
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2022/pdf/AstraZeneca_AR_2022.pdf",
+      "filename": "companies_validated/S5/S5_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:22.962936+00:00",
+      "pages": 228,
+      "size_mb": 13.2,
+      "sha256": "e20ad9e396bd3f2baf29d3416d9505c61e07065dd06fb290741ebfc0a52af268",
+      "verified_at": "2026-04-03T18:07:22.962936+00:00"
     },
     "S5_2023": {
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2023/pdf/AstraZeneca_AR_2023.pdf",
+      "filename": "companies_validated/S5/S5_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:08:18.868690+00:00",
+      "pages": 240,
+      "size_mb": 21.6,
+      "sha256": "64983cc505d239d9ac6c2ccc8b9f9d37e931707068abf69ddc3b06bc25d2327c",
+      "verified_at": "2026-04-03T17:08:18.868690+00:00"
     },
     "S5_2024": {
       "cid": "S5",
       "company": "AstraZeneca",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.astrazeneca.com/content/dam/az/Investor_Relations/annual-report-2024/pdf/AstraZeneca_AR_2024.pdf",
+      "filename": "companies_validated/S5/S5_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:25.098360+00:00",
+      "pages": 248,
+      "size_mb": 13.9,
+      "sha256": "71152937d67eaee232d87edd696db955472513b0ec940ddd51cd4072068ce8cc",
+      "verified_at": "2026-04-03T18:07:25.098360+00:00"
     },
     "S6_2019": {
       "cid": "S6",
@@ -378,7 +452,14 @@
       "cid": "S7",
       "company": "Boliden",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://investors.boliden.com/sites/boliden-ir/files/pr/boliden_q3_2019_presentation.pdf",
+      "filename": "companies_validated/S7/S7_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:08:33.866650+00:00",
+      "pages": 33,
+      "size_mb": 2.4,
+      "sha256": "1284812046e515d9831e83ac29d74af1fc07583d14e68e813a043c6b1110dc49",
+      "verified_at": "2026-04-03T17:08:33.866650+00:00"
     },
     "S7_2020": {
       "cid": "S7",
@@ -661,19 +742,22 @@
       "company": "Essity",
       "year": 2019,
       "status": "failed",
-      "error": "no report URL found",
-      "failed_at": "2026-04-03T17:03:21.863782+00:00"
+      "source_url": "https://www.essity.com/Images/Essity-Annual-and-Sustainability-Report-2019_tcm339-89480.pdf",
+      "filename": "companies_validated/S11/S11_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:17.109310+00:00",
+      "error": "verification: too small (0.1MB)",
+      "failed_at": "2026-04-03T18:08:17.109310+00:00"
     },
     "S11_2020": {
       "cid": "S11",
       "company": "Essity",
       "year": 2020,
       "status": "failed",
-      "source_url": "https://assets.www.essity.com/essity/Presentation%20Q3%202025.pdf",
+      "source_url": "https://www.essity.com/Images/Essity_2020_EN_tcm339-112722.pdf",
       "filename": "companies_validated/S11/S11_2020_annual_report.pdf",
-      "downloaded_at": "2026-04-03T17:03:40.251475+00:00",
-      "error": "verification: too few pages (17)",
-      "failed_at": "2026-04-03T17:03:40.251475+00:00"
+      "downloaded_at": "2026-04-03T18:08:18.646935+00:00",
+      "error": "verification: too few pages (18)",
+      "failed_at": "2026-04-03T18:08:18.646935+00:00"
     },
     "S11_2021": {
       "cid": "S11",
@@ -943,45 +1027,92 @@
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2019,
-      "status": "failed",
-      "error": "no report URL found",
-      "failed_at": "2026-04-03T17:03:52.885392+00:00"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2019.pdf",
+      "filename": "companies_validated/S15/S15_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:39.405386+00:00",
+      "pages": 80,
+      "size_mb": 7.0,
+      "sha256": "0a26aaf97329ebe32b93d82c1ddd0a4ae5c47dc2d0df60d6bc0c518abef3768d",
+      "verified_at": "2026-04-03T18:05:39.405386+00:00"
     },
     "S15_2020": {
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2020.pdf",
+      "filename": "companies_validated/S15/S15_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:41.569327+00:00",
+      "pages": 84,
+      "size_mb": 10.8,
+      "sha256": "dfa422cd41b4b12f7779b6c42ae6bdc743e889ae6f19d9c3ff642cb152b7f505",
+      "verified_at": "2026-04-03T18:05:41.569327+00:00"
     },
     "S15_2021": {
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2021.pdf",
+      "filename": "companies_validated/S15/S15_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:43.758797+00:00",
+      "pages": 80,
+      "size_mb": 4.7,
+      "sha256": "aaf087322aea3a54bae509e69ba0ed50243f2858fffb497a06625c9f9b85eceb",
+      "verified_at": "2026-04-03T18:05:43.758797+00:00"
     },
     "S15_2022": {
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2022.pdf",
+      "filename": "companies_validated/S15/S15_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:46.183947+00:00",
+      "pages": 96,
+      "size_mb": 14.7,
+      "sha256": "3f86d46adaba8a244c577706182f5c7ddd347e59904ce1a39240c39a13c76807",
+      "verified_at": "2026-04-03T18:05:46.183947+00:00"
     },
     "S15_2023": {
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2023-2.pdf",
+      "filename": "companies_validated/S15/S15_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:48.514875+00:00",
+      "pages": 96,
+      "size_mb": 8.7,
+      "sha256": "8d8d86da7e8cfe6f13558b0e28f0e336b27eb5f39f8698f6c8e5edc249573420",
+      "verified_at": "2026-04-03T18:05:48.514875+00:00"
     },
     "S15_2024": {
       "cid": "S15",
       "company": "Industrivärden",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.industrivarden.se/globalassets/arsredovisningar/engelska/2024.pdf",
+      "filename": "companies_validated/S15/S15_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:05:50.348124+00:00",
+      "pages": 96,
+      "size_mb": 5.9,
+      "sha256": "c0b7436aaf34fe3c11225ea0f596a850bb5483f642b333e9af60260e5cc94642",
+      "verified_at": "2026-04-03T18:05:50.348124+00:00"
     },
     "S16_2019": {
       "cid": "S16",
       "company": "Investor",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.investorab.com/media/o3ogwynf/investor-annual-report-2019.pdf",
+      "filename": "companies_validated/S16/S16_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:03:59.727755+00:00",
+      "pages": 122,
+      "size_mb": 7.8,
+      "sha256": "5a1b1b10ecfbb61e8a6c6e690be2b1bbdb1d14724cfb5cc35e270328b6974e0b",
+      "verified_at": "2026-04-03T17:03:59.727755+00:00"
     },
     "S16_2020": {
       "cid": "S16",
@@ -1059,7 +1190,14 @@
       "cid": "S17",
       "company": "Lifco",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://network.s-z.se/app/uploads/sites/16/eng_lifco_arsredovisning_2020_a4-4.pdf",
+      "filename": "companies_validated/S17/S17_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:04:08.020695+00:00",
+      "pages": 106,
+      "size_mb": 4.2,
+      "sha256": "0fabd8ba20e9d34d3ff8505774b55d0e9c59420ef673b8376cd0447bf57401e0",
+      "verified_at": "2026-04-03T17:04:08.020695+00:00"
     },
     "S17_2021": {
       "cid": "S17",
@@ -1113,31 +1251,51 @@
       "cid": "S18",
       "company": "NIBE Industrier",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nibe.com/download/18.66e33dd9170a4ecbd4220ab/1586445611484/AR-2019_WLOW.pdf",
+      "filename": "companies_validated/S18/S18_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:04:11.412980+00:00",
+      "pages": 144,
+      "size_mb": 11.2,
+      "sha256": "d12ea83d80486b61fe86a67191d9c1e3a8bbcee2d1bae0c005bafc5ffa897b64",
+      "verified_at": "2026-04-03T17:04:11.412980+00:00"
     },
     "S18_2020": {
       "cid": "S18",
       "company": "NIBE Industrier",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nibe.com/download/18.6bf0d57419c4f285896a3/1770904960524/NIBE-PPT-presentation-Q4%202025.pdf",
+      "filename": "companies_validated/S18/S18_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:04:19.787345+00:00",
+      "pages": 38,
+      "size_mb": 9.0,
+      "sha256": "648128a6ee843226d6a6a8ec707c93d90d11456fd954e448b3749467ed657646",
+      "verified_at": "2026-04-03T17:04:19.787345+00:00"
     },
     "S18_2021": {
       "cid": "S18",
       "company": "NIBE Industrier",
       "year": 2021,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:21.148538+00:00"
     },
     "S18_2022": {
       "cid": "S18",
       "company": "NIBE Industrier",
       "year": 2022,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:27.332789+00:00"
     },
     "S18_2023": {
       "cid": "S18",
       "company": "NIBE Industrier",
       "year": 2023,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:33.456071+00:00"
     },
     "S18_2024": {
       "cid": "S18",
@@ -1155,37 +1313,79 @@
       "cid": "S19",
       "company": "Nordea",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/nordea-responsible-investments-report-2019.pdf",
+      "filename": "companies_validated/S19/S19_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:04:48.133166+00:00",
+      "pages": 33,
+      "size_mb": 2.8,
+      "sha256": "b45f681fe752804e725adab6773d4dd25422350850001181a040e906ed605d58",
+      "verified_at": "2026-04-03T17:04:48.133166+00:00"
     },
     "S19_2020": {
       "cid": "S19",
       "company": "Nordea",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/nordea-responsible-investments-annual-report-2020.pdf",
+      "filename": "companies_validated/S19/S19_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:04:58.203767+00:00",
+      "pages": 44,
+      "size_mb": 12.4,
+      "sha256": "0b91d5bf4dcb89255ec9eb28d7cc4cdd1ccfae0a6e6ac708edf2f587bc991164",
+      "verified_at": "2026-04-03T17:04:58.203767+00:00"
     },
     "S19_2021": {
       "cid": "S19",
       "company": "Nordea",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2021.pdf",
+      "filename": "companies_validated/S19/S19_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:10.831082+00:00",
+      "pages": 342,
+      "size_mb": 9.9,
+      "sha256": "3c19b1890e5f28549679e9f8cbd45fc7234094b0e8c1d4bd8fbe1a53e69f23bb",
+      "verified_at": "2026-04-03T18:06:10.831082+00:00"
     },
     "S19_2022": {
       "cid": "S19",
       "company": "Nordea",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2022.pdf",
+      "filename": "companies_validated/S19/S19_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:12.948070+00:00",
+      "pages": 364,
+      "size_mb": 8.8,
+      "sha256": "487cc5f188457dc8267a4d1244a03dbba609ea48694b8d5ecf7faff2baa36252",
+      "verified_at": "2026-04-03T18:06:12.948070+00:00"
     },
     "S19_2023": {
       "cid": "S19",
       "company": "Nordea",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2023.pdf",
+      "filename": "companies_validated/S19/S19_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:15.208560+00:00",
+      "pages": 386,
+      "size_mb": 9.2,
+      "sha256": "9dbeda045a8fa38301584d55f93083ce9dd6e89c18507923a80d84c2ccd53a05",
+      "verified_at": "2026-04-03T18:06:15.208560+00:00"
     },
     "S19_2024": {
       "cid": "S19",
       "company": "Nordea",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.nordea.com/en/doc/annual-report-nordea-bank-abp-2024-0.pdf",
+      "filename": "companies_validated/S19/S19_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:17.568044+00:00",
+      "pages": 384,
+      "size_mb": 13.5,
+      "sha256": "4e729ee653f35ead55030884f0f3b84c1e03b6593012fbe9d9f0ff5b44797054",
+      "verified_at": "2026-04-03T18:06:17.568044+00:00"
     },
     "S20_2019": {
       "cid": "S20",
@@ -1263,7 +1463,14 @@
       "cid": "S21",
       "company": "Sandvik",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.home.sandvik/siteassets/investors/capital-markets-day/2019/sandvik-mining-and-rcok-technology-cmd-2019.pdf",
+      "filename": "companies_validated/S21/S21_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:06:00.026346+00:00",
+      "pages": 33,
+      "size_mb": 4.3,
+      "sha256": "391274f5d4955be55f2aa9ea42dcb7f69b7eb7ae1d05c71bec8606e40b5290b8",
+      "verified_at": "2026-04-03T17:06:00.026346+00:00"
     },
     "S21_2020": {
       "cid": "S21",
@@ -1353,7 +1560,14 @@
       "cid": "S22",
       "company": "SCA",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.sca.com/siteassets/investors/reports-and-presentations/annual-reports/2021/annual-report-2021.pdf",
+      "filename": "companies_validated/S22/S22_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T17:06:03.778753+00:00",
+      "pages": 180,
+      "size_mb": 10.2,
+      "sha256": "fcb366be82facfdb028cd46025a285992051c54eca503f38896dfb3ee2a4c610",
+      "verified_at": "2026-04-03T17:06:03.778753+00:00"
     },
     "S22_2022": {
       "cid": "S22",
@@ -1395,31 +1609,66 @@
       "cid": "S23",
       "company": "SEB",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/5186A40EFFD1DC41C125869C00549CE3/$FILE/annual_report_2019.pdf",
+      "filename": "companies_validated/S23/S23_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:34.039100+00:00",
+      "pages": 186,
+      "size_mb": 4.7,
+      "sha256": "adcdc7921eb7fcc5b0921665200fc4b601e51b2e0cb3deebb955227d23caea1c",
+      "verified_at": "2026-04-03T18:06:34.039100+00:00"
     },
     "S23_2020": {
       "cid": "S23",
       "company": "SEB",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/BA2E5E1963C4203DC125869C0054821A/$FILE/annual_report_2020.pdf",
+      "filename": "companies_validated/S23/S23_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:35.861885+00:00",
+      "pages": 222,
+      "size_mb": 3.3,
+      "sha256": "f41fa4139f14b285095565c7cd0844426a48db35b4ab4d6cc065c9a82f665628",
+      "verified_at": "2026-04-03T18:06:35.861885+00:00"
     },
     "S23_2021": {
       "cid": "S23",
       "company": "SEB",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/44DC29E047E8FABDC12587F7002A8F15/$FILE/annual_report_2021.pdf",
+      "filename": "companies_validated/S23/S23_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:37.294535+00:00",
+      "pages": 242,
+      "size_mb": 4.3,
+      "sha256": "ca86d4f77bb79de40fb3c80296aef3a217c7ea3232e868c17c494060b9281d65",
+      "verified_at": "2026-04-03T18:06:37.294535+00:00"
     },
     "S23_2022": {
       "cid": "S23",
       "company": "SEB",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://webapp.sebgroup.com/mb/mblib.nsf/alldocsbyunid/90A6F3B0C1DDAFB8C1258960004B71A2/$FILE/annual_report_2022.pdf",
+      "filename": "companies_validated/S23/S23_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:38.839024+00:00",
+      "pages": 240,
+      "size_mb": 4.1,
+      "sha256": "d9502951e4c2920af17745447a6137b832944139e8bb9b3325a70b8c6f00998b",
+      "verified_at": "2026-04-03T18:06:38.839024+00:00"
     },
     "S23_2023": {
       "cid": "S23",
       "company": "SEB",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.annualreports.com/HostedData/AnnualReportArchive/s/seb-group_2023.pdf",
+      "filename": "companies_validated/S23/S23_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:47.114862+00:00",
+      "pages": 252,
+      "size_mb": 4.2,
+      "sha256": "0d23a25ed9a1b3bd4fb9e8adb5d6ece675591d783db604a46a6ffc65929b711b",
+      "verified_at": "2026-04-03T18:08:47.114862+00:00"
     },
     "S23_2024": {
       "cid": "S23",
@@ -1437,19 +1686,40 @@
       "cid": "S24",
       "company": "Skanska",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://group.skanska.com/4a194f/siteassets/investors/reports-publications/annual-reports/2019/annual-and-sustainability-report-2019.pdf",
+      "filename": "companies_validated/S24/S24_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:48.556112+00:00",
+      "pages": 212,
+      "size_mb": 18.8,
+      "sha256": "4fec0777981a9798f4c9be77f14f45264ca2f8a61fe27688697402b29a6844c0",
+      "verified_at": "2026-04-03T18:06:48.556112+00:00"
     },
     "S24_2020": {
       "cid": "S24",
       "company": "Skanska",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://group.skanska.com/4a1971/siteassets/investors/reports-publications/annual-reports/2020/annual-and-sustainability-report-2020.pdf",
+      "filename": "companies_validated/S24/S24_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:51.338569+00:00",
+      "pages": 212,
+      "size_mb": 7.6,
+      "sha256": "174ea0b920d8d9f0a646edc2cc311cb4c8a2ea42e860428b5a178ff2a188f5e8",
+      "verified_at": "2026-04-03T18:06:51.338569+00:00"
     },
     "S24_2021": {
       "cid": "S24",
       "company": "Skanska",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://group.skanska.com/4938df/siteassets/investors/reports-publications/annual-reports/2021/annual-and-sustainability-report-2021.pdf",
+      "filename": "companies_validated/S24/S24_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:06:53.129587+00:00",
+      "pages": 208,
+      "size_mb": 14.6,
+      "sha256": "c84650fd8aefaa8007055118e60c8e8046394fc8bf3b8ec178a5e8d58ea3fa53",
+      "verified_at": "2026-04-03T18:06:53.129587+00:00"
     },
     "S24_2022": {
       "cid": "S24",
@@ -1491,7 +1761,12 @@
       "cid": "S25",
       "company": "SKF",
       "year": 2019,
-      "status": "pending"
+      "status": "failed",
+      "source_url": "https://investors.skf.com/sites/default/files/library/SKF_AR2019_eng.pdf",
+      "filename": "companies_validated/S25/S25_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:50.797772+00:00",
+      "error": "verification: too small (0.0MB)",
+      "failed_at": "2026-04-03T18:08:50.797772+00:00"
     },
     "S25_2020": {
       "cid": "S25",
@@ -1557,49 +1832,95 @@
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2019,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:51.986358+00:00"
     },
     "S26_2020": {
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2020,
-      "status": "pending"
+      "status": "failed",
+      "error": "no report URL found",
+      "failed_at": "2026-04-03T18:08:53.302296+00:00"
     },
     "S26_2021": {
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2021,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://mb.cision.com/Main/3555/3519940/1545190.pdf",
+      "filename": "companies_validated/S26/S26_2021_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:54.596000+00:00",
+      "pages": 284,
+      "size_mb": 5.7,
+      "sha256": "d649a5ac7e561e4a2d0b0a690d22e47820b6d71e73726bbf448b3b26faf521ce",
+      "verified_at": "2026-04-03T18:08:54.596000+00:00"
     },
     "S26_2022": {
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2022,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://mb.cision.com/Main/3555/3723067/1874784.pdf",
+      "filename": "companies_validated/S26/S26_2022_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:00.808246+00:00",
+      "pages": 272,
+      "size_mb": 5.1,
+      "sha256": "b8a783c42b415e01e43bf3c47f94a61ccbcbfa3f79aba4f5c91444c2178c3b3d",
+      "verified_at": "2026-04-03T18:07:00.808246+00:00"
     },
     "S26_2023": {
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://mb.cision.com/Main/3555/3934274/2623353.pdf",
+      "filename": "companies_validated/S26/S26_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:02.805236+00:00",
+      "pages": 312,
+      "size_mb": 4.2,
+      "sha256": "138056186bf482c5cd718c3673bc1c6ce182a377fe56ad660408f571bc893f93",
+      "verified_at": "2026-04-03T18:07:02.805236+00:00"
     },
     "S26_2024": {
       "cid": "S26",
       "company": "Handelsbanken",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://mb.cision.com/Main/3555/4111826/3288310.pdf",
+      "filename": "companies_validated/S26/S26_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:04.393838+00:00",
+      "pages": 388,
+      "size_mb": 6.7,
+      "sha256": "54f1545842e3d2ae120518b9abe46dcd30a73e9f58a92dcbf6093b329325c266",
+      "verified_at": "2026-04-03T18:07:04.393838+00:00"
     },
     "S27_2019": {
       "cid": "S27",
       "company": "Swedbank",
       "year": 2019,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE53581973",
+      "filename": "companies_validated/S27/S27_2019_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:06.555330+00:00",
+      "pages": 236,
+      "size_mb": 5.6,
+      "sha256": "375bd118e152ce2747849f8025849f058d88414787fbfa900d6de1f34ec4a5f8",
+      "verified_at": "2026-04-03T18:07:06.555330+00:00"
     },
     "S27_2020": {
       "cid": "S27",
       "company": "Swedbank",
       "year": 2020,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE78501331",
+      "filename": "companies_validated/S27/S27_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:09.057965+00:00",
+      "pages": 256,
+      "size_mb": 8.5,
+      "sha256": "f87800d3e492cda30173c48f0a08c03f3da73317a75d6932ce357dad228faeb8",
+      "verified_at": "2026-04-03T18:07:09.057965+00:00"
     },
     "S27_2021": {
       "cid": "S27",
@@ -1629,7 +1950,14 @@
       "cid": "S27",
       "company": "Swedbank",
       "year": 2023,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://internetbank.swedbank.se/ConditionsEarchive/download?bankid=1111&id=WEBDOC-PRODE175406578",
+      "filename": "companies_validated/S27/S27_2023_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:12.045172+00:00",
+      "pages": 292,
+      "size_mb": 9.9,
+      "sha256": "ad49f751e6abd9f6ab2e3ed5564c31622167852b21d2784932a2dd94159c7279",
+      "verified_at": "2026-04-03T18:07:12.045172+00:00"
     },
     "S27_2024": {
       "cid": "S27",
@@ -1731,7 +2059,12 @@
       "cid": "S29",
       "company": "Telia Company",
       "year": 2020,
-      "status": "pending"
+      "status": "failed",
+      "source_url": "https://www.teliacompany.com/globalassets/telia-company/documents/reports/2020/annual/telia-company--annual-and-sustainability-report-2020.pdf",
+      "filename": "companies_validated/S29/S29_2020_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:08:56.390433+00:00",
+      "error": "verification: too small (0.0MB)",
+      "failed_at": "2026-04-03T18:08:56.390433+00:00"
     },
     "S29_2021": {
       "cid": "S29",
@@ -1773,7 +2106,14 @@
       "cid": "S29",
       "company": "Telia Company",
       "year": 2024,
-      "status": "pending"
+      "status": "complete",
+      "source_url": "https://www.teliacompany.com/assets/u5c1v3pt22v8/4LVJsLuOlr3SbbnB7DT3X/fdd30eea5fefca67f2a9104af30fd104/Telia_Annual_report_2024.pdf",
+      "filename": "companies_validated/S29/S29_2024_annual_report.pdf",
+      "downloaded_at": "2026-04-03T18:07:16.921402+00:00",
+      "pages": 303,
+      "size_mb": 7.1,
+      "sha256": "fe27775cf30a0d9e511e2dbe1145fe1a80648e1224b74ae54befb94a6832a308",
+      "verified_at": "2026-04-03T18:07:16.921402+00:00"
     },
     "S30_2019": {
       "cid": "S30",
